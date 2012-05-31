@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="EntityDataModelStoreContainer" CdmEntityContainer="EntityDataModelContainer">
+    <EntitySetMapping Name="Contragents">
+      <EntityTypeMapping TypeName="IsTypeOf(EntityDataModel.Contragent)">
+        <MappingFragment StoreEntitySet="Contragents">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FIO" ColumnName="FIO" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="EMail" ColumnName="EMail" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Parts">
+      <EntityTypeMapping TypeName="IsTypeOf(EntityDataModel.Part)">
+        <MappingFragment StoreEntitySet="Parts">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Category_id" ColumnName="Category_id" />
+          <ScalarProperty Name="Vendor_id" ColumnName="Vendor_id" />
+          <ScalarProperty Name="Part_num" ColumnName="Part_num" />
+          <ScalarProperty Name="Serial_num" ColumnName="Serial_num" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Date_in" ColumnName="Date_in" />
+          <ScalarProperty Name="Supplier_id" ColumnName="Supplier_id" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="IsTypeOf(EntityDataModel.Category)">
+        <MappingFragment StoreEntitySet="Categories">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Warranties">
+      <EntityTypeMapping TypeName="IsTypeOf(EntityDataModel.Warranty)">
+        <MappingFragment StoreEntitySet="Warranties">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SCs">
+      <EntityTypeMapping TypeName="IsTypeOf(EntityDataModel.SC)">
+        <MappingFragment StoreEntitySet="SCs">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="IsTypeOf(EntityDataModel.Employee)">
+        <MappingFragment StoreEntitySet="Employees">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FIO" ColumnName="FIO" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vendors">
+      <EntityTypeMapping TypeName="IsTypeOf(EntityDataModel.Vendor)">
+        <MappingFragment StoreEntitySet="Vendors">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Requests">
+      <EntityTypeMapping TypeName="IsTypeOf(EntityDataModel.Request)">
+        <MappingFragment StoreEntitySet="Requests">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Item" ColumnName="Item" />
+          <ScalarProperty Name="Serial_num" ColumnName="Serial_num" />
+          <ScalarProperty Name="Employee_id" ColumnName="Employee_id" />
+          <ScalarProperty Name="Service" ColumnName="Service" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="More_info" ColumnName="More_info" />
+          <ScalarProperty Name="Packing" ColumnName="Packing" />
+          <ScalarProperty Name="Defect" ColumnName="Defect" />
+          <ScalarProperty Name="Warranty_id" ColumnName="Warranty_id" />
+          <ScalarProperty Name="State_id" ColumnName="State_id" />
+          <ScalarProperty Name="Contragent_id" ColumnName="Contragent_id" />
+          <ScalarProperty Name="SC_num" ColumnName="SC_num" />
+          <ScalarProperty Name="Diagnostic_result" ColumnName="Diagnostic_result" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="States">
+      <EntityTypeMapping TypeName="IsTypeOf(EntityDataModel.State)">
+        <MappingFragment StoreEntitySet="States">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Clients">
+      <EntityTypeMapping TypeName="IsTypeOf(EntityDataModel.Supplier)">
+        <MappingFragment StoreEntitySet="Clients">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Contact_name" ColumnName="Contact_name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="RequestParts" TypeName="EntityDataModel.PartRequest" StoreEntitySet="RequestParts">
+      <EndProperty Name="Part">
+        <ScalarProperty Name="Id" ColumnName="Part_Id" />
+      </EndProperty>
+      <EndProperty Name="Request">
+        <ScalarProperty Name="Id" ColumnName="Request_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

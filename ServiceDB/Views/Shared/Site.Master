@@ -1,0 +1,74 @@
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+
+<!DOCTYPE html>
+<html>
+<head runat="server">
+    <title><asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>
+    <link href="../../Content/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="../../Content/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" type="text/css" />
+    <link href="../../Content/Custom.css" rel="stylesheet" type="text/css" />
+    <script src="<%: Url.Content("~/Scripts/jquery-1.7.1.min.js") %>" type="text/javascript"></script>
+    <script src="<%: Url.Content("~/Scripts/jquery-ui-1.8.11.min.js") %>" type="text/javascript"></script>
+    <script src="<%: Url.Content("~/Scripts/modernizr-1.7.min.js") %>" type="text/javascript"></script>
+    <script src="<%: Url.Content("~/Scripts/bootstrap/js/bootstrap.js") %>" type="text/javascript"></script>
+</head>
+<body>
+    <div class="page">
+        <header class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                <%: Html.ActionLink("Сервисный центр", "Index", "Home", null, new { @class="brand", @id="logo" }) %>
+                    <ul class="nav pull-right">
+                        <li><%: Html.ActionLink("Домой", "Index", "Home")%></li>
+                        <% if (Request.IsAuthenticated) { %>
+                          <li><%: Html.ActionLink("Заявки", "Index", "Requests")%></li>
+                          <li id="supp-menu" class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                              Товары <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                              <li><%: Html.ActionLink("Товары в ремонт", "Index", "Home")%></li>
+                              <li><%: Html.ActionLink("Товары в заявке", "Index", "Home")%></li>
+                            </ul>
+                          </li>  
+                          <li id="ref-menu" class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                              Справочники <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                              <li><%: Html.ActionLink("Гарантия", "Index", "Warranties")%></li>
+                              <li><%: Html.ActionLink("Контрагенты", "Index", "Contragents")%> </li>
+                              <li><%: Html.ActionLink("Мастера", "Index", "Employees")%> </li>
+                              <li><%: Html.ActionLink("Услуги", "Index", "Home")%> </li>
+                              <li><%: Html.ActionLink("Статус", "Index", "States")%> </li>
+                              <li class="divider"></li>
+                              <li><%: Html.ActionLink("Вендор", "Index", "Vendors")%> </li>
+                              <li><%: Html.ActionLink("Поставщик", "Index", "Suppliers")%> </li>
+                              <li><%: Html.ActionLink("Категории", "Index", "Categories")%> </li>
+                              <li><%: Html.ActionLink("Запчасти", "Index", "Home")%></li>
+                            </ul>
+                          <li id="fat-menu" class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                              Аккаунт <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                              <li><%: Html.ActionLink("...", "About", "Home")%> </li>
+                              <li class="divider"></li>
+                              <li><%: Html.ActionLink("Выйти", "LogOff", "Account")%></li>
+                            </ul>
+                        <% }else{ %>
+                            <li><%: Html.ActionLink("Войти", "Logon", "Account")%></li>
+                        <% } %>
+                        <li><%: Html.ActionLink("О нас", "About", "Home")%></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
+        <div class="container">
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" />
+            <footer>
+            </footer>
+        </div>
+    </div>
+</body>
+</html>

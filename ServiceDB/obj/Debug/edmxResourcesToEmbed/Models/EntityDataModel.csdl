@@ -1,0 +1,250 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="EntityDataModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+  <EntityContainer Name="EntityDataModelContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Contragents" EntityType="EntityDataModel.Contragent" />
+    <EntitySet Name="Parts" EntityType="EntityDataModel.Part" />
+    <EntitySet Name="Categories" EntityType="EntityDataModel.Category" />
+    <AssociationSet Name="CategoryParts" Association="EntityDataModel.CategoryParts">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Parts" EntitySet="Parts" />
+    </AssociationSet>
+    <EntitySet Name="Warranties" EntityType="EntityDataModel.Warranty" />
+    <EntitySet Name="SCs" EntityType="EntityDataModel.SC" />
+    <EntitySet Name="Employees" EntityType="EntityDataModel.Employee" />
+    <EntitySet Name="Vendors" EntityType="EntityDataModel.Vendor" />
+    <AssociationSet Name="VendorPart" Association="EntityDataModel.VendorPart">
+      <End Role="Vendor" EntitySet="Vendors" />
+      <End Role="Part" EntitySet="Parts" />
+    </AssociationSet>
+    <EntitySet Name="Requests" EntityType="EntityDataModel.Request" />
+    <EntitySet Name="States" EntityType="EntityDataModel.State" />
+    <AssociationSet Name="StateRequest" Association="EntityDataModel.StateRequest">
+      <End Role="State" EntitySet="States" />
+      <End Role="Request" EntitySet="Requests" />
+    </AssociationSet>
+    <AssociationSet Name="WarrantyRequest" Association="EntityDataModel.WarrantyRequest">
+      <End Role="Warranty" EntitySet="Warranties" />
+      <End Role="Request" EntitySet="Requests" />
+    </AssociationSet>
+    <AssociationSet Name="EmployeeRequest" Association="EntityDataModel.EmployeeRequest">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Request" EntitySet="Requests" />
+    </AssociationSet>
+    <AssociationSet Name="RequestParts" Association="EntityDataModel.PartRequest">
+      <End Role="Part" EntitySet="Parts" />
+      <End Role="Request" EntitySet="Requests" />
+    </AssociationSet>
+    <EntitySet Name="Clients" EntityType="EntityDataModel.Supplier" />
+    <AssociationSet Name="SupplierPart" Association="EntityDataModel.SupplierPart">
+      <End Role="Supplier" EntitySet="Clients" />
+      <End Role="Part" EntitySet="Parts" />
+    </AssociationSet>
+    <AssociationSet Name="ContragentRequest" Association="EntityDataModel.ContragentRequest">
+      <End Role="Contragent" EntitySet="Contragents" />
+      <End Role="Request" EntitySet="Requests" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Contragent">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="FIO" Nullable="false" />
+    <Property Type="String" Name="Phone" Nullable="false" />
+    <Property Type="String" Name="Address" Nullable="false" />
+    <Property Type="String" Name="EMail" Nullable="false" />
+    <NavigationProperty Name="Request" Relationship="EntityDataModel.ContragentRequest" FromRole="Contragent" ToRole="Request" />
+  </EntityType>
+  <EntityType Name="Part">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="Category_id" Nullable="false" />
+    <Property Type="Int32" Name="Vendor_id" Nullable="false" />
+    <Property Type="String" Name="Part_num" Nullable="false" />
+    <Property Type="String" Name="Serial_num" Nullable="false" />
+    <Property Type="String" Name="Description" Nullable="false" />
+    <Property Type="DateTime" Name="Date_in" Nullable="false" />
+    <Property Type="Int32" Name="Supplier_id" Nullable="false" />
+    <Property Type="Double" Name="Price" Nullable="false" />
+    <NavigationProperty Name="Category" Relationship="EntityDataModel.CategoryParts" FromRole="Parts" ToRole="Category" />
+    <NavigationProperty Name="Vendor" Relationship="EntityDataModel.VendorPart" FromRole="Part" ToRole="Vendor" />
+    <NavigationProperty Name="Request" Relationship="EntityDataModel.PartRequest" FromRole="Part" ToRole="Request" />
+    <NavigationProperty Name="Supplier" Relationship="EntityDataModel.SupplierPart" FromRole="Part" ToRole="Supplier" />
+  </EntityType>
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" Nullable="false" />
+    <NavigationProperty Name="Parts" Relationship="EntityDataModel.CategoryParts" FromRole="Category" ToRole="Parts" />
+  </EntityType>
+  <Association Name="CategoryParts">
+    <End Type="EntityDataModel.Category" Role="Category" Multiplicity="1" />
+    <End Type="EntityDataModel.Part" Role="Parts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Parts">
+        <PropertyRef Name="Category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Warranty">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" Nullable="false" />
+    <NavigationProperty Name="Request" Relationship="EntityDataModel.WarrantyRequest" FromRole="Warranty" ToRole="Request" />
+  </EntityType>
+  <EntityType Name="SC">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Employee">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="FIO" Nullable="false" />
+    <Property Type="String" Name="Address" Nullable="true" />
+    <Property Type="String" Name="Phone" Nullable="false" />
+    <NavigationProperty Name="Request" Relationship="EntityDataModel.EmployeeRequest" FromRole="Employee" ToRole="Request" />
+    <Property Type="String" Name="Email" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Vendor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" Nullable="false" />
+    <NavigationProperty Name="Part" Relationship="EntityDataModel.VendorPart" FromRole="Vendor" ToRole="Part" />
+  </EntityType>
+  <Association Name="VendorPart">
+    <End Type="EntityDataModel.Vendor" Role="Vendor" Multiplicity="1" />
+    <End Type="EntityDataModel.Part" Role="Part" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Part">
+        <PropertyRef Name="Vendor_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Request">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" Nullable="false" />
+    <Property Type="String" Name="Item" Nullable="false" />
+    <Property Type="String" Name="Serial_num" Nullable="false" />
+    <Property Type="Int32" Name="Employee_id" Nullable="false" />
+    <Property Type="String" Name="Service" Nullable="false" />
+    <Property Type="String" Name="Description" Nullable="false" />
+    <Property Type="String" Name="More_info" Nullable="false" />
+    <Property Type="String" Name="Packing" Nullable="false" />
+    <Property Type="String" Name="Defect" Nullable="false" />
+    <Property Type="Int32" Name="Warranty_id" Nullable="false" />
+    <Property Type="Int32" Name="State_id" Nullable="false" />
+    <Property Type="Int32" Name="Contragent_id" Nullable="false" />
+    <Property Type="String" Name="SC_num" Nullable="false" />
+    <NavigationProperty Name="State" Relationship="EntityDataModel.StateRequest" FromRole="Request" ToRole="State" />
+    <NavigationProperty Name="Warranty" Relationship="EntityDataModel.WarrantyRequest" FromRole="Request" ToRole="Warranty" />
+    <NavigationProperty Name="Employee" Relationship="EntityDataModel.EmployeeRequest" FromRole="Request" ToRole="Employee" />
+    <NavigationProperty Name="Part" Relationship="EntityDataModel.PartRequest" FromRole="Request" ToRole="Part" />
+    <Property Type="String" Name="Diagnostic_result" Nullable="false" />
+    <NavigationProperty Name="Contragent" Relationship="EntityDataModel.ContragentRequest" FromRole="Request" ToRole="Contragent" />
+  </EntityType>
+  <EntityType Name="State">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" Nullable="false" />
+    <NavigationProperty Name="Request" Relationship="EntityDataModel.StateRequest" FromRole="State" ToRole="Request" />
+  </EntityType>
+  <Association Name="StateRequest">
+    <End Type="EntityDataModel.State" Role="State" Multiplicity="1" />
+    <End Type="EntityDataModel.Request" Role="Request" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="State">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Request">
+        <PropertyRef Name="State_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="WarrantyRequest">
+    <End Type="EntityDataModel.Warranty" Role="Warranty" Multiplicity="1" />
+    <End Type="EntityDataModel.Request" Role="Request" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Warranty">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Request">
+        <PropertyRef Name="Warranty_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EmployeeRequest">
+    <End Type="EntityDataModel.Employee" Role="Employee" Multiplicity="1" />
+    <End Type="EntityDataModel.Request" Role="Request" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Request">
+        <PropertyRef Name="Employee_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PartRequest">
+    <End Type="EntityDataModel.Part" Role="Part" Multiplicity="*" />
+    <End Type="EntityDataModel.Request" Role="Request" Multiplicity="*" />
+  </Association>
+  <EntityType Name="Supplier">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" Nullable="false" />
+    <Property Type="String" Name="Phone" Nullable="false" />
+    <Property Type="String" Name="Address" Nullable="false" />
+    <Property Type="String" Name="Contact_name" Nullable="false" />
+    <NavigationProperty Name="Part" Relationship="EntityDataModel.SupplierPart" FromRole="Supplier" ToRole="Part" />
+  </EntityType>
+  <Association Name="SupplierPart">
+    <End Type="EntityDataModel.Supplier" Role="Supplier" Multiplicity="1" />
+    <End Type="EntityDataModel.Part" Role="Part" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Part">
+        <PropertyRef Name="Supplier_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ContragentRequest">
+    <End Type="EntityDataModel.Contragent" Role="Contragent" Multiplicity="1" />
+    <End Type="EntityDataModel.Request" Role="Request" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contragent">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Request">
+        <PropertyRef Name="Contragent_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

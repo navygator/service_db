@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="EntityDataModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="EntityDataModelStoreContainer">
+    <EntitySet Name="Contragents" EntityType="EntityDataModel.Store.Contragents" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Parts" EntityType="EntityDataModel.Store.Parts" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Categories" EntityType="EntityDataModel.Store.Categories" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Warranties" EntityType="EntityDataModel.Store.Warranties" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="SCs" EntityType="EntityDataModel.Store.SCs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Employees" EntityType="EntityDataModel.Store.Employees" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Vendors" EntityType="EntityDataModel.Store.Vendors" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Requests" EntityType="EntityDataModel.Store.Requests" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="States" EntityType="EntityDataModel.Store.States" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Clients" EntityType="EntityDataModel.Store.Clients" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RequestParts" EntityType="EntityDataModel.Store.PartRequest" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="CategoryParts" Association="EntityDataModel.Store.CategoryParts">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Parts" EntitySet="Parts" />
+    </AssociationSet>
+    <AssociationSet Name="VendorPart" Association="EntityDataModel.Store.VendorPart">
+      <End Role="Vendor" EntitySet="Vendors" />
+      <End Role="Part" EntitySet="Parts" />
+    </AssociationSet>
+    <AssociationSet Name="StateRequest" Association="EntityDataModel.Store.StateRequest">
+      <End Role="State" EntitySet="States" />
+      <End Role="Request" EntitySet="Requests" />
+    </AssociationSet>
+    <AssociationSet Name="WarrantyRequest" Association="EntityDataModel.Store.WarrantyRequest">
+      <End Role="Warranty" EntitySet="Warranties" />
+      <End Role="Request" EntitySet="Requests" />
+    </AssociationSet>
+    <AssociationSet Name="EmployeeRequest" Association="EntityDataModel.Store.EmployeeRequest">
+      <End Role="Employee" EntitySet="Employees" />
+      <End Role="Request" EntitySet="Requests" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RequestParts_Part" Association="EntityDataModel.Store.FK_PartRequest_Part">
+      <End Role="Part" EntitySet="Parts" />
+      <End Role="PartRequest" EntitySet="RequestParts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RequestParts_Request" Association="EntityDataModel.Store.FK_PartRequest_Request">
+      <End Role="Request" EntitySet="Requests" />
+      <End Role="PartRequest" EntitySet="RequestParts" />
+    </AssociationSet>
+    <AssociationSet Name="SupplierPart" Association="EntityDataModel.Store.SupplierPart">
+      <End Role="Supplier" EntitySet="Clients" />
+      <End Role="Part" EntitySet="Parts" />
+    </AssociationSet>
+    <AssociationSet Name="ContragentRequest" Association="EntityDataModel.Store.ContragentRequest">
+      <End Role="Contragent" EntitySet="Contragents" />
+      <End Role="Request" EntitySet="Requests" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Contragents">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FIO" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Phone" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="EMail" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Parts">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Category_id" Type="int" Nullable="false" />
+    <Property Name="Vendor_id" Type="int" Nullable="false" />
+    <Property Name="Part_num" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Serial_num" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Date_in" Type="datetime" Nullable="false" />
+    <Property Name="Supplier_id" Type="int" Nullable="false" />
+    <Property Name="Price" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Categories">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Warranties">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SCs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Employees">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FIO" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Phone" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Vendors">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Requests">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Item" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Serial_num" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Employee_id" Type="int" Nullable="false" />
+    <Property Name="Service" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="More_info" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Packing" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Defect" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Warranty_id" Type="int" Nullable="false" />
+    <Property Name="State_id" Type="int" Nullable="false" />
+    <Property Name="Contragent_id" Type="int" Nullable="false" />
+    <Property Name="SC_num" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Diagnostic_result" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="States">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Clients">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Phone" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Contact_name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PartRequest">
+    <Key>
+      <PropertyRef Name="Part_Id" />
+      <PropertyRef Name="Request_Id" />
+    </Key>
+    <Property Name="Part_Id" Type="int" Nullable="false" />
+    <Property Name="Request_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="CategoryParts">
+    <End Role="Category" Type="EntityDataModel.Store.Categories" Multiplicity="1" />
+    <End Role="Parts" Type="EntityDataModel.Store.Parts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Parts">
+        <PropertyRef Name="Category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="VendorPart">
+    <End Role="Vendor" Type="EntityDataModel.Store.Vendors" Multiplicity="1" />
+    <End Role="Part" Type="EntityDataModel.Store.Parts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendor">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Part">
+        <PropertyRef Name="Vendor_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="StateRequest">
+    <End Role="State" Type="EntityDataModel.Store.States" Multiplicity="1" />
+    <End Role="Request" Type="EntityDataModel.Store.Requests" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="State">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Request">
+        <PropertyRef Name="State_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="WarrantyRequest">
+    <End Role="Warranty" Type="EntityDataModel.Store.Warranties" Multiplicity="1" />
+    <End Role="Request" Type="EntityDataModel.Store.Requests" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Warranty">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Request">
+        <PropertyRef Name="Warranty_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EmployeeRequest">
+    <End Role="Employee" Type="EntityDataModel.Store.Employees" Multiplicity="1" />
+    <End Role="Request" Type="EntityDataModel.Store.Requests" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employee">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Request">
+        <PropertyRef Name="Employee_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SupplierPart">
+    <End Role="Supplier" Type="EntityDataModel.Store.Clients" Multiplicity="1" />
+    <End Role="Part" Type="EntityDataModel.Store.Parts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Part">
+        <PropertyRef Name="Supplier_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ContragentRequest">
+    <End Role="Contragent" Type="EntityDataModel.Store.Contragents" Multiplicity="1" />
+    <End Role="Request" Type="EntityDataModel.Store.Requests" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contragent">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Request">
+        <PropertyRef Name="Contragent_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PartRequest_Part">
+    <End Role="Part" Type="EntityDataModel.Store.Parts" Multiplicity="1" />
+    <End Role="PartRequest" Type="EntityDataModel.Store.PartRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Part">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PartRequest">
+        <PropertyRef Name="Part_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PartRequest_Request">
+    <End Role="PartRequest" Type="EntityDataModel.Store.PartRequest" Multiplicity="*" />
+    <End Role="Request" Type="EntityDataModel.Store.Requests" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Request">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PartRequest">
+        <PropertyRef Name="Request_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
