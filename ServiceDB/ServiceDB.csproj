@@ -69,6 +69,8 @@
     <Compile Include="Controllers\ContragentsController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PartsController.cs" />
+    <Compile Include="Controllers\RequestPartsController.cs" />
     <Compile Include="Controllers\RequestsController.cs" />
     <Compile Include="Controllers\StatesController.cs" />
     <Compile Include="Controllers\SuppliersController.cs" />
@@ -157,6 +159,16 @@
     <Content Include="Views\Employees\Details.aspx" />
     <Content Include="Views\Employees\Edit.aspx" />
     <Content Include="Views\Employees\Index.aspx" />
+    <Content Include="Views\Parts\Create.aspx" />
+    <Content Include="Views\Parts\Delete.aspx" />
+    <Content Include="Views\Parts\Details.aspx" />
+    <Content Include="Views\Parts\Edit.aspx" />
+    <Content Include="Views\Parts\Index.aspx" />
+    <Content Include="Views\RequestParts\Create.aspx" />
+    <Content Include="Views\RequestParts\Delete.aspx" />
+    <Content Include="Views\RequestParts\Details.aspx" />
+    <Content Include="Views\RequestParts\Edit.aspx" />
+    <Content Include="Views\RequestParts\Index.aspx" />
     <Content Include="Views\Requests\Create.aspx" />
     <Content Include="Views\Requests\Delete.aspx" />
     <Content Include="Views\Requests\Details.aspx" />

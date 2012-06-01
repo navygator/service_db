@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<ServiceDB.Models.Employee>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<ServiceDB.Models.Part>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Просмотр
@@ -7,30 +7,31 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 <div class="row">
     <div class="span6 offset3">
-        <h1>Сотрудник</h1>
+        <h1>Инмормация о запчасти</h1>
 
         <fieldset>
-            <legend>Данные</legend>
+            <legend>Запчасть</legend>
 
-            <div class="display-label">ФИО</div>
+            <div class="display-label">Категория</div>
             <div class="display-field">
-                <%: Html.DisplayFor(model => model.FIO) %>
+                <%: Html.DisplayFor(model => model.Category.Name) %>
             </div>
 
-            <div class="display-label">Адрес</div>
+            <div class="display-label">Производитель</div>
             <div class="display-field">
-                <%: Html.DisplayFor(model => model.Address) %>
+                <%: Html.DisplayFor(model => model.Vendor.Name) %>
             </div>
 
-            <div class="display-label">Телефон</div>
+            <div class="display-label">Парт-номер</div>
             <div class="display-field">
-                <%: Html.DisplayFor(model => model.Phone) %>
+                <%: Html.DisplayFor(model => model.Part_num) %>
             </div>
 
-            <div class="display-label">Email</div>
+            <div class="display-label">Описание</div>
             <div class="display-field">
-                <%: Html.DisplayFor(model => model.Email) %>
+                <%: Html.DisplayFor(model => model.Description) %>
             </div>
+
         </fieldset>
         <p>
             <%: Html.ActionLink("Редактировать", "Edit", new { @id=Model.Id }, new { @class="btn btn-primary" }) %>

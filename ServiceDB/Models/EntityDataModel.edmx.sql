@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 05/30/2012 13:58:10
+-- Date Created: 06/01/2012 10:48:37
 -- Generated from EDMX file: D:\Work\My Documents\Visual Studio 2010\Projects\ServiceDB\ServiceDB\Models\EntityDataModel.edmx
 -- --------------------------------------------------
 
@@ -17,9 +17,6 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_ContragentsParts]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Parts] DROP CONSTRAINT [FK_ContragentsParts];
-GO
 IF OBJECT_ID(N'[dbo].[FK_CategoryParts]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Parts] DROP CONSTRAINT [FK_CategoryParts];
 GO
@@ -35,11 +32,17 @@ GO
 IF OBJECT_ID(N'[dbo].[FK_EmployeeRequest]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Requests] DROP CONSTRAINT [FK_EmployeeRequest];
 GO
-IF OBJECT_ID(N'[dbo].[FK_PartRequest_Part]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[RequestParts] DROP CONSTRAINT [FK_PartRequest_Part];
+IF OBJECT_ID(N'[dbo].[FK_ContragentRequest]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Requests] DROP CONSTRAINT [FK_ContragentRequest];
 GO
-IF OBJECT_ID(N'[dbo].[FK_PartRequest_Request]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[RequestParts] DROP CONSTRAINT [FK_PartRequest_Request];
+IF OBJECT_ID(N'[dbo].[FK_PartRequestPart]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RequestsParts] DROP CONSTRAINT [FK_PartRequestPart];
+GO
+IF OBJECT_ID(N'[dbo].[FK_SupplierRequestPart]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RequestsParts] DROP CONSTRAINT [FK_SupplierRequestPart];
+GO
+IF OBJECT_ID(N'[dbo].[FK_RequestRequestPart]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[RequestsParts] DROP CONSTRAINT [FK_RequestRequestPart];
 GO
 
 -- --------------------------------------------------
@@ -73,8 +76,11 @@ GO
 IF OBJECT_ID(N'[dbo].[States]', 'U') IS NOT NULL
     DROP TABLE [dbo].[States];
 GO
-IF OBJECT_ID(N'[dbo].[RequestParts]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[RequestParts];
+IF OBJECT_ID(N'[dbo].[Clients]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Clients];
+GO
+IF OBJECT_ID(N'[dbo].[RequestsParts]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[RequestsParts];
 GO
 
 -- --------------------------------------------------
@@ -97,11 +103,7 @@ CREATE TABLE [dbo].[Parts] (
     [Category_id] int  NOT NULL,
     [Vendor_id] int  NOT NULL,
     [Part_num] nvarchar(max)  NOT NULL,
-    [Serial_num] nvarchar(max)  NOT NULL,
-    [Description] nvarchar(max)  NOT NULL,
-    [Date_in] datetime  NOT NULL,
-    [Supplier_id] int  NOT NULL,
-    [Price] float  NOT NULL
+    [Description] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -152,14 +154,14 @@ CREATE TABLE [dbo].[Requests] (
     [Employee_id] int  NOT NULL,
     [Service] nvarchar(max)  NOT NULL,
     [Description] nvarchar(max)  NOT NULL,
-    [More_info] nvarchar(max)  NOT NULL,
+    [More_info] nvarchar(max)  NULL,
     [Packing] nvarchar(max)  NOT NULL,
     [Defect] nvarchar(max)  NOT NULL,
     [Warranty_id] int  NOT NULL,
     [State_id] int  NOT NULL,
     [Contragent_id] int  NOT NULL,
-    [SC_num] nvarchar(max)  NOT NULL,
-    [Diagnostic_result] nvarchar(max)  NOT NULL
+    [SC_num] nvarchar(max)  NULL,
+    [Diagnostic_result] nvarchar(max)  NULL
 );
 GO
 
@@ -180,10 +182,15 @@ CREATE TABLE [dbo].[Clients] (
 );
 GO
 
--- Creating table 'RequestParts'
-CREATE TABLE [dbo].[RequestParts] (
-    [Part_Id] int  NOT NULL,
-    [Request_Id] int  NOT NULL
+-- Creating table 'RequestsParts'
+CREATE TABLE [dbo].[RequestsParts] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Request_id] int  NOT NULL,
+    [Part_id] int  NOT NULL,
+    [Serial_num] nvarchar(max)  NOT NULL,
+    [Supplier_id] int  NOT NULL,
+    [Date_in] nvarchar(max)  NOT NULL,
+    [Price] decimal(18,0)  NOT NULL
 );
 GO
 
@@ -251,10 +258,10 @@ ADD CONSTRAINT [PK_Clients]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Part_Id], [Request_Id] in table 'RequestParts'
-ALTER TABLE [dbo].[RequestParts]
-ADD CONSTRAINT [PK_RequestParts]
-    PRIMARY KEY NONCLUSTERED ([Part_Id], [Request_Id] ASC);
+-- Creating primary key on [Id] in table 'RequestsParts'
+ALTER TABLE [dbo].[RequestsParts]
+ADD CONSTRAINT [PK_RequestsParts]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
 -- --------------------------------------------------
@@ -331,43 +338,6 @@ ON [dbo].[Requests]
     ([Employee_id]);
 GO
 
--- Creating foreign key on [Part_Id] in table 'RequestParts'
-ALTER TABLE [dbo].[RequestParts]
-ADD CONSTRAINT [FK_PartRequest_Part]
-    FOREIGN KEY ([Part_Id])
-    REFERENCES [dbo].[Parts]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating foreign key on [Request_Id] in table 'RequestParts'
-ALTER TABLE [dbo].[RequestParts]
-ADD CONSTRAINT [FK_PartRequest_Request]
-    FOREIGN KEY ([Request_Id])
-    REFERENCES [dbo].[Requests]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_PartRequest_Request'
-CREATE INDEX [IX_FK_PartRequest_Request]
-ON [dbo].[RequestParts]
-    ([Request_Id]);
-GO
-
--- Creating foreign key on [Supplier_id] in table 'Parts'
-ALTER TABLE [dbo].[Parts]
-ADD CONSTRAINT [FK_SupplierPart]
-    FOREIGN KEY ([Supplier_id])
-    REFERENCES [dbo].[Clients]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_SupplierPart'
-CREATE INDEX [IX_FK_SupplierPart]
-ON [dbo].[Parts]
-    ([Supplier_id]);
-GO
-
 -- Creating foreign key on [Contragent_id] in table 'Requests'
 ALTER TABLE [dbo].[Requests]
 ADD CONSTRAINT [FK_ContragentRequest]
@@ -380,6 +350,48 @@ ADD CONSTRAINT [FK_ContragentRequest]
 CREATE INDEX [IX_FK_ContragentRequest]
 ON [dbo].[Requests]
     ([Contragent_id]);
+GO
+
+-- Creating foreign key on [Part_id] in table 'RequestsParts'
+ALTER TABLE [dbo].[RequestsParts]
+ADD CONSTRAINT [FK_PartRequestPart]
+    FOREIGN KEY ([Part_id])
+    REFERENCES [dbo].[Parts]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PartRequestPart'
+CREATE INDEX [IX_FK_PartRequestPart]
+ON [dbo].[RequestsParts]
+    ([Part_id]);
+GO
+
+-- Creating foreign key on [Supplier_id] in table 'RequestsParts'
+ALTER TABLE [dbo].[RequestsParts]
+ADD CONSTRAINT [FK_SupplierRequestPart]
+    FOREIGN KEY ([Supplier_id])
+    REFERENCES [dbo].[Clients]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_SupplierRequestPart'
+CREATE INDEX [IX_FK_SupplierRequestPart]
+ON [dbo].[RequestsParts]
+    ([Supplier_id]);
+GO
+
+-- Creating foreign key on [Request_id] in table 'RequestsParts'
+ALTER TABLE [dbo].[RequestsParts]
+ADD CONSTRAINT [FK_RequestRequestPart]
+    FOREIGN KEY ([Request_id])
+    REFERENCES [dbo].[Requests]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_RequestRequestPart'
+CREATE INDEX [IX_FK_RequestRequestPart]
+ON [dbo].[RequestsParts]
+    ([Request_id]);
 GO
 
 -- --------------------------------------------------

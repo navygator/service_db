@@ -27,7 +27,7 @@
 <% foreach (var item in Model) { %>
     <tr>
         <td>
-            <%: Html.ActionLink(item.Name, "Details", new { id=item.Id }) %> |
+            <%: Html.ActionLink(item.Name, "Details", new { id=item.Id }) %> 
         </td>
         <td>
             <%: Html.DisplayFor(modelItem => item.Item) %>

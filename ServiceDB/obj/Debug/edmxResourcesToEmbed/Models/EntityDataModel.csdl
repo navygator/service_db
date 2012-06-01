@@ -30,18 +30,23 @@
       <End Role="Employee" EntitySet="Employees" />
       <End Role="Request" EntitySet="Requests" />
     </AssociationSet>
-    <AssociationSet Name="RequestParts" Association="EntityDataModel.PartRequest">
-      <End Role="Part" EntitySet="Parts" />
-      <End Role="Request" EntitySet="Requests" />
-    </AssociationSet>
     <EntitySet Name="Clients" EntityType="EntityDataModel.Supplier" />
-    <AssociationSet Name="SupplierPart" Association="EntityDataModel.SupplierPart">
-      <End Role="Supplier" EntitySet="Clients" />
-      <End Role="Part" EntitySet="Parts" />
-    </AssociationSet>
     <AssociationSet Name="ContragentRequest" Association="EntityDataModel.ContragentRequest">
       <End Role="Contragent" EntitySet="Contragents" />
       <End Role="Request" EntitySet="Requests" />
+    </AssociationSet>
+    <EntitySet Name="RequestsParts" EntityType="EntityDataModel.RequestPart" />
+    <AssociationSet Name="PartRequestPart" Association="EntityDataModel.PartRequestPart">
+      <End Role="Part" EntitySet="Parts" />
+      <End Role="RequestPart" EntitySet="RequestsParts" />
+    </AssociationSet>
+    <AssociationSet Name="SupplierRequestPart" Association="EntityDataModel.SupplierRequestPart">
+      <End Role="Supplier" EntitySet="Clients" />
+      <End Role="RequestPart" EntitySet="RequestsParts" />
+    </AssociationSet>
+    <AssociationSet Name="RequestRequestPart" Association="EntityDataModel.RequestRequestPart">
+      <End Role="Request" EntitySet="Requests" />
+      <End Role="RequestPart" EntitySet="RequestsParts" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Contragent">
@@ -63,15 +68,10 @@
     <Property Type="Int32" Name="Category_id" Nullable="false" />
     <Property Type="Int32" Name="Vendor_id" Nullable="false" />
     <Property Type="String" Name="Part_num" Nullable="false" />
-    <Property Type="String" Name="Serial_num" Nullable="false" />
     <Property Type="String" Name="Description" Nullable="false" />
-    <Property Type="DateTime" Name="Date_in" Nullable="false" />
-    <Property Type="Int32" Name="Supplier_id" Nullable="false" />
-    <Property Type="Double" Name="Price" Nullable="false" />
     <NavigationProperty Name="Category" Relationship="EntityDataModel.CategoryParts" FromRole="Parts" ToRole="Category" />
     <NavigationProperty Name="Vendor" Relationship="EntityDataModel.VendorPart" FromRole="Part" ToRole="Vendor" />
-    <NavigationProperty Name="Request" Relationship="EntityDataModel.PartRequest" FromRole="Part" ToRole="Request" />
-    <NavigationProperty Name="Supplier" Relationship="EntityDataModel.SupplierPart" FromRole="Part" ToRole="Supplier" />
+    <NavigationProperty Name="RequestPart" Relationship="EntityDataModel.PartRequestPart" FromRole="Part" ToRole="RequestPart" />
   </EntityType>
   <EntityType Name="Category">
     <Key>
@@ -150,19 +150,19 @@
     <Property Type="Int32" Name="Employee_id" Nullable="false" />
     <Property Type="String" Name="Service" Nullable="false" />
     <Property Type="String" Name="Description" Nullable="false" />
-    <Property Type="String" Name="More_info" Nullable="false" />
+    <Property Type="String" Name="More_info" Nullable="true" />
     <Property Type="String" Name="Packing" Nullable="false" />
     <Property Type="String" Name="Defect" Nullable="false" />
     <Property Type="Int32" Name="Warranty_id" Nullable="false" />
     <Property Type="Int32" Name="State_id" Nullable="false" />
     <Property Type="Int32" Name="Contragent_id" Nullable="false" />
-    <Property Type="String" Name="SC_num" Nullable="false" />
+    <Property Type="String" Name="SC_num" Nullable="true" />
     <NavigationProperty Name="State" Relationship="EntityDataModel.StateRequest" FromRole="Request" ToRole="State" />
     <NavigationProperty Name="Warranty" Relationship="EntityDataModel.WarrantyRequest" FromRole="Request" ToRole="Warranty" />
     <NavigationProperty Name="Employee" Relationship="EntityDataModel.EmployeeRequest" FromRole="Request" ToRole="Employee" />
-    <NavigationProperty Name="Part" Relationship="EntityDataModel.PartRequest" FromRole="Request" ToRole="Part" />
-    <Property Type="String" Name="Diagnostic_result" Nullable="false" />
+    <Property Type="String" Name="Diagnostic_result" Nullable="true" />
     <NavigationProperty Name="Contragent" Relationship="EntityDataModel.ContragentRequest" FromRole="Request" ToRole="Contragent" />
+    <NavigationProperty Name="RequestPart" Relationship="EntityDataModel.RequestRequestPart" FromRole="Request" ToRole="RequestPart" />
   </EntityType>
   <EntityType Name="State">
     <Key>
@@ -208,10 +208,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="PartRequest">
-    <End Type="EntityDataModel.Part" Role="Part" Multiplicity="*" />
-    <End Type="EntityDataModel.Request" Role="Request" Multiplicity="*" />
-  </Association>
   <EntityType Name="Supplier">
     <Key>
       <PropertyRef Name="Id" />
@@ -221,20 +217,8 @@
     <Property Type="String" Name="Phone" Nullable="false" />
     <Property Type="String" Name="Address" Nullable="false" />
     <Property Type="String" Name="Contact_name" Nullable="false" />
-    <NavigationProperty Name="Part" Relationship="EntityDataModel.SupplierPart" FromRole="Supplier" ToRole="Part" />
+    <NavigationProperty Name="RequestPart" Relationship="EntityDataModel.SupplierRequestPart" FromRole="Supplier" ToRole="RequestPart" />
   </EntityType>
-  <Association Name="SupplierPart">
-    <End Type="EntityDataModel.Supplier" Role="Supplier" Multiplicity="1" />
-    <End Type="EntityDataModel.Part" Role="Part" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Supplier">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Part">
-        <PropertyRef Name="Supplier_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="ContragentRequest">
     <End Type="EntityDataModel.Contragent" Role="Contragent" Multiplicity="1" />
     <End Type="EntityDataModel.Request" Role="Request" Multiplicity="*" />
@@ -244,6 +228,57 @@
       </Principal>
       <Dependent Role="Request">
         <PropertyRef Name="Contragent_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="RequestPart">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="Request_id" Nullable="false" />
+    <Property Type="Int32" Name="Part_id" Nullable="false" />
+    <Property Type="String" Name="Serial_num" Nullable="false" />
+    <Property Type="Int32" Name="Supplier_id" Nullable="false" />
+    <Property Type="String" Name="Date_in" Nullable="false" />
+    <Property Type="Decimal" Name="Price" Nullable="false" />
+    <NavigationProperty Name="Part" Relationship="EntityDataModel.PartRequestPart" FromRole="RequestPart" ToRole="Part" />
+    <NavigationProperty Name="Supplier" Relationship="EntityDataModel.SupplierRequestPart" FromRole="RequestPart" ToRole="Supplier" />
+    <NavigationProperty Name="Request" Relationship="EntityDataModel.RequestRequestPart" FromRole="RequestPart" ToRole="Request" />
+  </EntityType>
+  <Association Name="PartRequestPart">
+    <End Type="EntityDataModel.Part" Role="Part" Multiplicity="1" />
+    <End Type="EntityDataModel.RequestPart" Role="RequestPart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Part">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RequestPart">
+        <PropertyRef Name="Part_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SupplierRequestPart">
+    <End Type="EntityDataModel.Supplier" Role="Supplier" Multiplicity="1" />
+    <End Type="EntityDataModel.RequestPart" Role="RequestPart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RequestPart">
+        <PropertyRef Name="Supplier_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RequestRequestPart">
+    <End Type="EntityDataModel.Request" Role="Request" Multiplicity="1" />
+    <End Type="EntityDataModel.RequestPart" Role="RequestPart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Request">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RequestPart">
+        <PropertyRef Name="Request_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

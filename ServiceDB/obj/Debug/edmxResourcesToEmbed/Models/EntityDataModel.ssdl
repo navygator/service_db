@@ -11,7 +11,7 @@
     <EntitySet Name="Requests" EntityType="EntityDataModel.Store.Requests" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="States" EntityType="EntityDataModel.Store.States" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Clients" EntityType="EntityDataModel.Store.Clients" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="RequestParts" EntityType="EntityDataModel.Store.PartRequest" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RequestsParts" EntityType="EntityDataModel.Store.RequestsParts" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="CategoryParts" Association="EntityDataModel.Store.CategoryParts">
       <End Role="Category" EntitySet="Categories" />
       <End Role="Parts" EntitySet="Parts" />
@@ -32,21 +32,21 @@
       <End Role="Employee" EntitySet="Employees" />
       <End Role="Request" EntitySet="Requests" />
     </AssociationSet>
-    <AssociationSet Name="FK_RequestParts_Part" Association="EntityDataModel.Store.FK_PartRequest_Part">
-      <End Role="Part" EntitySet="Parts" />
-      <End Role="PartRequest" EntitySet="RequestParts" />
-    </AssociationSet>
-    <AssociationSet Name="FK_RequestParts_Request" Association="EntityDataModel.Store.FK_PartRequest_Request">
-      <End Role="Request" EntitySet="Requests" />
-      <End Role="PartRequest" EntitySet="RequestParts" />
-    </AssociationSet>
-    <AssociationSet Name="SupplierPart" Association="EntityDataModel.Store.SupplierPart">
-      <End Role="Supplier" EntitySet="Clients" />
-      <End Role="Part" EntitySet="Parts" />
-    </AssociationSet>
     <AssociationSet Name="ContragentRequest" Association="EntityDataModel.Store.ContragentRequest">
       <End Role="Contragent" EntitySet="Contragents" />
       <End Role="Request" EntitySet="Requests" />
+    </AssociationSet>
+    <AssociationSet Name="PartRequestPart" Association="EntityDataModel.Store.PartRequestPart">
+      <End Role="Part" EntitySet="Parts" />
+      <End Role="RequestPart" EntitySet="RequestsParts" />
+    </AssociationSet>
+    <AssociationSet Name="SupplierRequestPart" Association="EntityDataModel.Store.SupplierRequestPart">
+      <End Role="Supplier" EntitySet="Clients" />
+      <End Role="RequestPart" EntitySet="RequestsParts" />
+    </AssociationSet>
+    <AssociationSet Name="RequestRequestPart" Association="EntityDataModel.Store.RequestRequestPart">
+      <End Role="Request" EntitySet="Requests" />
+      <End Role="RequestPart" EntitySet="RequestsParts" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Contragents">
@@ -67,11 +67,7 @@
     <Property Name="Category_id" Type="int" Nullable="false" />
     <Property Name="Vendor_id" Type="int" Nullable="false" />
     <Property Name="Part_num" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Serial_num" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Date_in" Type="datetime" Nullable="false" />
-    <Property Name="Supplier_id" Type="int" Nullable="false" />
-    <Property Name="Price" Type="float" Nullable="false" />
   </EntityType>
   <EntityType Name="Categories">
     <Key>
@@ -122,14 +118,14 @@
     <Property Name="Employee_id" Type="int" Nullable="false" />
     <Property Name="Service" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="More_info" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="More_info" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Packing" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Defect" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Warranty_id" Type="int" Nullable="false" />
     <Property Name="State_id" Type="int" Nullable="false" />
     <Property Name="Contragent_id" Type="int" Nullable="false" />
-    <Property Name="SC_num" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Diagnostic_result" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SC_num" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Diagnostic_result" Type="nvarchar(max)" Nullable="true" />
   </EntityType>
   <EntityType Name="States">
     <Key>
@@ -148,13 +144,17 @@
     <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Contact_name" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
-  <EntityType Name="PartRequest">
+  <EntityType Name="RequestsParts">
     <Key>
-      <PropertyRef Name="Part_Id" />
-      <PropertyRef Name="Request_Id" />
+      <PropertyRef Name="Id" />
     </Key>
-    <Property Name="Part_Id" Type="int" Nullable="false" />
-    <Property Name="Request_Id" Type="int" Nullable="false" />
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Request_id" Type="int" Nullable="false" />
+    <Property Name="Part_id" Type="int" Nullable="false" />
+    <Property Name="Serial_num" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Supplier_id" Type="int" Nullable="false" />
+    <Property Name="Date_in" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Price" Type="decimal" Nullable="false" />
   </EntityType>
   <Association Name="CategoryParts">
     <End Role="Category" Type="EntityDataModel.Store.Categories" Multiplicity="1" />
@@ -216,18 +216,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="SupplierPart">
-    <End Role="Supplier" Type="EntityDataModel.Store.Clients" Multiplicity="1" />
-    <End Role="Part" Type="EntityDataModel.Store.Parts" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Supplier">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Part">
-        <PropertyRef Name="Supplier_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="ContragentRequest">
     <End Role="Contragent" Type="EntityDataModel.Store.Contragents" Multiplicity="1" />
     <End Role="Request" Type="EntityDataModel.Store.Requests" Multiplicity="*" />
@@ -240,27 +228,39 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_PartRequest_Part">
+  <Association Name="PartRequestPart">
     <End Role="Part" Type="EntityDataModel.Store.Parts" Multiplicity="1" />
-    <End Role="PartRequest" Type="EntityDataModel.Store.PartRequest" Multiplicity="*" />
+    <End Role="RequestPart" Type="EntityDataModel.Store.RequestsParts" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Part">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="PartRequest">
-        <PropertyRef Name="Part_Id" />
+      <Dependent Role="RequestPart">
+        <PropertyRef Name="Part_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_PartRequest_Request">
-    <End Role="PartRequest" Type="EntityDataModel.Store.PartRequest" Multiplicity="*" />
+  <Association Name="SupplierRequestPart">
+    <End Role="Supplier" Type="EntityDataModel.Store.Clients" Multiplicity="1" />
+    <End Role="RequestPart" Type="EntityDataModel.Store.RequestsParts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RequestPart">
+        <PropertyRef Name="Supplier_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RequestRequestPart">
     <End Role="Request" Type="EntityDataModel.Store.Requests" Multiplicity="1" />
+    <End Role="RequestPart" Type="EntityDataModel.Store.RequestsParts" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Request">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="PartRequest">
-        <PropertyRef Name="Request_Id" />
+      <Dependent Role="RequestPart">
+        <PropertyRef Name="Request_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

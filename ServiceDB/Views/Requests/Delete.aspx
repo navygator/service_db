@@ -5,88 +5,91 @@
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<div class="row">
+    <div class="span6 offset3">
 
-<h2>Delete</h2>
+        <h1>Удалить заявку</h1>
 
-<h3>Are you sure you want to delete this?</h3>
-<fieldset>
-    <legend>Request</legend>
+        <h3>Вы уверены, что желаете удалить?</h3>
+        <fieldset>
+            <legend>Заявка</legend>
 
-    <div class="display-label">Name</div>
-    <div class="display-field">
-        <%: Html.DisplayFor(model => model.Name) %>
+            <div class="display-label">Название</div>
+            <div class="display-field">
+                <%: Html.DisplayFor(model => model.Name) %>
+            </div>
+
+            <div class="display-label">Товар</div>
+            <div class="display-field">
+                <%: Html.DisplayFor(model => model.Item) %>
+            </div>
+
+            <div class="display-label">Серийный номер</div>
+            <div class="display-field">
+                <%: Html.DisplayFor(model => model.Serial_num) %>
+            </div>
+
+            <div class="display-label">Мастер</div>
+            <div class="display-field">
+                <%: Html.DisplayFor(model => model.Employee.FIO) %>
+            </div>
+
+            <div class="display-label">Услуга</div>
+            <div class="display-field">
+                <%: Html.DisplayFor(model => model.Service) %>
+            </div>
+
+            <div class="display-label">Описание</div>
+            <div class="display-field">
+                <%: Html.DisplayFor(model => model.Description) %>
+            </div>
+
+            <div class="display-label">Доп. инфо</div>
+            <div class="display-field">
+                <%: Html.DisplayFor(model => model.More_info) %>
+            </div>
+
+            <div class="display-label">Комплектация</div>
+            <div class="display-field">
+                <%: Html.DisplayFor(model => model.Packing) %>
+            </div>
+
+            <div class="display-label">Неисправность</div>
+            <div class="display-field">
+                <%: Html.DisplayFor(model => model.Defect) %>
+            </div>
+
+            <div class="display-label">Гарантия</div>
+            <div class="display-field">
+                <%: Html.DisplayFor(model => model.Warranty.Name) %>
+            </div>
+
+            <div class="display-label">Статус</div>
+            <div class="display-field">
+                <%: Html.DisplayFor(model => model.State.Name) %>
+            </div>
+
+            <div class="display-label">Клиент</div>
+            <div class="display-field">
+                <%: Html.DisplayFor(model => model.Contragent.FIO) %>
+            </div>
+
+            <div class="display-label">Номер заявки в СЦ</div>
+            <div class="display-field">
+                <%: Html.DisplayFor(model => model.SC_num) %>
+            </div>
+
+            <div class="display-label">Результаты диагностики</div>
+            <div class="display-field">
+                <%: Html.DisplayFor(model => model.Diagnostic_result) %>
+            </div>
+        </fieldset>
+        <% using (Html.BeginForm()) { %>
+            <p>
+                <input type="submit" value="Удалить" class="btn btn-danger" /> 
+                <%: Html.ActionLink("К списку", "Index", null, new { @class="btn btn-primary"})%>
+            </p>
+        <% } %>
     </div>
-
-    <div class="display-label">Item</div>
-    <div class="display-field">
-        <%: Html.DisplayFor(model => model.Item) %>
-    </div>
-
-    <div class="display-label">Serial_num</div>
-    <div class="display-field">
-        <%: Html.DisplayFor(model => model.Serial_num) %>
-    </div>
-
-    <div class="display-label">Employee</div>
-    <div class="display-field">
-        <%: Html.DisplayFor(model => model.Employee.FIO) %>
-    </div>
-
-    <div class="display-label">Service</div>
-    <div class="display-field">
-        <%: Html.DisplayFor(model => model.Service) %>
-    </div>
-
-    <div class="display-label">Description</div>
-    <div class="display-field">
-        <%: Html.DisplayFor(model => model.Description) %>
-    </div>
-
-    <div class="display-label">More_info</div>
-    <div class="display-field">
-        <%: Html.DisplayFor(model => model.More_info) %>
-    </div>
-
-    <div class="display-label">Packing</div>
-    <div class="display-field">
-        <%: Html.DisplayFor(model => model.Packing) %>
-    </div>
-
-    <div class="display-label">Defect</div>
-    <div class="display-field">
-        <%: Html.DisplayFor(model => model.Defect) %>
-    </div>
-
-    <div class="display-label">Warranty</div>
-    <div class="display-field">
-        <%: Html.DisplayFor(model => model.Warranty.Name) %>
-    </div>
-
-    <div class="display-label">State</div>
-    <div class="display-field">
-        <%: Html.DisplayFor(model => model.State.Name) %>
-    </div>
-
-    <div class="display-label">Contragent</div>
-    <div class="display-field">
-        <%: Html.DisplayFor(model => model.Contragent.FIO) %>
-    </div>
-
-    <div class="display-label">SC_num</div>
-    <div class="display-field">
-        <%: Html.DisplayFor(model => model.SC_num) %>
-    </div>
-
-    <div class="display-label">Diagnostic_result</div>
-    <div class="display-field">
-        <%: Html.DisplayFor(model => model.Diagnostic_result) %>
-    </div>
-</fieldset>
-<% using (Html.BeginForm()) { %>
-    <p>
-        <input type="submit" value="Delete" /> |
-        <%: Html.ActionLink("Back to List", "Index") %>
-    </p>
-<% } %>
-
+</div>
 </asp:Content>
