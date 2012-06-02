@@ -5,3 +5,10 @@ d:\work\my documents\visual studio 2010\Projects\ServiceDB\ServiceDB\bin\EntityF
 d:\work\my documents\visual studio 2010\Projects\ServiceDB\ServiceDB\obj\Debug\ResolveAssemblyReference.cache
 d:\work\my documents\visual studio 2010\Projects\ServiceDB\ServiceDB\obj\Debug\ServiceDB.dll
 d:\work\my documents\visual studio 2010\Projects\ServiceDB\ServiceDB\obj\Debug\ServiceDB.pdb
+I:\Work\Alex\My Documents\Visual Studio 2010\Projects\service_db\ServiceDB\bin\ServiceDB.dll
+I:\Work\Alex\My Documents\Visual Studio 2010\Projects\service_db\ServiceDB\bin\ServiceDB.pdb
+I:\Work\Alex\My Documents\Visual Studio 2010\Projects\service_db\ServiceDB\bin\EntityFramework.dll
+I:\Work\Alex\My Documents\Visual Studio 2010\Projects\service_db\ServiceDB\bin\EntityFramework.xml
+I:\Work\Alex\My Documents\Visual Studio 2010\Projects\service_db\ServiceDB\obj\Debug\ResolveAssemblyReference.cache
+I:\Work\Alex\My Documents\Visual Studio 2010\Projects\service_db\ServiceDB\obj\Debug\ServiceDB.dll
+I:\Work\Alex\My Documents\Visual Studio 2010\Projects\service_db\ServiceDB\obj\Debug\ServiceDB.pdb

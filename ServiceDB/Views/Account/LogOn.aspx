@@ -6,9 +6,9 @@
 
 <asp:Content ID="loginContent" ContentPlaceHolderID="MainContent" runat="server">
     <div class="span6 offset3">
-    <h1>Log On</h1>
+    <h1>Вход</h1>
     <p>
-        Please enter your user name and password. <%: Html.ActionLink("Register", "Register") %> if you don't have an account.
+        Введите имя пользователя и пароль. <%: Html.ActionLink("Зарегистрируйтесь", "Register") %>, если у вас нет аккаунта.
     </p>
 
     <script src="<%: Url.Content("~/Scripts/jquery.validate.min.js") %>" type="text/javascript"></script>
@@ -18,10 +18,10 @@
         <%: Html.ValidationSummary(true, "Login was unsuccessful. Please correct the errors and try again.") %>
         <div>
             <fieldset>
-                <legend>Account Information</legend>
+                <legend>Информация об аккаунте</legend>
                 
                 <div class="editor-label">
-                    <%: Html.LabelFor(m => m.UserName) %>
+                    <%: Html.LabelFor(m => m.UserName, "Имя пользователя") %>
                 </div>
                 <div class="editor-field">
                     <%: Html.TextBoxFor(m => m.UserName) %>
@@ -29,7 +29,7 @@
                 </div>
                 
                 <div class="editor-label">
-                    <%: Html.LabelFor(m => m.Password) %>
+                    <%: Html.LabelFor(m => m.Password, "Пароль") %>
                 </div>
                 <div class="editor-field">
                     <%: Html.PasswordFor(m => m.Password) %>
@@ -38,11 +38,11 @@
                 
                 <div class="editor-label">
                     <%: Html.CheckBoxFor(m => m.RememberMe) %>
-                    <%: Html.LabelFor(m => m.RememberMe) %>
+                    <%: Html.LabelFor(m => m.RememberMe, "Запомнить меня") %>
                 </div>
                 
                 <p>
-                    <input type="submit" value="Log On" class="btn btn-large btn-primary" />
+                    <input type="submit" value="Войти" class="btn btn-large btn-primary" />
                 </p>
             </fieldset>
         </div>
