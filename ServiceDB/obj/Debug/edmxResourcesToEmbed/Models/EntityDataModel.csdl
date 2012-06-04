@@ -30,7 +30,7 @@
       <End Role="Employee" EntitySet="Employees" />
       <End Role="Request" EntitySet="Requests" />
     </AssociationSet>
-    <EntitySet Name="Clients" EntityType="EntityDataModel.Supplier" />
+    <EntitySet Name="Suppliers" EntityType="EntityDataModel.Supplier" />
     <AssociationSet Name="ContragentRequest" Association="EntityDataModel.ContragentRequest">
       <End Role="Contragent" EntitySet="Contragents" />
       <End Role="Request" EntitySet="Requests" />
@@ -41,7 +41,7 @@
       <End Role="RequestPart" EntitySet="RequestsParts" />
     </AssociationSet>
     <AssociationSet Name="SupplierRequestPart" Association="EntityDataModel.SupplierRequestPart">
-      <End Role="Supplier" EntitySet="Clients" />
+      <End Role="Supplier" EntitySet="Suppliers" />
       <End Role="RequestPart" EntitySet="RequestsParts" />
     </AssociationSet>
     <AssociationSet Name="RequestRequestPart" Association="EntityDataModel.RequestRequestPart">
@@ -59,6 +59,7 @@
     <Property Type="String" Name="Address" Nullable="false" />
     <Property Type="String" Name="EMail" Nullable="false" />
     <NavigationProperty Name="Request" Relationship="EntityDataModel.ContragentRequest" FromRole="Contragent" ToRole="Request" />
+    <Property Type="DateTime" Name="Updated_at" Nullable="true" />
   </EntityType>
   <EntityType Name="Part">
     <Key>
@@ -72,6 +73,7 @@
     <NavigationProperty Name="Category" Relationship="EntityDataModel.CategoryParts" FromRole="Parts" ToRole="Category" />
     <NavigationProperty Name="Vendor" Relationship="EntityDataModel.VendorPart" FromRole="Part" ToRole="Vendor" />
     <NavigationProperty Name="RequestPart" Relationship="EntityDataModel.PartRequestPart" FromRole="Part" ToRole="RequestPart" />
+    <Property Type="DateTime" Name="Updated_at" Nullable="true" />
   </EntityType>
   <EntityType Name="Category">
     <Key>
@@ -80,6 +82,7 @@
     <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Type="String" Name="Name" Nullable="false" />
     <NavigationProperty Name="Parts" Relationship="EntityDataModel.CategoryParts" FromRole="Category" ToRole="Parts" />
+    <Property Type="DateTime" Name="Updated_at" Nullable="true" />
   </EntityType>
   <Association Name="CategoryParts">
     <End Type="EntityDataModel.Category" Role="Category" Multiplicity="1" />
@@ -118,6 +121,8 @@
     <Property Type="String" Name="Phone" Nullable="false" />
     <NavigationProperty Name="Request" Relationship="EntityDataModel.EmployeeRequest" FromRole="Employee" ToRole="Request" />
     <Property Type="String" Name="Email" Nullable="false" />
+    <Property Type="String" Name="Created_at" Nullable="false" />
+    <Property Type="DateTime" Name="Updated_at" Nullable="true" />
   </EntityType>
   <EntityType Name="Vendor">
     <Key>
@@ -126,6 +131,7 @@
     <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Type="String" Name="Name" Nullable="false" />
     <NavigationProperty Name="Part" Relationship="EntityDataModel.VendorPart" FromRole="Vendor" ToRole="Part" />
+    <Property Type="DateTime" Name="Updated_at" Nullable="true" />
   </EntityType>
   <Association Name="VendorPart">
     <End Type="EntityDataModel.Vendor" Role="Vendor" Multiplicity="1" />
@@ -163,6 +169,7 @@
     <Property Type="String" Name="Diagnostic_result" Nullable="true" />
     <NavigationProperty Name="Contragent" Relationship="EntityDataModel.ContragentRequest" FromRole="Request" ToRole="Contragent" />
     <NavigationProperty Name="RequestPart" Relationship="EntityDataModel.RequestRequestPart" FromRole="Request" ToRole="RequestPart" />
+    <Property Type="DateTime" Name="Updated_at" Nullable="true" />
   </EntityType>
   <EntityType Name="State">
     <Key>
@@ -218,6 +225,7 @@
     <Property Type="String" Name="Address" Nullable="false" />
     <Property Type="String" Name="Contact_name" Nullable="false" />
     <NavigationProperty Name="RequestPart" Relationship="EntityDataModel.SupplierRequestPart" FromRole="Supplier" ToRole="RequestPart" />
+    <Property Type="DateTime" Name="Updated_at" Nullable="true" />
   </EntityType>
   <Association Name="ContragentRequest">
     <End Type="EntityDataModel.Contragent" Role="Contragent" Multiplicity="1" />
@@ -245,6 +253,7 @@
     <NavigationProperty Name="Part" Relationship="EntityDataModel.PartRequestPart" FromRole="RequestPart" ToRole="Part" />
     <NavigationProperty Name="Supplier" Relationship="EntityDataModel.SupplierRequestPart" FromRole="RequestPart" ToRole="Supplier" />
     <NavigationProperty Name="Request" Relationship="EntityDataModel.RequestRequestPart" FromRole="RequestPart" ToRole="Request" />
+    <Property Type="DateTime" Name="Updated_at" Nullable="true" />
   </EntityType>
   <Association Name="PartRequestPart">
     <End Type="EntityDataModel.Part" Role="Part" Multiplicity="1" />

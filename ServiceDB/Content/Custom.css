@@ -121,9 +121,15 @@ input, textarea, select, .uneditable-input {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
-.display-label {
+.display-label, 
+.editor-label {
     font-weight: bold;
-    margin-top: 10px;
+    margin: 1em 0 0 0;
+}
+
+.display-field, 
+.editor-field {
+    margin: 0 0 0.5em 0;
 }
 
 /* miscellaneous */

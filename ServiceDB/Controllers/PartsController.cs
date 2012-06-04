@@ -38,7 +38,7 @@ namespace ServiceDB.Controllers
         {
             ViewBag.Category_id = new SelectList(db.Categories, "Id", "Name");
             ViewBag.Vendor_id = new SelectList(db.Vendors, "Id", "Name");
-            ViewBag.Supplier_id = new SelectList(db.Clients, "Id", "Name");
+			ViewBag.Supplier_id = new SelectList(db.Suppliers, "Id", "Name");
             return View();
         } 
 

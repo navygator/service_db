@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 06/01/2012 10:48:37
--- Generated from EDMX file: D:\Work\My Documents\Visual Studio 2010\Projects\ServiceDB\ServiceDB\Models\EntityDataModel.edmx
+-- Date Created: 06/02/2012 14:11:28
+-- Generated from EDMX file: I:\Work\Alex\My Documents\Visual Studio 2010\Projects\service_db\ServiceDB\Models\EntityDataModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -93,7 +93,8 @@ CREATE TABLE [dbo].[Contragents] (
     [FIO] nvarchar(max)  NOT NULL,
     [Phone] nvarchar(max)  NOT NULL,
     [Address] nvarchar(max)  NOT NULL,
-    [EMail] nvarchar(max)  NOT NULL
+    [EMail] nvarchar(max)  NOT NULL,
+    [Updated_at] datetime  NULL
 );
 GO
 
@@ -103,14 +104,16 @@ CREATE TABLE [dbo].[Parts] (
     [Category_id] int  NOT NULL,
     [Vendor_id] int  NOT NULL,
     [Part_num] nvarchar(max)  NOT NULL,
-    [Description] nvarchar(max)  NOT NULL
+    [Description] nvarchar(max)  NOT NULL,
+    [Updated_at] datetime  NULL
 );
 GO
 
 -- Creating table 'Categories'
 CREATE TABLE [dbo].[Categories] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Name] nvarchar(max)  NOT NULL
+    [Name] nvarchar(max)  NOT NULL,
+    [Updated_at] datetime  NULL
 );
 GO
 
@@ -134,14 +137,17 @@ CREATE TABLE [dbo].[Employees] (
     [FIO] nvarchar(max)  NOT NULL,
     [Address] nvarchar(max)  NULL,
     [Phone] nvarchar(max)  NOT NULL,
-    [Email] nvarchar(max)  NOT NULL
+    [Email] nvarchar(max)  NOT NULL,
+    [Created_at] nvarchar(max)  NOT NULL,
+    [Updated_at] datetime  NULL
 );
 GO
 
 -- Creating table 'Vendors'
 CREATE TABLE [dbo].[Vendors] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [Name] nvarchar(max)  NOT NULL
+    [Name] nvarchar(max)  NOT NULL,
+    [Updated_at] datetime  NULL
 );
 GO
 
@@ -161,7 +167,8 @@ CREATE TABLE [dbo].[Requests] (
     [State_id] int  NOT NULL,
     [Contragent_id] int  NOT NULL,
     [SC_num] nvarchar(max)  NULL,
-    [Diagnostic_result] nvarchar(max)  NULL
+    [Diagnostic_result] nvarchar(max)  NULL,
+    [Updated_at] datetime  NULL
 );
 GO
 
@@ -178,7 +185,8 @@ CREATE TABLE [dbo].[Clients] (
     [Name] nvarchar(max)  NOT NULL,
     [Phone] nvarchar(max)  NOT NULL,
     [Address] nvarchar(max)  NOT NULL,
-    [Contact_name] nvarchar(max)  NOT NULL
+    [Contact_name] nvarchar(max)  NOT NULL,
+    [Updated_at] datetime  NULL
 );
 GO
 
@@ -190,7 +198,8 @@ CREATE TABLE [dbo].[RequestsParts] (
     [Serial_num] nvarchar(max)  NOT NULL,
     [Supplier_id] int  NOT NULL,
     [Date_in] nvarchar(max)  NOT NULL,
-    [Price] decimal(18,0)  NOT NULL
+    [Price] decimal(18,0)  NOT NULL,
+    [Updated_at] datetime  NULL
 );
 GO
 

@@ -225,18 +225,18 @@ namespace ServiceDB.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Supplier> Clients
+        public ObjectSet<Supplier> Suppliers
         {
             get
             {
-                if ((_Clients == null))
+                if ((_Suppliers == null))
                 {
-                    _Clients = base.CreateObjectSet<Supplier>("Clients");
+                    _Suppliers = base.CreateObjectSet<Supplier>("Suppliers");
                 }
-                return _Clients;
+                return _Suppliers;
             }
         }
-        private ObjectSet<Supplier> _Clients;
+        private ObjectSet<Supplier> _Suppliers;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -330,11 +330,11 @@ namespace ServiceDB.Models
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Clients EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the Suppliers EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToClients(Supplier supplier)
+        public void AddToSuppliers(Supplier supplier)
         {
-            base.AddObject("Clients", supplier);
+            base.AddObject("Suppliers", supplier);
         }
     
         /// <summary>
@@ -429,6 +429,30 @@ namespace ServiceDB.Models
         private global::System.String _Name;
         partial void OnNameChanging(global::System.String value);
         partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> Updated_at
+        {
+            get
+            {
+                return _Updated_at;
+            }
+            set
+            {
+                OnUpdated_atChanging(value);
+                ReportPropertyChanging("Updated_at");
+                _Updated_at = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Updated_at");
+                OnUpdated_atChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _Updated_at;
+        partial void OnUpdated_atChanging(Nullable<global::System.DateTime> value);
+        partial void OnUpdated_atChanged();
 
         #endregion
     
@@ -613,6 +637,30 @@ namespace ServiceDB.Models
         private global::System.String _EMail;
         partial void OnEMailChanging(global::System.String value);
         partial void OnEMailChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> Updated_at
+        {
+            get
+            {
+                return _Updated_at;
+            }
+            set
+            {
+                OnUpdated_atChanging(value);
+                ReportPropertyChanging("Updated_at");
+                _Updated_at = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Updated_at");
+                OnUpdated_atChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _Updated_at;
+        partial void OnUpdated_atChanging(Nullable<global::System.DateTime> value);
+        partial void OnUpdated_atChanged();
 
         #endregion
     
@@ -660,13 +708,15 @@ namespace ServiceDB.Models
         /// <param name="fIO">Initial value of the FIO property.</param>
         /// <param name="phone">Initial value of the Phone property.</param>
         /// <param name="email">Initial value of the Email property.</param>
-        public static Employee CreateEmployee(global::System.Int32 id, global::System.String fIO, global::System.String phone, global::System.String email)
+        /// <param name="created_at">Initial value of the Created_at property.</param>
+        public static Employee CreateEmployee(global::System.Int32 id, global::System.String fIO, global::System.String phone, global::System.String email, global::System.String created_at)
         {
             Employee employee = new Employee();
             employee.Id = id;
             employee.FIO = fIO;
             employee.Phone = phone;
             employee.Email = email;
+            employee.Created_at = created_at;
             return employee;
         }
 
@@ -795,6 +845,54 @@ namespace ServiceDB.Models
         private global::System.String _Email;
         partial void OnEmailChanging(global::System.String value);
         partial void OnEmailChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Created_at
+        {
+            get
+            {
+                return _Created_at;
+            }
+            set
+            {
+                OnCreated_atChanging(value);
+                ReportPropertyChanging("Created_at");
+                _Created_at = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Created_at");
+                OnCreated_atChanged();
+            }
+        }
+        private global::System.String _Created_at;
+        partial void OnCreated_atChanging(global::System.String value);
+        partial void OnCreated_atChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> Updated_at
+        {
+            get
+            {
+                return _Updated_at;
+            }
+            set
+            {
+                OnUpdated_atChanging(value);
+                ReportPropertyChanging("Updated_at");
+                _Updated_at = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Updated_at");
+                OnUpdated_atChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _Updated_at;
+        partial void OnUpdated_atChanging(Nullable<global::System.DateTime> value);
+        partial void OnUpdated_atChanged();
 
         #endregion
     
@@ -979,6 +1077,30 @@ namespace ServiceDB.Models
         private global::System.String _Description;
         partial void OnDescriptionChanging(global::System.String value);
         partial void OnDescriptionChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> Updated_at
+        {
+            get
+            {
+                return _Updated_at;
+            }
+            set
+            {
+                OnUpdated_atChanging(value);
+                ReportPropertyChanging("Updated_at");
+                _Updated_at = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Updated_at");
+                OnUpdated_atChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _Updated_at;
+        partial void OnUpdated_atChanging(Nullable<global::System.DateTime> value);
+        partial void OnUpdated_atChanged();
 
         #endregion
     
@@ -1493,6 +1615,30 @@ namespace ServiceDB.Models
         private global::System.String _Diagnostic_result;
         partial void OnDiagnostic_resultChanging(global::System.String value);
         partial void OnDiagnostic_resultChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> Updated_at
+        {
+            get
+            {
+                return _Updated_at;
+            }
+            set
+            {
+                OnUpdated_atChanging(value);
+                ReportPropertyChanging("Updated_at");
+                _Updated_at = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Updated_at");
+                OnUpdated_atChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _Updated_at;
+        partial void OnUpdated_atChanging(Nullable<global::System.DateTime> value);
+        partial void OnUpdated_atChanged();
 
         #endregion
     
@@ -1881,6 +2027,30 @@ namespace ServiceDB.Models
         private global::System.Decimal _Price;
         partial void OnPriceChanging(global::System.Decimal value);
         partial void OnPriceChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> Updated_at
+        {
+            get
+            {
+                return _Updated_at;
+            }
+            set
+            {
+                OnUpdated_atChanging(value);
+                ReportPropertyChanging("Updated_at");
+                _Updated_at = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Updated_at");
+                OnUpdated_atChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _Updated_at;
+        partial void OnUpdated_atChanging(Nullable<global::System.DateTime> value);
+        partial void OnUpdated_atChanged();
 
         #endregion
     
@@ -2344,6 +2514,30 @@ namespace ServiceDB.Models
         private global::System.String _Contact_name;
         partial void OnContact_nameChanging(global::System.String value);
         partial void OnContact_nameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> Updated_at
+        {
+            get
+            {
+                return _Updated_at;
+            }
+            set
+            {
+                OnUpdated_atChanging(value);
+                ReportPropertyChanging("Updated_at");
+                _Updated_at = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Updated_at");
+                OnUpdated_atChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _Updated_at;
+        partial void OnUpdated_atChanging(Nullable<global::System.DateTime> value);
+        partial void OnUpdated_atChanged();
 
         #endregion
     
@@ -2450,6 +2644,30 @@ namespace ServiceDB.Models
         private global::System.String _Name;
         partial void OnNameChanging(global::System.String value);
         partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> Updated_at
+        {
+            get
+            {
+                return _Updated_at;
+            }
+            set
+            {
+                OnUpdated_atChanging(value);
+                ReportPropertyChanging("Updated_at");
+                _Updated_at = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Updated_at");
+                OnUpdated_atChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _Updated_at;
+        partial void OnUpdated_atChanging(Nullable<global::System.DateTime> value);
+        partial void OnUpdated_atChanged();
 
         #endregion
     

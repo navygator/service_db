@@ -44,7 +44,7 @@ namespace ServiceDB.Controllers
 		public ActionResult Create(int requestId)
 		{
 			ViewBag.Part_id = new SelectList(db.Parts, "Id", "Part_num");
-			ViewBag.Supplier_id = new SelectList(db.Clients, "Id", "Name");
+			ViewBag.Supplier_id = new SelectList(db.Suppliers, "Id", "Name");
 			//ViewBag.Request_id = new SelectList(db.Requests, "Id", "Name");
 
 			RequestPart part = new RequestPart();
@@ -67,7 +67,7 @@ namespace ServiceDB.Controllers
 			}
 
 			ViewBag.Part_id = new SelectList(db.Parts, "Id", "Part_num", requestpart.Part_id);
-			ViewBag.Supplier_id = new SelectList(db.Clients, "Id", "Name", requestpart.Supplier_id);
+			ViewBag.Supplier_id = new SelectList(db.Suppliers, "Id", "Name", requestpart.Supplier_id);
 			ViewBag.Request_id = new SelectList(db.Requests, "Id", "Name", requestpart.Request_id);
 			return View(requestpart);
 		}
@@ -79,7 +79,7 @@ namespace ServiceDB.Controllers
 		{
 			RequestPart requestpart = db.RequestsParts.Single(r => r.Id == id);
 			ViewBag.Part_id = new SelectList(db.Parts, "Id", "Part_num", requestpart.Part_id);
-			ViewBag.Supplier_id = new SelectList(db.Clients, "Id", "Name", requestpart.Supplier_id);
+			ViewBag.Supplier_id = new SelectList(db.Suppliers, "Id", "Name", requestpart.Supplier_id);
 			ViewBag.Request_id = new SelectList(db.Requests, "Id", "Name", requestpart.Request_id);
 			return View(requestpart);
 		}
@@ -98,7 +98,7 @@ namespace ServiceDB.Controllers
 				return RedirectToAction("Index");
 			}
 			ViewBag.Part_id = new SelectList(db.Parts, "Id", "Part_num", requestpart.Part_id);
-			ViewBag.Supplier_id = new SelectList(db.Clients, "Id", "Name", requestpart.Supplier_id);
+			ViewBag.Supplier_id = new SelectList(db.Suppliers, "Id", "Name", requestpart.Supplier_id);
 			ViewBag.Request_id = new SelectList(db.Requests, "Id", "Name", requestpart.Request_id);
 			return View(requestpart);
 		}

@@ -58,6 +58,7 @@
     <Property Name="Phone" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
     <Property Name="EMail" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Updated_at" Type="datetime" Nullable="true" />
   </EntityType>
   <EntityType Name="Parts">
     <Key>
@@ -68,6 +69,7 @@
     <Property Name="Vendor_id" Type="int" Nullable="false" />
     <Property Name="Part_num" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Updated_at" Type="datetime" Nullable="true" />
   </EntityType>
   <EntityType Name="Categories">
     <Key>
@@ -75,6 +77,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Updated_at" Type="datetime" Nullable="true" />
   </EntityType>
   <EntityType Name="Warranties">
     <Key>
@@ -99,6 +102,8 @@
     <Property Name="Address" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Phone" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Created_at" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Updated_at" Type="datetime" Nullable="true" />
   </EntityType>
   <EntityType Name="Vendors">
     <Key>
@@ -106,6 +111,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Updated_at" Type="datetime" Nullable="true" />
   </EntityType>
   <EntityType Name="Requests">
     <Key>
@@ -126,6 +132,7 @@
     <Property Name="Contragent_id" Type="int" Nullable="false" />
     <Property Name="SC_num" Type="nvarchar(max)" Nullable="true" />
     <Property Name="Diagnostic_result" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Updated_at" Type="datetime" Nullable="true" />
   </EntityType>
   <EntityType Name="States">
     <Key>
@@ -143,6 +150,7 @@
     <Property Name="Phone" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Contact_name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Updated_at" Type="datetime" Nullable="true" />
   </EntityType>
   <EntityType Name="RequestsParts">
     <Key>
@@ -155,6 +163,7 @@
     <Property Name="Supplier_id" Type="int" Nullable="false" />
     <Property Name="Date_in" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Price" Type="decimal" Nullable="false" />
+    <Property Name="Updated_at" Type="datetime" Nullable="true" />
   </EntityType>
   <Association Name="CategoryParts">
     <End Role="Category" Type="EntityDataModel.Store.Categories" Multiplicity="1" />

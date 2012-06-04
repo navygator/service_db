@@ -9,6 +9,7 @@
           <ScalarProperty Name="Phone" ColumnName="Phone" />
           <ScalarProperty Name="Address" ColumnName="Address" />
           <ScalarProperty Name="EMail" ColumnName="EMail" />
+          <ScalarProperty Name="Updated_at" ColumnName="Updated_at" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -20,6 +21,7 @@
           <ScalarProperty Name="Vendor_id" ColumnName="Vendor_id" />
           <ScalarProperty Name="Part_num" ColumnName="Part_num" />
           <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Updated_at" ColumnName="Updated_at" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -28,6 +30,7 @@
         <MappingFragment StoreEntitySet="Categories">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Updated_at" ColumnName="Updated_at" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -55,6 +58,8 @@
           <ScalarProperty Name="Address" ColumnName="Address" />
           <ScalarProperty Name="Phone" ColumnName="Phone" />
           <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Created_at" ColumnName="Created_at" />
+          <ScalarProperty Name="Updated_at" ColumnName="Updated_at" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -63,6 +68,7 @@
         <MappingFragment StoreEntitySet="Vendors">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Updated_at" ColumnName="Updated_at" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -84,6 +90,7 @@
           <ScalarProperty Name="Contragent_id" ColumnName="Contragent_id" />
           <ScalarProperty Name="SC_num" ColumnName="SC_num" />
           <ScalarProperty Name="Diagnostic_result" ColumnName="Diagnostic_result" />
+          <ScalarProperty Name="Updated_at" ColumnName="Updated_at" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -95,7 +102,7 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Clients">
+    <EntitySetMapping Name="Suppliers">
       <EntityTypeMapping TypeName="IsTypeOf(EntityDataModel.Supplier)">
         <MappingFragment StoreEntitySet="Clients">
           <ScalarProperty Name="Id" ColumnName="Id" />
@@ -103,6 +110,7 @@
           <ScalarProperty Name="Phone" ColumnName="Phone" />
           <ScalarProperty Name="Address" ColumnName="Address" />
           <ScalarProperty Name="Contact_name" ColumnName="Contact_name" />
+          <ScalarProperty Name="Updated_at" ColumnName="Updated_at" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -116,6 +124,7 @@
           <ScalarProperty Name="Supplier_id" ColumnName="Supplier_id" />
           <ScalarProperty Name="Date_in" ColumnName="Date_in" />
           <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Updated_at" ColumnName="Updated_at" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

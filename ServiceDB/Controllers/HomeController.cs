@@ -11,7 +11,7 @@ namespace ServiceDB.Controllers
 		public ActionResult Index()
 		{
 			ViewBag.Message = "Добро пожаловать в базу учета СЦ";
-
+			ViewBag.Feed = Models.Feed.All();
 			return View();
 		}
 
