@@ -34,8 +34,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.4.1.10331.0\lib\EntityFramework.dll</HintPath>
+    <Reference Include="EntityFramework, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.4.3.1\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data.Entity" />
@@ -67,11 +68,13 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\ContragentsController.cs" />
+    <Compile Include="Controllers\GoodsController.cs" />
+    <Compile Include="Controllers\RequestItemsController.cs" />
+    <Compile Include="Controllers\RequestsController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PartsController.cs" />
-    <Compile Include="Controllers\RequestPartsController.cs" />
-    <Compile Include="Controllers\RequestsController.cs" />
+    <Compile Include="Controllers\RequestItemPartsController.cs" />
     <Compile Include="Controllers\StatesController.cs" />
     <Compile Include="Controllers\SuppliersController.cs" />
     <Compile Include="Controllers\VendorsController.cs" />
@@ -80,6 +83,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\ContragentModel.cs" />
     <Compile Include="Models\EmployeeModel.cs" />
     <Compile Include="Models\EntityDataModel.Designer.cs">
@@ -87,9 +91,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EntityDataModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\EntityDataModel.Views.cs" />
     <Compile Include="Models\FeedModel.cs" />
+    <Compile Include="Models\GoodModel.cs" />
     <Compile Include="Models\Interface\IBase.cs" />
+    <Compile Include="Models\PartModel.cs" />
+    <Compile Include="Models\RequestItemModel.cs" />
+    <Compile Include="Models\RequestItemPartModel.cs" />
+    <Compile Include="Models\RequestItemServiceModel.cs" />
     <Compile Include="Models\RequestModel.cs" />
+    <Compile Include="Models\ServiceDdContext.cs" />
+    <Compile Include="Models\ServiceModel.cs" />
     <Compile Include="Models\StateModel.cs" />
     <Compile Include="Models\SupplierModel.cs" />
     <Compile Include="Models\VendorModel.cs" />
@@ -158,6 +170,21 @@
     <Content Include="Views\Contragents\Details.aspx" />
     <Content Include="Views\Contragents\Edit.aspx" />
     <Content Include="Views\Contragents\Index.aspx" />
+    <Content Include="Views\Goods\Create.aspx" />
+    <Content Include="Views\Goods\Delete.aspx" />
+    <Content Include="Views\Goods\Details.aspx" />
+    <Content Include="Views\Goods\Edit.aspx" />
+    <Content Include="Views\Goods\Index.aspx" />
+    <Content Include="Views\RequestItems\Create.aspx" />
+    <Content Include="Views\RequestItems\Delete.aspx" />
+    <Content Include="Views\RequestItems\Details.aspx" />
+    <Content Include="Views\RequestItems\Edit.aspx" />
+    <Content Include="Views\RequestItems\Index.aspx" />
+    <Content Include="Views\Requests\Create.aspx" />
+    <Content Include="Views\Requests\Delete.aspx" />
+    <Content Include="Views\Requests\Details.aspx" />
+    <Content Include="Views\Requests\Edit.aspx" />
+    <Content Include="Views\Requests\Index.aspx" />
     <Content Include="Views\Employees\Create.aspx" />
     <Content Include="Views\Employees\Delete.aspx" />
     <Content Include="Views\Employees\Details.aspx" />
@@ -169,16 +196,18 @@
     <Content Include="Views\Parts\Details.aspx" />
     <Content Include="Views\Parts\Edit.aspx" />
     <Content Include="Views\Parts\Index.aspx" />
-    <Content Include="Views\RequestParts\Create.aspx" />
-    <Content Include="Views\RequestParts\Delete.aspx" />
-    <Content Include="Views\RequestParts\Details.aspx" />
-    <Content Include="Views\RequestParts\Edit.aspx" />
-    <Content Include="Views\RequestParts\Index.aspx" />
-    <Content Include="Views\Requests\Create.aspx" />
-    <Content Include="Views\Requests\Delete.aspx" />
-    <Content Include="Views\Requests\Details.aspx" />
-    <Content Include="Views\Requests\Edit.aspx" />
-    <Content Include="Views\Requests\Index.aspx" />
+    <Content Include="Views\RequestItemParts\Create.aspx" />
+    <Content Include="Views\RequestItemParts\Delete.aspx" />
+    <Content Include="Views\RequestItemParts\Details.aspx" />
+    <Content Include="Views\RequestItemParts\Edit.aspx" />
+    <Content Include="Views\RequestItemParts\Index.aspx" />
+    <Content Include="Views\RequestsOld\Create.aspx" />
+    <Content Include="Views\RequestsOld\Delete.aspx" />
+    <Content Include="Views\RequestsOld\Details.aspx" />
+    <Content Include="Views\RequestsOld\Edit.aspx" />
+    <Content Include="Views\RequestsOld\Index.aspx" />
+    <Content Include="Views\Requests\Items.ascx" />
+    <Content Include="Views\Requests\RequestInfo.ascx" />
     <Content Include="Views\States\Create.aspx" />
     <Content Include="Views\States\Delete.aspx" />
     <Content Include="Views\States\Details.aspx" />

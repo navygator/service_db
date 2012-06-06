@@ -20,13 +20,18 @@ using System.Runtime.Serialization;
 
 [assembly: EdmRelationshipAttribute("EntityDataModel", "CategoryParts", "Category", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ServiceDB.Models.Category), "Parts", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ServiceDB.Models.Part), true)]
 [assembly: EdmRelationshipAttribute("EntityDataModel", "VendorPart", "Vendor", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ServiceDB.Models.Vendor), "Part", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ServiceDB.Models.Part), true)]
+[assembly: EdmRelationshipAttribute("EntityDataModel", "WarrantyRequest", "Warranty", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ServiceDB.Models.Warranty), "Request", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ServiceDB.Models.RequestItem), true)]
+[assembly: EdmRelationshipAttribute("EntityDataModel", "EmployeeRequest", "Employee", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ServiceDB.Models.Employee), "Request", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ServiceDB.Models.RequestItem), true)]
+[assembly: EdmRelationshipAttribute("EntityDataModel", "PartRequestPart", "Part", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ServiceDB.Models.Part), "RequestPart", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ServiceDB.Models.RequestItemPart), true)]
+[assembly: EdmRelationshipAttribute("EntityDataModel", "SupplierRequestPart", "Supplier", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ServiceDB.Models.Supplier), "RequestPart", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ServiceDB.Models.RequestItemPart), true)]
+[assembly: EdmRelationshipAttribute("EntityDataModel", "RequestItemRequestItemPart", "RequestItem", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ServiceDB.Models.RequestItem), "RequestItemPart", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ServiceDB.Models.RequestItemPart), true)]
+[assembly: EdmRelationshipAttribute("EntityDataModel", "RequestItemRequestItemService", "RequestItem", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ServiceDB.Models.RequestItem), "RequestItemService", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ServiceDB.Models.RequestItemService), true)]
+[assembly: EdmRelationshipAttribute("EntityDataModel", "ServiceRequestItemService", "Service", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ServiceDB.Models.Service), "RequestItemService", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ServiceDB.Models.RequestItemService), true)]
+[assembly: EdmRelationshipAttribute("EntityDataModel", "RequestRequestItem", "Request", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ServiceDB.Models.Request), "RequestItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ServiceDB.Models.RequestItem), true)]
+[assembly: EdmRelationshipAttribute("EntityDataModel", "StateRequestItem", "State", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ServiceDB.Models.State), "RequestItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ServiceDB.Models.RequestItem), true)]
 [assembly: EdmRelationshipAttribute("EntityDataModel", "StateRequest", "State", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ServiceDB.Models.State), "Request", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ServiceDB.Models.Request), true)]
-[assembly: EdmRelationshipAttribute("EntityDataModel", "WarrantyRequest", "Warranty", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ServiceDB.Models.Warranty), "Request", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ServiceDB.Models.Request), true)]
-[assembly: EdmRelationshipAttribute("EntityDataModel", "EmployeeRequest", "Employee", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ServiceDB.Models.Employee), "Request", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ServiceDB.Models.Request), true)]
 [assembly: EdmRelationshipAttribute("EntityDataModel", "ContragentRequest", "Contragent", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ServiceDB.Models.Contragent), "Request", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ServiceDB.Models.Request), true)]
-[assembly: EdmRelationshipAttribute("EntityDataModel", "PartRequestPart", "Part", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ServiceDB.Models.Part), "RequestPart", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ServiceDB.Models.RequestPart), true)]
-[assembly: EdmRelationshipAttribute("EntityDataModel", "SupplierRequestPart", "Supplier", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ServiceDB.Models.Supplier), "RequestPart", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ServiceDB.Models.RequestPart), true)]
-[assembly: EdmRelationshipAttribute("EntityDataModel", "RequestRequestPart", "Request", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ServiceDB.Models.Request), "RequestPart", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ServiceDB.Models.RequestPart), true)]
+[assembly: EdmRelationshipAttribute("EntityDataModel", "GoodRequestItem", "Good", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(ServiceDB.Models.Good), "RequestItem", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(ServiceDB.Models.RequestItem), true)]
 
 #endregion
 
@@ -145,22 +150,6 @@ namespace ServiceDB.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<SC> SCs
-        {
-            get
-            {
-                if ((_SCs == null))
-                {
-                    _SCs = base.CreateObjectSet<SC>("SCs");
-                }
-                return _SCs;
-            }
-        }
-        private ObjectSet<SC> _SCs;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<Employee> Employees
         {
             get
@@ -193,18 +182,18 @@ namespace ServiceDB.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Request> Requests
+        public ObjectSet<RequestItem> RequestItems
         {
             get
             {
-                if ((_Requests == null))
+                if ((_RequestItems == null))
                 {
-                    _Requests = base.CreateObjectSet<Request>("Requests");
+                    _RequestItems = base.CreateObjectSet<RequestItem>("RequestItems");
                 }
-                return _Requests;
+                return _RequestItems;
             }
         }
-        private ObjectSet<Request> _Requests;
+        private ObjectSet<RequestItem> _RequestItems;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -241,18 +230,82 @@ namespace ServiceDB.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<RequestPart> RequestsParts
+        public ObjectSet<RequestItemPart> RequestItemParts
         {
             get
             {
-                if ((_RequestsParts == null))
+                if ((_RequestItemParts == null))
                 {
-                    _RequestsParts = base.CreateObjectSet<RequestPart>("RequestsParts");
+                    _RequestItemParts = base.CreateObjectSet<RequestItemPart>("RequestItemParts");
                 }
-                return _RequestsParts;
+                return _RequestItemParts;
             }
         }
-        private ObjectSet<RequestPart> _RequestsParts;
+        private ObjectSet<RequestItemPart> _RequestItemParts;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Request> Requests
+        {
+            get
+            {
+                if ((_Requests == null))
+                {
+                    _Requests = base.CreateObjectSet<Request>("Requests");
+                }
+                return _Requests;
+            }
+        }
+        private ObjectSet<Request> _Requests;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Good> Goods
+        {
+            get
+            {
+                if ((_Goods == null))
+                {
+                    _Goods = base.CreateObjectSet<Good>("Goods");
+                }
+                return _Goods;
+            }
+        }
+        private ObjectSet<Good> _Goods;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Service> Services
+        {
+            get
+            {
+                if ((_Services == null))
+                {
+                    _Services = base.CreateObjectSet<Service>("Services");
+                }
+                return _Services;
+            }
+        }
+        private ObjectSet<Service> _Services;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<RequestItemService> RequestItemServices
+        {
+            get
+            {
+                if ((_RequestItemServices == null))
+                {
+                    _RequestItemServices = base.CreateObjectSet<RequestItemService>("RequestItemServices");
+                }
+                return _RequestItemServices;
+            }
+        }
+        private ObjectSet<RequestItemService> _RequestItemServices;
 
         #endregion
         #region AddTo Methods
@@ -290,14 +343,6 @@ namespace ServiceDB.Models
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the SCs EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToSCs(SC sC)
-        {
-            base.AddObject("SCs", sC);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the Employees EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToEmployees(Employee employee)
@@ -314,11 +359,11 @@ namespace ServiceDB.Models
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Requests EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the RequestItems EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToRequests(Request request)
+        public void AddToRequestItems(RequestItem requestItem)
         {
-            base.AddObject("Requests", request);
+            base.AddObject("RequestItems", requestItem);
         }
     
         /// <summary>
@@ -338,11 +383,43 @@ namespace ServiceDB.Models
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the RequestsParts EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the RequestItemParts EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToRequestsParts(RequestPart requestPart)
+        public void AddToRequestItemParts(RequestItemPart requestItemPart)
         {
-            base.AddObject("RequestsParts", requestPart);
+            base.AddObject("RequestItemParts", requestItemPart);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Requests EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToRequests(Request request)
+        {
+            base.AddObject("Requests", request);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Goods EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToGoods(Good good)
+        {
+            base.AddObject("Goods", good);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Services EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToServices(Service service)
+        {
+            base.AddObject("Services", service);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the RequestItemServices EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToRequestItemServices(RequestItemService requestItemService)
+        {
+            base.AddObject("RequestItemServices", requestItemService);
         }
 
         #endregion
@@ -708,15 +785,13 @@ namespace ServiceDB.Models
         /// <param name="fIO">Initial value of the FIO property.</param>
         /// <param name="phone">Initial value of the Phone property.</param>
         /// <param name="email">Initial value of the Email property.</param>
-        /// <param name="created_at">Initial value of the Created_at property.</param>
-        public static Employee CreateEmployee(global::System.Int32 id, global::System.String fIO, global::System.String phone, global::System.String email, global::System.String created_at)
+        public static Employee CreateEmployee(global::System.Int32 id, global::System.String fIO, global::System.String phone, global::System.String email)
         {
             Employee employee = new Employee();
             employee.Id = id;
             employee.FIO = fIO;
             employee.Phone = phone;
             employee.Email = email;
-            employee.Created_at = created_at;
             return employee;
         }
 
@@ -849,30 +924,6 @@ namespace ServiceDB.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Created_at
-        {
-            get
-            {
-                return _Created_at;
-            }
-            set
-            {
-                OnCreated_atChanging(value);
-                ReportPropertyChanging("Created_at");
-                _Created_at = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Created_at");
-                OnCreated_atChanged();
-            }
-        }
-        private global::System.String _Created_at;
-        partial void OnCreated_atChanging(global::System.String value);
-        partial void OnCreated_atChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public Nullable<global::System.DateTime> Updated_at
@@ -905,17 +956,149 @@ namespace ServiceDB.Models
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("EntityDataModel", "EmployeeRequest", "Request")]
-        public EntityCollection<Request> Request
+        public EntityCollection<RequestItem> Request
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Request>("EntityDataModel.EmployeeRequest", "Request");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<RequestItem>("EntityDataModel.EmployeeRequest", "Request");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Request>("EntityDataModel.EmployeeRequest", "Request", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<RequestItem>("EntityDataModel.EmployeeRequest", "Request", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="EntityDataModel", Name="Good")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Good : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Good object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
+        /// <param name="updated_at">Initial value of the Updated_at property.</param>
+        public static Good CreateGood(global::System.Int32 id, global::System.String name, global::System.DateTime updated_at)
+        {
+            Good good = new Good();
+            good.Id = id;
+            good.Name = name;
+            good.Updated_at = updated_at;
+            return good;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime Updated_at
+        {
+            get
+            {
+                return _Updated_at;
+            }
+            set
+            {
+                OnUpdated_atChanging(value);
+                ReportPropertyChanging("Updated_at");
+                _Updated_at = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Updated_at");
+                OnUpdated_atChanged();
+            }
+        }
+        private global::System.DateTime _Updated_at;
+        partial void OnUpdated_atChanging(global::System.DateTime value);
+        partial void OnUpdated_atChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EntityDataModel", "GoodRequestItem", "RequestItem")]
+        public EntityCollection<RequestItem> RequestItem
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<RequestItem>("EntityDataModel.GoodRequestItem", "RequestItem");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<RequestItem>("EntityDataModel.GoodRequestItem", "RequestItem", value);
                 }
             }
         }
@@ -1189,17 +1372,17 @@ namespace ServiceDB.Models
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("EntityDataModel", "PartRequestPart", "RequestPart")]
-        public EntityCollection<RequestPart> RequestPart
+        public EntityCollection<RequestItemPart> RequestPart
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<RequestPart>("EntityDataModel.PartRequestPart", "RequestPart");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<RequestItemPart>("EntityDataModel.PartRequestPart", "RequestPart");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<RequestPart>("EntityDataModel.PartRequestPart", "RequestPart", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<RequestItemPart>("EntityDataModel.PartRequestPart", "RequestPart", value);
                 }
             }
         }
@@ -1221,32 +1404,18 @@ namespace ServiceDB.Models
         /// Create a new Request object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
-        /// <param name="name">Initial value of the Name property.</param>
-        /// <param name="item">Initial value of the Item property.</param>
-        /// <param name="serial_num">Initial value of the Serial_num property.</param>
-        /// <param name="employee_id">Initial value of the Employee_id property.</param>
-        /// <param name="service">Initial value of the Service property.</param>
-        /// <param name="description">Initial value of the Description property.</param>
-        /// <param name="packing">Initial value of the Packing property.</param>
-        /// <param name="defect">Initial value of the Defect property.</param>
-        /// <param name="warranty_id">Initial value of the Warranty_id property.</param>
-        /// <param name="state_id">Initial value of the State_id property.</param>
+        /// <param name="date">Initial value of the Date property.</param>
         /// <param name="contragent_id">Initial value of the Contragent_id property.</param>
-        public static Request CreateRequest(global::System.Int32 id, global::System.String name, global::System.String item, global::System.String serial_num, global::System.Int32 employee_id, global::System.String service, global::System.String description, global::System.String packing, global::System.String defect, global::System.Int32 warranty_id, global::System.Int32 state_id, global::System.Int32 contragent_id)
+        /// <param name="state_id">Initial value of the State_id property.</param>
+        /// <param name="updated_at">Initial value of the Updated_at property.</param>
+        public static Request CreateRequest(global::System.Int32 id, global::System.DateTime date, global::System.Int32 contragent_id, global::System.Int32 state_id, global::System.DateTime updated_at)
         {
             Request request = new Request();
             request.Id = id;
-            request.Name = name;
-            request.Item = item;
-            request.Serial_num = serial_num;
-            request.Employee_id = employee_id;
-            request.Service = service;
-            request.Description = description;
-            request.Packing = packing;
-            request.Defect = defect;
-            request.Warranty_id = warranty_id;
-            request.State_id = state_id;
+            request.Date = date;
             request.Contragent_id = contragent_id;
+            request.State_id = state_id;
+            request.Updated_at = updated_at;
             return request;
         }
 
@@ -1285,48 +1454,318 @@ namespace ServiceDB.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String Name
+        public global::System.DateTime Date
         {
             get
             {
-                return _Name;
+                return _Date;
             }
             set
             {
-                OnNameChanging(value);
-                ReportPropertyChanging("Name");
-                _Name = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Name");
-                OnNameChanged();
+                OnDateChanging(value);
+                ReportPropertyChanging("Date");
+                _Date = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Date");
+                OnDateChanged();
             }
         }
-        private global::System.String _Name;
-        partial void OnNameChanging(global::System.String value);
-        partial void OnNameChanged();
+        private global::System.DateTime _Date;
+        partial void OnDateChanging(global::System.DateTime value);
+        partial void OnDateChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String Item
+        public global::System.Int32 Contragent_id
         {
             get
             {
-                return _Item;
+                return _Contragent_id;
             }
             set
             {
-                OnItemChanging(value);
-                ReportPropertyChanging("Item");
-                _Item = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Item");
-                OnItemChanged();
+                OnContragent_idChanging(value);
+                ReportPropertyChanging("Contragent_id");
+                _Contragent_id = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Contragent_id");
+                OnContragent_idChanged();
             }
         }
-        private global::System.String _Item;
-        partial void OnItemChanging(global::System.String value);
-        partial void OnItemChanged();
+        private global::System.Int32 _Contragent_id;
+        partial void OnContragent_idChanging(global::System.Int32 value);
+        partial void OnContragent_idChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 State_id
+        {
+            get
+            {
+                return _State_id;
+            }
+            set
+            {
+                OnState_idChanging(value);
+                ReportPropertyChanging("State_id");
+                _State_id = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("State_id");
+                OnState_idChanged();
+            }
+        }
+        private global::System.Int32 _State_id;
+        partial void OnState_idChanging(global::System.Int32 value);
+        partial void OnState_idChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime Updated_at
+        {
+            get
+            {
+                return _Updated_at;
+            }
+            set
+            {
+                OnUpdated_atChanging(value);
+                ReportPropertyChanging("Updated_at");
+                _Updated_at = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Updated_at");
+                OnUpdated_atChanged();
+            }
+        }
+        private global::System.DateTime _Updated_at;
+        partial void OnUpdated_atChanging(global::System.DateTime value);
+        partial void OnUpdated_atChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EntityDataModel", "RequestRequestItem", "RequestItem")]
+        public EntityCollection<RequestItem> RequestItem
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<RequestItem>("EntityDataModel.RequestRequestItem", "RequestItem");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<RequestItem>("EntityDataModel.RequestRequestItem", "RequestItem", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EntityDataModel", "StateRequest", "State")]
+        public State State
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<State>("EntityDataModel.StateRequest", "State").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<State>("EntityDataModel.StateRequest", "State").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<State> StateReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<State>("EntityDataModel.StateRequest", "State");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<State>("EntityDataModel.StateRequest", "State", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EntityDataModel", "ContragentRequest", "Contragent")]
+        public Contragent Contragent
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Contragent>("EntityDataModel.ContragentRequest", "Contragent").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Contragent>("EntityDataModel.ContragentRequest", "Contragent").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Contragent> ContragentReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Contragent>("EntityDataModel.ContragentRequest", "Contragent");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Contragent>("EntityDataModel.ContragentRequest", "Contragent", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="EntityDataModel", Name="RequestItem")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class RequestItem : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new RequestItem object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="request_id">Initial value of the Request_id property.</param>
+        /// <param name="good_id">Initial value of the Good_id property.</param>
+        /// <param name="serial_num">Initial value of the Serial_num property.</param>
+        /// <param name="warranty_id">Initial value of the Warranty_id property.</param>
+        /// <param name="employee_id">Initial value of the Employee_id property.</param>
+        /// <param name="description">Initial value of the Description property.</param>
+        /// <param name="packing">Initial value of the Packing property.</param>
+        /// <param name="defect">Initial value of the Defect property.</param>
+        /// <param name="state_id">Initial value of the State_id property.</param>
+        public static RequestItem CreateRequestItem(global::System.Int32 id, global::System.Int32 request_id, global::System.Int32 good_id, global::System.String serial_num, global::System.Int32 warranty_id, global::System.Int32 employee_id, global::System.String description, global::System.String packing, global::System.String defect, global::System.Int32 state_id)
+        {
+            RequestItem requestItem = new RequestItem();
+            requestItem.Id = id;
+            requestItem.Request_id = request_id;
+            requestItem.Good_id = good_id;
+            requestItem.Serial_num = serial_num;
+            requestItem.Warranty_id = warranty_id;
+            requestItem.Employee_id = employee_id;
+            requestItem.Description = description;
+            requestItem.Packing = packing;
+            requestItem.Defect = defect;
+            requestItem.State_id = state_id;
+            return requestItem;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Request_id
+        {
+            get
+            {
+                return _Request_id;
+            }
+            set
+            {
+                OnRequest_idChanging(value);
+                ReportPropertyChanging("Request_id");
+                _Request_id = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Request_id");
+                OnRequest_idChanged();
+            }
+        }
+        private global::System.Int32 _Request_id;
+        partial void OnRequest_idChanging(global::System.Int32 value);
+        partial void OnRequest_idChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Good_id
+        {
+            get
+            {
+                return _Good_id;
+            }
+            set
+            {
+                OnGood_idChanging(value);
+                ReportPropertyChanging("Good_id");
+                _Good_id = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Good_id");
+                OnGood_idChanged();
+            }
+        }
+        private global::System.Int32 _Good_id;
+        partial void OnGood_idChanging(global::System.Int32 value);
+        partial void OnGood_idChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1357,6 +1796,30 @@ namespace ServiceDB.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
+        public global::System.Int32 Warranty_id
+        {
+            get
+            {
+                return _Warranty_id;
+            }
+            set
+            {
+                OnWarranty_idChanging(value);
+                ReportPropertyChanging("Warranty_id");
+                _Warranty_id = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Warranty_id");
+                OnWarranty_idChanged();
+            }
+        }
+        private global::System.Int32 _Warranty_id;
+        partial void OnWarranty_idChanging(global::System.Int32 value);
+        partial void OnWarranty_idChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
         public global::System.Int32 Employee_id
         {
             get
@@ -1381,30 +1844,6 @@ namespace ServiceDB.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String Service
-        {
-            get
-            {
-                return _Service;
-            }
-            set
-            {
-                OnServiceChanging(value);
-                ReportPropertyChanging("Service");
-                _Service = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Service");
-                OnServiceChanged();
-            }
-        }
-        private global::System.String _Service;
-        partial void OnServiceChanging(global::System.String value);
-        partial void OnServiceChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
         public global::System.String Description
         {
             get
@@ -1423,30 +1862,6 @@ namespace ServiceDB.Models
         private global::System.String _Description;
         partial void OnDescriptionChanging(global::System.String value);
         partial void OnDescriptionChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String More_info
-        {
-            get
-            {
-                return _More_info;
-            }
-            set
-            {
-                OnMore_infoChanging(value);
-                ReportPropertyChanging("More_info");
-                _More_info = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("More_info");
-                OnMore_infoChanged();
-            }
-        }
-        private global::System.String _More_info;
-        partial void OnMore_infoChanging(global::System.String value);
-        partial void OnMore_infoChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1499,98 +1914,26 @@ namespace ServiceDB.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 Warranty_id
-        {
-            get
-            {
-                return _Warranty_id;
-            }
-            set
-            {
-                OnWarranty_idChanging(value);
-                ReportPropertyChanging("Warranty_id");
-                _Warranty_id = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Warranty_id");
-                OnWarranty_idChanged();
-            }
-        }
-        private global::System.Int32 _Warranty_id;
-        partial void OnWarranty_idChanging(global::System.Int32 value);
-        partial void OnWarranty_idChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 State_id
-        {
-            get
-            {
-                return _State_id;
-            }
-            set
-            {
-                OnState_idChanging(value);
-                ReportPropertyChanging("State_id");
-                _State_id = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("State_id");
-                OnState_idChanged();
-            }
-        }
-        private global::System.Int32 _State_id;
-        partial void OnState_idChanging(global::System.Int32 value);
-        partial void OnState_idChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 Contragent_id
-        {
-            get
-            {
-                return _Contragent_id;
-            }
-            set
-            {
-                OnContragent_idChanging(value);
-                ReportPropertyChanging("Contragent_id");
-                _Contragent_id = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Contragent_id");
-                OnContragent_idChanged();
-            }
-        }
-        private global::System.Int32 _Contragent_id;
-        partial void OnContragent_idChanging(global::System.Int32 value);
-        partial void OnContragent_idChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String SC_num
+        public global::System.String More_info
         {
             get
             {
-                return _SC_num;
+                return _More_info;
             }
             set
             {
-                OnSC_numChanging(value);
-                ReportPropertyChanging("SC_num");
-                _SC_num = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("SC_num");
-                OnSC_numChanged();
+                OnMore_infoChanging(value);
+                ReportPropertyChanging("More_info");
+                _More_info = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("More_info");
+                OnMore_infoChanged();
             }
         }
-        private global::System.String _SC_num;
-        partial void OnSC_numChanging(global::System.String value);
-        partial void OnSC_numChanged();
+        private global::System.String _More_info;
+        partial void OnMore_infoChanging(global::System.String value);
+        partial void OnMore_infoChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1619,6 +1962,30 @@ namespace ServiceDB.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 State_id
+        {
+            get
+            {
+                return _State_id;
+            }
+            set
+            {
+                OnState_idChanging(value);
+                ReportPropertyChanging("State_id");
+                _State_id = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("State_id");
+                OnState_idChanged();
+            }
+        }
+        private global::System.Int32 _State_id;
+        partial void OnState_idChanging(global::System.Int32 value);
+        partial void OnState_idChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public Nullable<global::System.DateTime> Updated_at
@@ -1643,44 +2010,6 @@ namespace ServiceDB.Models
         #endregion
     
         #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("EntityDataModel", "StateRequest", "State")]
-        public State State
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<State>("EntityDataModel.StateRequest", "State").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<State>("EntityDataModel.StateRequest", "State").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<State> StateReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<State>("EntityDataModel.StateRequest", "State");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<State>("EntityDataModel.StateRequest", "State", value);
-                }
-            }
-        }
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1764,34 +2093,18 @@ namespace ServiceDB.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("EntityDataModel", "ContragentRequest", "Contragent")]
-        public Contragent Contragent
+        [EdmRelationshipNavigationPropertyAttribute("EntityDataModel", "RequestItemRequestItemPart", "RequestItemPart")]
+        public EntityCollection<RequestItemPart> RequestItemPart
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Contragent>("EntityDataModel.ContragentRequest", "Contragent").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Contragent>("EntityDataModel.ContragentRequest", "Contragent").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Contragent> ContragentReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Contragent>("EntityDataModel.ContragentRequest", "Contragent");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<RequestItemPart>("EntityDataModel.RequestItemRequestItemPart", "RequestItemPart");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Contragent>("EntityDataModel.ContragentRequest", "Contragent", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<RequestItemPart>("EntityDataModel.RequestItemRequestItemPart", "RequestItemPart", value);
                 }
             }
         }
@@ -1802,18 +2115,132 @@ namespace ServiceDB.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("EntityDataModel", "RequestRequestPart", "RequestPart")]
-        public EntityCollection<RequestPart> RequestPart
+        [EdmRelationshipNavigationPropertyAttribute("EntityDataModel", "RequestItemRequestItemService", "RequestItemService")]
+        public EntityCollection<RequestItemService> RequestItemService
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<RequestPart>("EntityDataModel.RequestRequestPart", "RequestPart");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<RequestItemService>("EntityDataModel.RequestItemRequestItemService", "RequestItemService");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<RequestPart>("EntityDataModel.RequestRequestPart", "RequestPart", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<RequestItemService>("EntityDataModel.RequestItemRequestItemService", "RequestItemService", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EntityDataModel", "RequestRequestItem", "Request")]
+        public Request Request
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Request>("EntityDataModel.RequestRequestItem", "Request").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Request>("EntityDataModel.RequestRequestItem", "Request").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Request> RequestReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Request>("EntityDataModel.RequestRequestItem", "Request");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Request>("EntityDataModel.RequestRequestItem", "Request", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EntityDataModel", "StateRequestItem", "State")]
+        public State State
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<State>("EntityDataModel.StateRequestItem", "State").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<State>("EntityDataModel.StateRequestItem", "State").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<State> StateReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<State>("EntityDataModel.StateRequestItem", "State");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<State>("EntityDataModel.StateRequestItem", "State", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EntityDataModel", "GoodRequestItem", "Good")]
+        public Good Good
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Good>("EntityDataModel.GoodRequestItem", "Good").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Good>("EntityDataModel.GoodRequestItem", "Good").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Good> GoodReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Good>("EntityDataModel.GoodRequestItem", "Good");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Good>("EntityDataModel.GoodRequestItem", "Good", value);
                 }
             }
         }
@@ -1824,34 +2251,34 @@ namespace ServiceDB.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="EntityDataModel", Name="RequestPart")]
+    [EdmEntityTypeAttribute(NamespaceName="EntityDataModel", Name="RequestItemPart")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class RequestPart : EntityObject
+    public partial class RequestItemPart : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new RequestPart object.
+        /// Create a new RequestItemPart object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
-        /// <param name="request_id">Initial value of the Request_id property.</param>
+        /// <param name="requestItem_id">Initial value of the RequestItem_id property.</param>
         /// <param name="part_id">Initial value of the Part_id property.</param>
         /// <param name="serial_num">Initial value of the Serial_num property.</param>
         /// <param name="supplier_id">Initial value of the Supplier_id property.</param>
         /// <param name="date_in">Initial value of the Date_in property.</param>
         /// <param name="price">Initial value of the Price property.</param>
-        public static RequestPart CreateRequestPart(global::System.Int32 id, global::System.Int32 request_id, global::System.Int32 part_id, global::System.String serial_num, global::System.Int32 supplier_id, global::System.String date_in, global::System.Decimal price)
+        public static RequestItemPart CreateRequestItemPart(global::System.Int32 id, global::System.Int32 requestItem_id, global::System.Int32 part_id, global::System.String serial_num, global::System.Int32 supplier_id, global::System.String date_in, global::System.Decimal price)
         {
-            RequestPart requestPart = new RequestPart();
-            requestPart.Id = id;
-            requestPart.Request_id = request_id;
-            requestPart.Part_id = part_id;
-            requestPart.Serial_num = serial_num;
-            requestPart.Supplier_id = supplier_id;
-            requestPart.Date_in = date_in;
-            requestPart.Price = price;
-            return requestPart;
+            RequestItemPart requestItemPart = new RequestItemPart();
+            requestItemPart.Id = id;
+            requestItemPart.RequestItem_id = requestItem_id;
+            requestItemPart.Part_id = part_id;
+            requestItemPart.Serial_num = serial_num;
+            requestItemPart.Supplier_id = supplier_id;
+            requestItemPart.Date_in = date_in;
+            requestItemPart.Price = price;
+            return requestItemPart;
         }
 
         #endregion
@@ -1889,24 +2316,24 @@ namespace ServiceDB.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.Int32 Request_id
+        public global::System.Int32 RequestItem_id
         {
             get
             {
-                return _Request_id;
+                return _RequestItem_id;
             }
             set
             {
-                OnRequest_idChanging(value);
-                ReportPropertyChanging("Request_id");
-                _Request_id = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Request_id");
-                OnRequest_idChanged();
+                OnRequestItem_idChanging(value);
+                ReportPropertyChanging("RequestItem_id");
+                _RequestItem_id = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("RequestItem_id");
+                OnRequestItem_idChanged();
             }
         }
-        private global::System.Int32 _Request_id;
-        partial void OnRequest_idChanging(global::System.Int32 value);
-        partial void OnRequest_idChanged();
+        private global::System.Int32 _RequestItem_id;
+        partial void OnRequestItem_idChanging(global::System.Int32 value);
+        partial void OnRequestItem_idChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2138,16 +2565,16 @@ namespace ServiceDB.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("EntityDataModel", "RequestRequestPart", "Request")]
-        public Request Request
+        [EdmRelationshipNavigationPropertyAttribute("EntityDataModel", "RequestItemRequestItemPart", "RequestItem")]
+        public RequestItem RequestItem
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Request>("EntityDataModel.RequestRequestPart", "Request").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RequestItem>("EntityDataModel.RequestItemRequestItemPart", "RequestItem").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Request>("EntityDataModel.RequestRequestPart", "Request").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RequestItem>("EntityDataModel.RequestItemRequestItemPart", "RequestItem").Value = value;
             }
         }
         /// <summary>
@@ -2155,17 +2582,17 @@ namespace ServiceDB.Models
         /// </summary>
         [BrowsableAttribute(false)]
         [DataMemberAttribute()]
-        public EntityReference<Request> RequestReference
+        public EntityReference<RequestItem> RequestItemReference
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Request>("EntityDataModel.RequestRequestPart", "Request");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RequestItem>("EntityDataModel.RequestItemRequestItemPart", "RequestItem");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Request>("EntityDataModel.RequestRequestPart", "Request", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<RequestItem>("EntityDataModel.RequestItemRequestItemPart", "RequestItem", value);
                 }
             }
         }
@@ -2176,24 +2603,212 @@ namespace ServiceDB.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="EntityDataModel", Name="SC")]
+    [EdmEntityTypeAttribute(NamespaceName="EntityDataModel", Name="RequestItemService")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class SC : EntityObject
+    public partial class RequestItemService : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new SC object.
+        /// Create a new RequestItemService object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="requestItem_id">Initial value of the RequestItem_id property.</param>
+        /// <param name="service_id">Initial value of the Service_id property.</param>
+        public static RequestItemService CreateRequestItemService(global::System.Int32 id, global::System.Int32 requestItem_id, global::System.Int32 service_id)
+        {
+            RequestItemService requestItemService = new RequestItemService();
+            requestItemService.Id = id;
+            requestItemService.RequestItem_id = requestItem_id;
+            requestItemService.Service_id = service_id;
+            return requestItemService;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 RequestItem_id
+        {
+            get
+            {
+                return _RequestItem_id;
+            }
+            set
+            {
+                OnRequestItem_idChanging(value);
+                ReportPropertyChanging("RequestItem_id");
+                _RequestItem_id = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("RequestItem_id");
+                OnRequestItem_idChanged();
+            }
+        }
+        private global::System.Int32 _RequestItem_id;
+        partial void OnRequestItem_idChanging(global::System.Int32 value);
+        partial void OnRequestItem_idChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Service_id
+        {
+            get
+            {
+                return _Service_id;
+            }
+            set
+            {
+                OnService_idChanging(value);
+                ReportPropertyChanging("Service_id");
+                _Service_id = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Service_id");
+                OnService_idChanged();
+            }
+        }
+        private global::System.Int32 _Service_id;
+        partial void OnService_idChanging(global::System.Int32 value);
+        partial void OnService_idChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EntityDataModel", "RequestItemRequestItemService", "RequestItem")]
+        public RequestItem RequestItem
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RequestItem>("EntityDataModel.RequestItemRequestItemService", "RequestItem").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RequestItem>("EntityDataModel.RequestItemRequestItemService", "RequestItem").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<RequestItem> RequestItemReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<RequestItem>("EntityDataModel.RequestItemRequestItemService", "RequestItem");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<RequestItem>("EntityDataModel.RequestItemRequestItemService", "RequestItem", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EntityDataModel", "ServiceRequestItemService", "Service")]
+        public Service Service
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Service>("EntityDataModel.ServiceRequestItemService", "Service").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Service>("EntityDataModel.ServiceRequestItemService", "Service").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Service> ServiceReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Service>("EntityDataModel.ServiceRequestItemService", "Service");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Service>("EntityDataModel.ServiceRequestItemService", "Service", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="EntityDataModel", Name="Service")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Service : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Service object.
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="name">Initial value of the Name property.</param>
-        public static SC CreateSC(global::System.Int32 id, global::System.String name)
+        /// <param name="updated_at">Initial value of the Updated_at property.</param>
+        public static Service CreateService(global::System.Int32 id, global::System.String name, global::System.DateTime updated_at)
         {
-            SC sC = new SC();
-            sC.Id = id;
-            sC.Name = name;
-            return sC;
+            Service service = new Service();
+            service.Id = id;
+            service.Name = name;
+            service.Updated_at = updated_at;
+            return service;
         }
 
         #endregion
@@ -2249,9 +2864,58 @@ namespace ServiceDB.Models
         private global::System.String _Name;
         partial void OnNameChanging(global::System.String value);
         partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime Updated_at
+        {
+            get
+            {
+                return _Updated_at;
+            }
+            set
+            {
+                OnUpdated_atChanging(value);
+                ReportPropertyChanging("Updated_at");
+                _Updated_at = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Updated_at");
+                OnUpdated_atChanged();
+            }
+        }
+        private global::System.DateTime _Updated_at;
+        partial void OnUpdated_atChanging(global::System.DateTime value);
+        partial void OnUpdated_atChanged();
 
         #endregion
     
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EntityDataModel", "ServiceRequestItemService", "RequestItemService")]
+        public EntityCollection<RequestItemService> RequestItemService
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<RequestItemService>("EntityDataModel.ServiceRequestItemService", "RequestItemService");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<RequestItemService>("EntityDataModel.ServiceRequestItemService", "RequestItemService", value);
+                }
+            }
+        }
+
+        #endregion
     }
     
     /// <summary>
@@ -2269,11 +2933,13 @@ namespace ServiceDB.Models
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="name">Initial value of the Name property.</param>
-        public static State CreateState(global::System.Int32 id, global::System.String name)
+        /// <param name="updated_at">Initial value of the Updated_at property.</param>
+        public static State CreateState(global::System.Int32 id, global::System.String name, global::System.DateTime updated_at)
         {
             State state = new State();
             state.Id = id;
             state.Name = name;
+            state.Updated_at = updated_at;
             return state;
         }
 
@@ -2330,10 +2996,56 @@ namespace ServiceDB.Models
         private global::System.String _Name;
         partial void OnNameChanging(global::System.String value);
         partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime Updated_at
+        {
+            get
+            {
+                return _Updated_at;
+            }
+            set
+            {
+                OnUpdated_atChanging(value);
+                ReportPropertyChanging("Updated_at");
+                _Updated_at = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Updated_at");
+                OnUpdated_atChanged();
+            }
+        }
+        private global::System.DateTime _Updated_at;
+        partial void OnUpdated_atChanging(global::System.DateTime value);
+        partial void OnUpdated_atChanged();
 
         #endregion
     
         #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("EntityDataModel", "StateRequestItem", "RequestItem")]
+        public EntityCollection<RequestItem> RequestItem
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<RequestItem>("EntityDataModel.StateRequestItem", "RequestItem");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<RequestItem>("EntityDataModel.StateRequestItem", "RequestItem", value);
+                }
+            }
+        }
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -2550,17 +3262,17 @@ namespace ServiceDB.Models
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("EntityDataModel", "SupplierRequestPart", "RequestPart")]
-        public EntityCollection<RequestPart> RequestPart
+        public EntityCollection<RequestItemPart> RequestPart
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<RequestPart>("EntityDataModel.SupplierRequestPart", "RequestPart");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<RequestItemPart>("EntityDataModel.SupplierRequestPart", "RequestPart");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<RequestPart>("EntityDataModel.SupplierRequestPart", "RequestPart", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<RequestItemPart>("EntityDataModel.SupplierRequestPart", "RequestPart", value);
                 }
             }
         }
@@ -2713,11 +3425,13 @@ namespace ServiceDB.Models
         /// </summary>
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="name">Initial value of the Name property.</param>
-        public static Warranty CreateWarranty(global::System.Int32 id, global::System.String name)
+        /// <param name="updated_at">Initial value of the Updated_at property.</param>
+        public static Warranty CreateWarranty(global::System.Int32 id, global::System.String name, global::System.DateTime updated_at)
         {
             Warranty warranty = new Warranty();
             warranty.Id = id;
             warranty.Name = name;
+            warranty.Updated_at = updated_at;
             return warranty;
         }
 
@@ -2774,6 +3488,30 @@ namespace ServiceDB.Models
         private global::System.String _Name;
         partial void OnNameChanging(global::System.String value);
         partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime Updated_at
+        {
+            get
+            {
+                return _Updated_at;
+            }
+            set
+            {
+                OnUpdated_atChanging(value);
+                ReportPropertyChanging("Updated_at");
+                _Updated_at = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Updated_at");
+                OnUpdated_atChanged();
+            }
+        }
+        private global::System.DateTime _Updated_at;
+        partial void OnUpdated_atChanging(global::System.DateTime value);
+        partial void OnUpdated_atChanged();
 
         #endregion
     
@@ -2786,17 +3524,17 @@ namespace ServiceDB.Models
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("EntityDataModel", "WarrantyRequest", "Request")]
-        public EntityCollection<Request> Request
+        public EntityCollection<RequestItem> Request
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Request>("EntityDataModel.WarrantyRequest", "Request");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<RequestItem>("EntityDataModel.WarrantyRequest", "Request");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Request>("EntityDataModel.WarrantyRequest", "Request", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<RequestItem>("EntityDataModel.WarrantyRequest", "Request", value);
                 }
             }
         }

@@ -1,60 +1,31 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<ServiceDB.Models.Request>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    Редактирование
+    Edit
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<h1>Редактировать заявку №<%: Model.Id.ToString() %></h1>
+
 <div class="row">
-        <h1>Редактировать заявку</h1>
+    <div class="span4">
 
         <script src="<%: Url.Content("~/Scripts/jquery.validate.min.js") %>" type="text/javascript"></script>
         <script src="<%: Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js") %>" type="text/javascript"></script>
 
-    <div class="span5">
         <% using (Html.BeginForm()) { %>
             <%: Html.ValidationSummary(true) %>
             <fieldset>
                 <legend>Заявка</legend>
 
-                <div class="editor-label">
-                    <%: Html.LabelFor(model => model.Name, "Название") %>
-                </div>
-                <div class="editor-field">
-                    <%: Html.EditorFor(model => model.Name) %>
-                    <%: Html.ValidationMessageFor(model => model.Name) %>
-                </div>
+                <%: Html.HiddenFor(model => model.Id) %>
 
                 <div class="editor-label">
-                    <%: Html.LabelFor(model => model.Item, "Товар") %>
+                    <%: Html.LabelFor(model => model.Date) %>
                 </div>
                 <div class="editor-field">
-                    <%: Html.EditorFor(model => model.Item) %>
-                    <%: Html.ValidationMessageFor(model => model.Item) %>
-                </div>
-
-                <div class="editor-label">
-                    <%: Html.LabelFor(model => model.Defect, "Неисправность") %>
-                </div>
-                <div class="editor-field">
-                    <%: Html.EditorFor(model => model.Defect) %>
-                    <%: Html.ValidationMessageFor(model => model.Defect) %>
-                </div>
-
-                <div class="editor-label">
-                    <%: Html.LabelFor(model => model.Serial_num, "Серийный номер") %>
-                </div>
-                <div class="editor-field">
-                    <%: Html.EditorFor(model => model.Serial_num) %>
-                    <%: Html.ValidationMessageFor(model => model.Serial_num) %>
-                </div>
-
-                <div class="editor-label">
-                    <%: Html.LabelFor(model => model.Packing, "Комплектация")%>
-                </div>
-                <div class="editor-field">
-                    <%: Html.EditorFor(model => model.Packing)%>
-                    <%: Html.ValidationMessageFor(model => model.Packing) %>
+                    <%: Html.EditorFor(model => model.Date) %>
+                    <%: Html.ValidationMessageFor(model => model.Date) %>
                 </div>
 
                 <div class="editor-label">
@@ -66,57 +37,6 @@
                 </div>
 
                 <div class="editor-label">
-                    <%: Html.LabelFor(model => model.Description, "Описание") %>
-                </div>
-                <div class="editor-field">
-                    <%: Html.TextAreaFor(model => model.Description)%>
-                    <%: Html.ValidationMessageFor(model => model.Description) %>
-                </div>
-                <p>
-                    <input type="submit" value="Сохранить" class="btn btn-primary"/>
-                    <%: Html.ActionLink("Добавить запчасть", "Create", "RequestParts", new { @requestid = Model.Id }, new { @class = "btn btn-primary" })%>
-                </p>
-            </fieldset>
-        <div>
-            <%: Html.ActionLink("К списку", "Index") %>
-        </div>
-    </div>
-    <div class="span5 offset1">
-            <fieldset>
-                <legend>Работа</legend>
-                <div class="editor-label">
-                    <%: Html.LabelFor(model => model.More_info, "Доп. инфор") %>
-                </div>
-                <div class="editor-field">
-                    <%: Html.TextAreaFor(model => model.More_info)%>
-                    <%: Html.ValidationMessageFor(model => model.More_info) %>
-                </div>
-
-                <div class="editor-label">
-                    <%: Html.LabelFor(model => model.Warranty_id, "Гарантия") %>
-                </div>
-                <div class="editor-field">
-                    <%: Html.DropDownList("Warranty_id", String.Empty) %>
-                    <%: Html.ValidationMessageFor(model => model.Warranty_id) %>
-                </div>
-
-                <div class="editor-label">
-                    <%: Html.LabelFor(model => model.Service, "Услуга") %>
-                </div>
-                <div class="editor-field">
-                    <%: Html.EditorFor(model => model.Service) %>
-                    <%: Html.ValidationMessageFor(model => model.Service) %>
-                </div>
-
-                <div class="editor-label">
-                    <%: Html.LabelFor(model => model.Employee_id, "Мастер") %>
-                </div>
-                <div class="editor-field">
-                    <%: Html.DropDownList("Employee_id", String.Empty) %>
-                    <%: Html.ValidationMessageFor(model => model.Employee_id) %>
-                </div>
-
-                <div class="editor-label">
                     <%: Html.LabelFor(model => model.State_id, "Статус") %>
                 </div>
                 <div class="editor-field">
@@ -124,24 +44,45 @@
                     <%: Html.ValidationMessageFor(model => model.State_id) %>
                 </div>
 
-                <div class="editor-label">
-                    <%: Html.LabelFor(model => model.SC_num, "Номер заявки СЦ") %>
-                </div>
-                <div class="editor-field">
-                    <%: Html.EditorFor(model => model.SC_num) %>
-                    <%: Html.ValidationMessageFor(model => model.SC_num) %>
-                </div>
-
-                <div class="editor-label">
-                    <%: Html.LabelFor(model => model.Diagnostic_result, "Результаты диагностики") %>
-                </div>
-                <div class="editor-field">
-                    <%: Html.TextAreaFor(model => model.Diagnostic_result) %>
-                    <%: Html.ValidationMessageFor(model => model.Diagnostic_result) %>
-                </div>
+                <p>
+                    <input type="submit" value="Сохранить" class="btn btn-primary" />
+                </p>
             </fieldset>
-        </div>
         <% } %>
+
+        <div>
+            <%: Html.ActionLink("К списку", "Index") %>
+        </div>
+    </div>
+    <div class="span7 offset1">
+        <fieldset>
+            <legend>Товар в ремонт</legend>
+                <table class="table table-striped">
+                <tr>
+                    <th>Наименование</th>
+                    <th>Серийный №</th>
+                    <th>Неисправность</th>
+                    <th>Статус</th>
+                    <th>Действия</th>
+                </tr>
+                <% foreach(var item in Model.RequestItem) { %>
+                <tr>
+                    <th><%: Html.DisplayFor(modelItem => item.Good.Name) %></th>
+                    <th><%: Html.DisplayFor(modelItem => item.Serial_num) %></th>
+                    <th><%: Html.DisplayFor(modelItem => item.Defect) %></th>
+                    <th><%: Html.DisplayFor(modelItem => item.State.Name) %></th>
+                    <th>
+                        <%: Html.ActionLink("Править", "Edit", "RequestItems", new { @id=item.Id } , new { @class="btn btn-mini" }) %> 
+                        <%: Html.ActionLink("Удалить", "Delete", "RequestItems", new { @id = item.Id }, new { @class = "btn btn-mini btn-danger" })%>
+                    </th>
+                </tr>
+                <% } %>
+            </table>
+        </fieldset>
+        <p>
+            <%: Html.ActionLink("Добавить", "Create", "RequestItems", new { @requestid = Model.Id }, new { @class = "btn btn-primary" })%>
+        </p>
+    </div>
 </div>
 
 </asp:Content>

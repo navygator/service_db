@@ -3,18 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data;
+using System.ComponentModel.DataAnnotations;
 
 namespace ServiceDB.Models
 {
+	[MetadataType(typeof(StateMetaData))]
 	public partial class State
 	{
 		private static EntityDataModelContainer db = new EntityDataModelContainer();
 
 		protected override void OnPropertyChanged(string property)
 		{
-			//if (property != "Updated_at")
-			//    Updated_at = DateTime.Now;
-			//base.OnPropertyChanged(property);
+			if (property != "Updated_at")
+			    Updated_at = DateTime.Now;
+			base.OnPropertyChanged(property);
 		}
 
 		public static List<State> All()
@@ -77,6 +79,13 @@ namespace ServiceDB.Models
 			}
 
 			return result;
+		}
+
+		public class StateMetaData
+		{
+			[Required]
+			[Display(Name = "Наименование")]
+			public string Name { get; set; }
 		}
 	}
 }

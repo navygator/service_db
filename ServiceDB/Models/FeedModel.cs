@@ -38,7 +38,7 @@ namespace ServiceDB.Models
 			var rq = Request.All().Where(m => m.Updated_at > DateTime.Now.AddDays(-1)).ToList();
 			foreach (var item in rq)
 			{
-				feed.Add(new Feed { Name = item.Name, Url = "/Requests/Details/" + item.Id });
+				feed.Add(new Feed { Name = "Заявка №" + item.Id.ToString(), Url = "/Requests/Details/" + item.Id });
 			}
 
 			return feed;

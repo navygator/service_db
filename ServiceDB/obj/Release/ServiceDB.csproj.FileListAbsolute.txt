@@ -1,0 +1,7 @@
+D:\Work\My Documents\Visual Studio 2010\Projects\ServiceDB\ServiceDB\bin\ServiceDB.dll
+D:\Work\My Documents\Visual Studio 2010\Projects\ServiceDB\ServiceDB\bin\ServiceDB.pdb
+D:\Work\My Documents\Visual Studio 2010\Projects\ServiceDB\ServiceDB\bin\EntityFramework.dll
+D:\Work\My Documents\Visual Studio 2010\Projects\ServiceDB\ServiceDB\bin\EntityFramework.xml
+D:\Work\My Documents\Visual Studio 2010\Projects\ServiceDB\ServiceDB\obj\Release\ResolveAssemblyReference.cache
+D:\Work\My Documents\Visual Studio 2010\Projects\ServiceDB\ServiceDB\obj\Release\ServiceDB.dll
+D:\Work\My Documents\Visual Studio 2010\Projects\ServiceDB\ServiceDB\obj\Release\ServiceDB.pdb

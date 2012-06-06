@@ -6,7 +6,7 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 <div class="row">
-    <div class="span6 offset3">
+    <div class="span4 offset3">
         <h1>Инмормация о запчасти</h1>
 
         <fieldset>

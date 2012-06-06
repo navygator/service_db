@@ -27,8 +27,8 @@
                               Товары <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                              <li><%: Html.ActionLink("Товары в ремонте", "Index", "Home")%></li>
-                              <li><%: Html.ActionLink("Товары в заявке", "Index", "RequestParts")%></li>
+                              <li><%: Html.ActionLink("Товары в ремонте", "Index", "RequestItems")%></li>
+                              <li><%: Html.ActionLink("Товары в заявке", "Index", "RequestItemParts")%></li>
                             </ul>
                           </li>  
                           <li id="ref-menu" class="dropdown">
@@ -39,13 +39,14 @@
                               <li><%: Html.ActionLink("Гарантия", "Index", "Warranties")%></li>
                               <li><%: Html.ActionLink("Контрагенты", "Index", "Contragents")%> </li>
                               <li><%: Html.ActionLink("Мастера", "Index", "Employees")%> </li>
-                              <li><%: Html.ActionLink("Услуги", "Index", "Home")%> </li>
                               <li><%: Html.ActionLink("Статус", "Index", "States")%> </li>
+                              <li><%: Html.ActionLink("Товар", "Index", "Goods")%> </li>
                               <li class="divider"></li>
                               <li><%: Html.ActionLink("Вендор", "Index", "Vendors")%> </li>
                               <li><%: Html.ActionLink("Поставщик", "Index", "Suppliers")%> </li>
                               <li><%: Html.ActionLink("Категории", "Index", "Categories")%> </li>
                               <li><%: Html.ActionLink("Запчасти", "Index", "Parts")%></li>
+                              <li><%: Html.ActionLink("Услуги", "Index", "Home")%> </li>
                             </ul>
                           <li id="fat-menu" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">

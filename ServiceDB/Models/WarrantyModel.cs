@@ -12,9 +12,9 @@ namespace ServiceDB.Models
 
 		protected override void OnPropertyChanged(string property)
 		{
-			//if (property != "Updated_at")
-			//    Updated_at = DateTime.Now;
-			//base.OnPropertyChanged(property);
+			if (property != "Updated_at")
+			    Updated_at = DateTime.Now;
+			base.OnPropertyChanged(property);
 		}
 
 		public static List<Warranty> All()

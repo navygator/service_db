@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data;
+using System.ComponentModel.DataAnnotations;
 
 namespace ServiceDB.Models
 {
+	[MetadataType(typeof(EmployeeMetaData))]
 	public partial class Employee
 	{
 		private static EntityDataModelContainer db = new EntityDataModelContainer();
@@ -32,7 +34,6 @@ namespace ServiceDB.Models
 			bool result = true;
 			try
 			{
-				if (employee.Created_at == null) employee.Created_at = DateTime.Now.ToLongDateString();
 				db.Employees.AddObject(employee);
 				db.SaveChanges();
 			}
@@ -78,6 +79,24 @@ namespace ServiceDB.Models
 			}
 
 			return result;
+		}
+
+		public class EmployeeMetaData
+		{
+			[Required]
+			[Display(Name = "ФИО")]
+			public string FIO { get; set; }
+
+			[Required]
+			[Display(Name = "Телефон")]
+			public string Phone { get; set; }
+	
+			[Required]
+			[Display(Name = "Адрес")]
+			public string Address { get; set; }
+
+			[Required]
+			public string Email { get; set; }
 		}
 	}
 }
