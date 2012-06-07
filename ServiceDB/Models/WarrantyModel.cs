@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data;
+using System.ComponentModel.DataAnnotations;
 
 namespace ServiceDB.Models
 {
+	[MetadataType(typeof(WarrantyMetaData))]
 	public partial class Warranty
 	{
 		private static EntityDataModelContainer db = new EntityDataModelContainer();
@@ -77,6 +79,13 @@ namespace ServiceDB.Models
 			}
 
 			return result;
+		}
+
+		public class WarrantyMetaData
+		{
+			[Required]
+			[Display(Name = "Наименование")]
+			public string Name { get; set; }
 		}
 	}
 }

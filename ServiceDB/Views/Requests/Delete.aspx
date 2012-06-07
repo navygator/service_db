@@ -6,9 +6,9 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 <h1>Удаление заявки</h1>
+<h3>Вы уверены, что желаете удалить?</h3>
 <div class="row">
-    <div class="span4">
-        <h3>Вы уверены, что желаете удалить?</h3>
+    <div class="span3">
         <% Html.RenderPartial("RequestInfo", Model); %>
         <% using (Html.BeginForm()) { %>
             <p>

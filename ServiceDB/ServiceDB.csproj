@@ -180,6 +180,9 @@
     <Content Include="Views\RequestItems\Details.aspx" />
     <Content Include="Views\RequestItems\Edit.aspx" />
     <Content Include="Views\RequestItems\Index.aspx" />
+    <Content Include="Views\RequestItems\Parts.ascx" />
+    <Content Include="Views\RequestItems\RequestItemInfo.ascx" />
+    <Content Include="Views\RequestItems\Services.ascx" />
     <Content Include="Views\Requests\Create.aspx" />
     <Content Include="Views\Requests\Delete.aspx" />
     <Content Include="Views\Requests\Details.aspx" />

@@ -6,6 +6,7 @@
             <th>Наименование</th>
             <th>Серийный №</th>
             <th>Неисправность</th>
+            <th>Мастер</th>
             <th>Статус</th>
         </tr>
         <% foreach(var item in Model) { %>
@@ -13,6 +14,7 @@
             <th><%: Html.DisplayFor(modelItem => item.Good.Name) %></th>
             <th><%: Html.DisplayFor(modelItem => item.Serial_num) %></th>
             <th><%: Html.DisplayFor(modelItem => item.Defect) %></th>
+            <th><%: Html.DisplayFor(modelItem => item.Employee.FIO) %></th>
             <th><%: Html.DisplayFor(modelItem => item.State.Name) %></th>
         </tr>
         <% } %>

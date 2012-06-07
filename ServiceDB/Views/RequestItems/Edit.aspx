@@ -1,127 +1,171 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<ServiceDB.Models.RequestItem>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    Edit
+    Редактирование
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
+<div class="row">
+    <h1>Редактировать ремонт</h1>
+    <div class="span4">
 
-<h2>Edit</h2>
+        <script src="<%: Url.Content("~/Scripts/jquery.validate.min.js") %>" type="text/javascript"></script>
+        <script src="<%: Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js") %>" type="text/javascript"></script>
 
-<script src="<%: Url.Content("~/Scripts/jquery.validate.min.js") %>" type="text/javascript"></script>
-<script src="<%: Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js") %>" type="text/javascript"></script>
+        <% using (Html.BeginForm()) { %>
+            <%: Html.ValidationSummary(true) %>
+            <fieldset>
+                <legend>Информация</legend>
 
-<% using (Html.BeginForm()) { %>
-    <%: Html.ValidationSummary(true) %>
-    <fieldset>
-        <legend>RequestItem</legend>
+                <%: Html.HiddenFor(model => model.Id) %>
+                <%: Html.HiddenFor(model => model.Request_id)%>
 
-        <%: Html.HiddenFor(model => model.Id) %>
+                <div class="editor-label">
+                    <%: Html.LabelFor(model => model.Good_id, "Товар") %>
+                </div>
+                <div class="editor-field">
+                    <%: Html.DropDownList("Good_id", String.Empty) %>
+                    <%: Html.ValidationMessageFor(model => model.Good_id) %>
+                </div>
 
-        <div class="editor-label">
-            <%: Html.LabelFor(model => model.Request_id, "Request") %>
-        </div>
-        <div class="editor-field">
-            <%: Html.DropDownList("Request_id", String.Empty) %>
-            <%: Html.ValidationMessageFor(model => model.Request_id) %>
-        </div>
+                <div class="editor-label">
+                    <%: Html.LabelFor(model => model.Serial_num) %>
+                </div>
+                <div class="editor-field">
+                    <%: Html.EditorFor(model => model.Serial_num) %>
+                    <%: Html.ValidationMessageFor(model => model.Serial_num) %>
+                </div>
 
-        <div class="editor-label">
-            <%: Html.LabelFor(model => model.Good_id, "Good") %>
-        </div>
-        <div class="editor-field">
-            <%: Html.DropDownList("Good_id", String.Empty) %>
-            <%: Html.ValidationMessageFor(model => model.Good_id) %>
-        </div>
+                <div class="editor-label">
+                    <%: Html.LabelFor(model => model.Warranty_id, "Гарантия") %>
+                </div>
+                <div class="editor-field">
+                    <%: Html.DropDownList("Warranty_id", String.Empty) %>
+                    <%: Html.ValidationMessageFor(model => model.Warranty_id) %>
+                </div>
 
-        <div class="editor-label">
-            <%: Html.LabelFor(model => model.Serial_num) %>
-        </div>
-        <div class="editor-field">
-            <%: Html.EditorFor(model => model.Serial_num) %>
-            <%: Html.ValidationMessageFor(model => model.Serial_num) %>
-        </div>
+                <div class="editor-label">
+                    <%: Html.LabelFor(model => model.Employee_id, "Мастер") %>
+                </div>
+                <div class="editor-field">
+                    <%: Html.DropDownList("Employee_id", String.Empty) %>
+                    <%: Html.ValidationMessageFor(model => model.Employee_id) %>
+                </div>
 
-        <div class="editor-label">
-            <%: Html.LabelFor(model => model.Warranty_id, "Warranty") %>
-        </div>
-        <div class="editor-field">
-            <%: Html.DropDownList("Warranty_id", String.Empty) %>
-            <%: Html.ValidationMessageFor(model => model.Warranty_id) %>
-        </div>
+                <div class="editor-label">
+                    <%: Html.LabelFor(model => model.Description) %>
+                </div>
+                <div class="editor-field">
+                    <%: Html.EditorFor(model => model.Description) %>
+                    <%: Html.ValidationMessageFor(model => model.Description) %>
+                </div>
 
-        <div class="editor-label">
-            <%: Html.LabelFor(model => model.Employee_id, "Employee") %>
-        </div>
-        <div class="editor-field">
-            <%: Html.DropDownList("Employee_id", String.Empty) %>
-            <%: Html.ValidationMessageFor(model => model.Employee_id) %>
-        </div>
+                <div class="editor-label">
+                    <%: Html.LabelFor(model => model.Packing) %>
+                </div>
+                <div class="editor-field">
+                    <%: Html.EditorFor(model => model.Packing) %>
+                    <%: Html.ValidationMessageFor(model => model.Packing) %>
+                </div>
 
-        <div class="editor-label">
-            <%: Html.LabelFor(model => model.Description) %>
-        </div>
-        <div class="editor-field">
-            <%: Html.EditorFor(model => model.Description) %>
-            <%: Html.ValidationMessageFor(model => model.Description) %>
-        </div>
+                <div class="editor-label">
+                    <%: Html.LabelFor(model => model.Defect) %>
+                </div>
+                <div class="editor-field">
+                    <%: Html.EditorFor(model => model.Defect) %>
+                    <%: Html.ValidationMessageFor(model => model.Defect) %>
+                </div>
 
-        <div class="editor-label">
-            <%: Html.LabelFor(model => model.Packing) %>
-        </div>
-        <div class="editor-field">
-            <%: Html.EditorFor(model => model.Packing) %>
-            <%: Html.ValidationMessageFor(model => model.Packing) %>
-        </div>
+                <div class="editor-label">
+                    <%: Html.LabelFor(model => model.More_info) %>
+                </div>
+                <div class="editor-field">
+                    <%: Html.EditorFor(model => model.More_info) %>
+                    <%: Html.ValidationMessageFor(model => model.More_info) %>
+                </div>
 
-        <div class="editor-label">
-            <%: Html.LabelFor(model => model.Defect) %>
-        </div>
-        <div class="editor-field">
-            <%: Html.EditorFor(model => model.Defect) %>
-            <%: Html.ValidationMessageFor(model => model.Defect) %>
-        </div>
+                <p>
+                    <input type="submit" value="Сохранить" class="btn btn-primary" />
+                </p>
+            </fieldset>
+        <% } %>
 
-        <div class="editor-label">
-            <%: Html.LabelFor(model => model.More_info) %>
+        <div>
+            <%: Html.ActionLink("К заявке", "Edit", "Requests", new { @id = Model.Request_id }, null)%>
         </div>
-        <div class="editor-field">
-            <%: Html.EditorFor(model => model.More_info) %>
-            <%: Html.ValidationMessageFor(model => model.More_info) %>
-        </div>
+    </div>
+    <div class="span6 offset1">
+        <fieldset>
+            <legend>Ремонт</legend>
+            <div class="editor-label">
+                <%: Html.LabelFor(model => model.Diagnostic_result) %>
+            </div>
+            <div class="editor-field">
+                <%: Html.EditorFor(model => model.Diagnostic_result) %>
+                <%: Html.ValidationMessageFor(model => model.Diagnostic_result) %>
+            </div>
 
-        <div class="editor-label">
-            <%: Html.LabelFor(model => model.Diagnostic_result) %>
-        </div>
-        <div class="editor-field">
-            <%: Html.EditorFor(model => model.Diagnostic_result) %>
-            <%: Html.ValidationMessageFor(model => model.Diagnostic_result) %>
-        </div>
+            <div class="editor-label">
+                <%: Html.LabelFor(model => model.State_id, "Статус") %>
+            </div>
+            <div class="editor-field">
+                <%: Html.DropDownList("State_id", String.Empty) %>
+                <%: Html.ValidationMessageFor(model => model.State_id) %>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Запчасти и услуги</legend>
+            <table class="table table-striped">
+                <tr>
+                    <th>Запчасть</th>
+                    <th>Серийный №</th>
+                    <th>Price</th>
+                    <th>Действия</th>
+                </tr>
 
-        <div class="editor-label">
-            <%: Html.LabelFor(model => model.State_id, "State") %>
-        </div>
-        <div class="editor-field">
-            <%: Html.DropDownList("State_id", String.Empty) %>
-            <%: Html.ValidationMessageFor(model => model.State_id) %>
-        </div>
+            <% foreach (var item in Model.RequestItemPart) { %>
+                <tr>
+                    <td>
+                        <%: Html.DisplayFor(modelItem => item.Part_id) %>
+                    </td>
+                    <td>
+                        <%: Html.DisplayFor(modelItem => item.Serial_num) %>
+                    </td>
+                    <td>
+                        <%: Html.DisplayFor(modelItem => item.Price) %>
+                    </td>
+                    <td>
+                        <%: Html.ActionLink("Править", "Edit", "RequestItemParts", new { @id=item.Id } , new { @class="btn btn-mini" }) %> 
+                        <%: Html.ActionLink("Удалить", "Delete", "RequestItemParts", new { @id = item.Id }, new { @class = "btn btn-mini btn-danger" })%>
+                    </td>
+                </tr>
+            <% } %>
+            </table>
+            <p>
+                <%: Html.ActionLink("Добавить", "Create", "RequestItemParts", new { @requestItemId = Model.Id }, new { @class = "btn btn-primary" })%>
+            </p>
+            <table class="table table-striped">
+                <tr>
+                    <th>Услуга</th>
+                    <th>Действия</th>
+                </tr>
 
-        <div class="editor-label">
-            <%: Html.LabelFor(model => model.Updated_at) %>
-        </div>
-        <div class="editor-field">
-            <%: Html.EditorFor(model => model.Updated_at) %>
-            <%: Html.ValidationMessageFor(model => model.Updated_at) %>
-        </div>
-
-        <p>
-            <input type="submit" value="Save" />
-        </p>
-    </fieldset>
-<% } %>
-
-<div>
-    <%: Html.ActionLink("Back to List", "Index") %>
+            <% foreach (var item in Model.RequestItemService) { %>
+                <tr>
+                    <td>
+                        <%: Html.DisplayFor(modelItem => item.Service_id) %>
+                    </td>
+                    <td>
+                        <%: Html.ActionLink("Править", "Edit", "RequestItemServices", new { @id=item.Id } , new { @class="btn btn-mini" }) %> 
+                        <%: Html.ActionLink("Удалить", "Delete", "RequestItemServices", new { @id = item.Id }, new { @class = "btn btn-mini btn-danger" })%>
+                    </td>
+                </tr>
+            <% } %>
+            </table>
+            <p>
+                <%: Html.ActionLink("Добавить", "Create", "RequestItemServices", new { @requestItemId = Model.Id }, new { @class = "btn btn-primary" })%>
+            </p>
+        </fieldset>
+    </div>
 </div>
-
 </asp:Content>

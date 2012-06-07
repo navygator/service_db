@@ -15,7 +15,7 @@
         <% using (Html.BeginForm()) { %>
             <%: Html.ValidationSummary(true) %>
             <fieldset>
-                <legend>Товар</legend>
+                <legend>Ремонт</legend>
                 <%: Html.HiddenFor(model => model.Request_id) %>
 
                 <div class="editor-label">
@@ -97,7 +97,7 @@
         <% } %>
 
         <div>
-            <%: Html.ActionLink("К списку", "Index") %>
+            <%: Html.ActionLink("К заявке", "Edit", "Requests", new { @id = Model.Request_id }, null)%>
         </div>
     </div>
 </div>

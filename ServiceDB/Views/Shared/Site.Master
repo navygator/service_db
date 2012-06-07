@@ -46,7 +46,7 @@
                               <li><%: Html.ActionLink("Поставщик", "Index", "Suppliers")%> </li>
                               <li><%: Html.ActionLink("Категории", "Index", "Categories")%> </li>
                               <li><%: Html.ActionLink("Запчасти", "Index", "Parts")%></li>
-                              <li><%: Html.ActionLink("Услуги", "Index", "Home")%> </li>
+                              <li><%: Html.ActionLink("Услуги", "Index", "Services")%> </li>
                             </ul>
                           <li id="fat-menu" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
