@@ -2268,7 +2268,7 @@ namespace ServiceDB.Models
         /// <param name="supplier_id">Initial value of the Supplier_id property.</param>
         /// <param name="date_in">Initial value of the Date_in property.</param>
         /// <param name="price">Initial value of the Price property.</param>
-        public static RequestItemPart CreateRequestItemPart(global::System.Int32 id, global::System.Int32 requestItem_id, global::System.Int32 part_id, global::System.String serial_num, global::System.Int32 supplier_id, global::System.String date_in, global::System.Decimal price)
+        public static RequestItemPart CreateRequestItemPart(global::System.Int32 id, global::System.Int32 requestItem_id, global::System.Int32 part_id, global::System.String serial_num, global::System.Int32 supplier_id, global::System.DateTime date_in, global::System.Decimal price)
         {
             RequestItemPart requestItemPart = new RequestItemPart();
             requestItemPart.Id = id;
@@ -2412,7 +2412,7 @@ namespace ServiceDB.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String Date_in
+        public global::System.DateTime Date_in
         {
             get
             {
@@ -2422,13 +2422,13 @@ namespace ServiceDB.Models
             {
                 OnDate_inChanging(value);
                 ReportPropertyChanging("Date_in");
-                _Date_in = StructuralObject.SetValidValue(value, false);
+                _Date_in = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("Date_in");
                 OnDate_inChanged();
             }
         }
-        private global::System.String _Date_in;
-        partial void OnDate_inChanging(global::System.String value);
+        private global::System.DateTime _Date_in;
+        partial void OnDate_inChanging(global::System.DateTime value);
         partial void OnDate_inChanged();
     
         /// <summary>
@@ -2616,12 +2616,14 @@ namespace ServiceDB.Models
         /// <param name="id">Initial value of the Id property.</param>
         /// <param name="requestItem_id">Initial value of the RequestItem_id property.</param>
         /// <param name="service_id">Initial value of the Service_id property.</param>
-        public static RequestItemService CreateRequestItemService(global::System.Int32 id, global::System.Int32 requestItem_id, global::System.Int32 service_id)
+        /// <param name="price">Initial value of the Price property.</param>
+        public static RequestItemService CreateRequestItemService(global::System.Int32 id, global::System.Int32 requestItem_id, global::System.Int32 service_id, global::System.Decimal price)
         {
             RequestItemService requestItemService = new RequestItemService();
             requestItemService.Id = id;
             requestItemService.RequestItem_id = requestItem_id;
             requestItemService.Service_id = service_id;
+            requestItemService.Price = price;
             return requestItemService;
         }
 
@@ -2702,6 +2704,30 @@ namespace ServiceDB.Models
         private global::System.Int32 _Service_id;
         partial void OnService_idChanging(global::System.Int32 value);
         partial void OnService_idChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal Price
+        {
+            get
+            {
+                return _Price;
+            }
+            set
+            {
+                OnPriceChanging(value);
+                ReportPropertyChanging("Price");
+                _Price = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Price");
+                OnPriceChanged();
+            }
+        }
+        private global::System.Decimal _Price;
+        partial void OnPriceChanging(global::System.Decimal value);
+        partial void OnPriceChanged();
 
         #endregion
     

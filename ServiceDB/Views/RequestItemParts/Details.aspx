@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<ServiceDB.Models.RequestPart>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<ServiceDB.Models.RequestItemPart>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Просмотр
@@ -15,7 +15,7 @@
 
             <div class="display-label">Заявка</div>
             <div class="display-field">
-                <%: Html.DisplayFor(model => model.Request.Name) %>
+                <%: Html.DisplayFor(model => model.RequestItem.Description) %>
             </div>
 
             <div class="display-label">Запчасть</div>

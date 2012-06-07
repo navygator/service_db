@@ -18,7 +18,7 @@ namespace ServiceDB.Controllers
 
 		public ViewResult Index()
 		{
-			ViewBag.Message = "Товар в заявках";
+			ViewBag.Message = "Товар в ремонте";
 			var requestitems = db.RequestItems.Include("Warranty").Include("Employee").Include("Request").Include("State").Include("Good");
 			return View(requestitems.ToList());
 		}
@@ -94,7 +94,7 @@ namespace ServiceDB.Controllers
 				db.RequestItems.Attach(requestitem);
 				db.ObjectStateManager.ChangeObjectState(requestitem, EntityState.Modified);
 				db.SaveChanges();
-				return RedirectToAction("Index");
+				return RedirectToAction("Edit", "Requests", new { @id = requestitem.Request_id});
 			}
 			ViewBag.Warranty_id = new SelectList(db.Warranties, "Id", "Name", requestitem.Warranty_id);
 			ViewBag.Employee_id = new SelectList(db.Employees, "Id", "FIO", requestitem.Employee_id);
@@ -122,7 +122,7 @@ namespace ServiceDB.Controllers
 			RequestItem requestitem = db.RequestItems.Single(r => r.Id == id);
 			db.RequestItems.DeleteObject(requestitem);
 			db.SaveChanges();
-			return RedirectToAction("Index");
+			return RedirectToAction("Edit", "Requests", new { @id = requestitem.Request_id });
 		}
 
 		protected override void Dispose(bool disposing)

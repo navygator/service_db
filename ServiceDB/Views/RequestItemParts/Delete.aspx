@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<ServiceDB.Models.RequestPart>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<ServiceDB.Models.RequestItemPart>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Удаление
@@ -8,7 +8,7 @@
 <div class="row">
     <div class="span6 offset3">
 
-        <h1>Удалить запчасть из заявки</h1>
+        <h1>Удалить запчасть из товара</h1>
 
         <h3>Вы уверены, что желаете удалить?</h3>
         <fieldset>
@@ -47,7 +47,7 @@
         <% using (Html.BeginForm()) { %>
             <p>
                 <input type="submit" value="Удалить" class="btn btn-danger" /> 
-                <%: Html.ActionLink("К списку", "Index", null, new { @class="btn btn-primary"})%>
+                <%: Html.ActionLink("К товару", "Edit", "RequestItems", new { @id = Model.RequestItem_id }, new { @class = "btn btn-primary" })%>
             </p>
         <% } %>
     </div>

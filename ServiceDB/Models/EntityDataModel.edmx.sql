@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 06/06/2012 11:35:07
+-- Date Created: 06/07/2012 11:40:07
 -- Generated from EDMX file: D:\Work\My Documents\Visual Studio 2010\Projects\ServiceDB\ServiceDB\Models\EntityDataModel.edmx
 -- --------------------------------------------------
 
@@ -212,7 +212,7 @@ CREATE TABLE [dbo].[RequestItemParts] (
     [Part_id] int  NOT NULL,
     [Serial_num] nvarchar(max)  NOT NULL,
     [Supplier_id] int  NOT NULL,
-    [Date_in] nvarchar(max)  NOT NULL,
+    [Date_in] datetime  NOT NULL,
     [Price] decimal(18,0)  NOT NULL,
     [Updated_at] datetime  NULL
 );
@@ -248,7 +248,8 @@ GO
 CREATE TABLE [dbo].[RequestItemServices] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [RequestItem_id] int  NOT NULL,
-    [Service_id] int  NOT NULL
+    [Service_id] int  NOT NULL,
+    [Price] decimal(18,0)  NOT NULL
 );
 GO
 

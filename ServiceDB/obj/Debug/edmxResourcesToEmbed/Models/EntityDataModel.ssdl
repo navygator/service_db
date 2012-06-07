@@ -175,7 +175,7 @@
     <Property Name="Part_id" Type="int" Nullable="false" />
     <Property Name="Serial_num" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Supplier_id" Type="int" Nullable="false" />
-    <Property Name="Date_in" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Date_in" Type="datetime" Nullable="false" />
     <Property Name="Price" Type="decimal" Nullable="false" />
     <Property Name="Updated_at" Type="datetime" Nullable="true" />
   </EntityType>
@@ -212,6 +212,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="RequestItem_id" Type="int" Nullable="false" />
     <Property Name="Service_id" Type="int" Nullable="false" />
+    <Property Name="Price" Type="decimal" Nullable="false" />
   </EntityType>
   <Association Name="CategoryParts">
     <End Role="Category" Type="EntityDataModel.Store.Categories" Multiplicity="1" />

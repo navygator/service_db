@@ -180,7 +180,7 @@
     <Property Name="Part_id" Type="int" Nullable="false" />
     <Property Name="Serial_num" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Supplier_id" Type="int" Nullable="false" />
-    <Property Name="Date_in" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Date_in" Type="datetime" Nullable="false" />
     <Property Name="Price" Type="decimal" Nullable="false" />
     <Property Name="Updated_at" Type="datetime" Nullable="true" />
   </EntityType>
@@ -217,6 +217,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="RequestItem_id" Type="int" Nullable="false" />
     <Property Name="Service_id" Type="int" Nullable="false" />
+    <Property Name="Price" Type="decimal" Nullable="false" />
   </EntityType>
   <Association Name="CategoryParts">
     <End Role="Category" Type="EntityDataModel.Store.Categories" Multiplicity="1" />
@@ -631,7 +632,7 @@
 		  <Property Type="Int32" Name="Part_id" Nullable="false" />
 		  <Property Type="String" Name="Serial_num" Nullable="false" />
 		  <Property Type="Int32" Name="Supplier_id" Nullable="false" />
-		  <Property Type="String" Name="Date_in" Nullable="false" />
+		  <Property Type="DateTime" Name="Date_in" Nullable="false" />
 		  <Property Type="Decimal" Name="Price" Nullable="false" />
 		  <NavigationProperty Name="Part" Relationship="EntityDataModel.PartRequestPart" FromRole="RequestPart" ToRole="Part" />
 		  <NavigationProperty Name="Supplier" Relationship="EntityDataModel.SupplierRequestPart" FromRole="RequestPart" ToRole="Supplier" />
@@ -702,6 +703,7 @@
 		  <NavigationProperty Name="RequestItem" Relationship="EntityDataModel.RequestItemRequestItemService" FromRole="RequestItemService" ToRole="RequestItem" />
 		  <NavigationProperty Name="Service" Relationship="EntityDataModel.ServiceRequestItemService" FromRole="RequestItemService" ToRole="Service" />
 		  <Property Type="Int32" Name="Service_id" Nullable="false" />
+          <Property Type="Decimal" Name="Price" Nullable="false" />
 		</EntityType>
 		<Association Name="RequestItemRequestItemPart">
 		  <End Type="EntityDataModel.RequestItem" Role="RequestItem" Multiplicity="1" />
@@ -957,6 +959,7 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="RequestItem_id" ColumnName="RequestItem_id" />
           <ScalarProperty Name="Service_id" ColumnName="Service_id" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -1017,7 +1020,7 @@
 		<EntityTypeShape EntityType="EntityDataModel.Request" Width="1.5" PointX="2.5" PointY="0.625" Height="2.5571907552083331" />
 		<EntityTypeShape EntityType="EntityDataModel.Good" Width="1.5" PointX="2.5" PointY="4" Height="1.7879850260416665" />
 		<EntityTypeShape EntityType="EntityDataModel.Service" Width="1.5" PointX="2.5" PointY="6.25" Height="1.7879850260416665" />
-		<EntityTypeShape EntityType="EntityDataModel.RequestItemService" Width="1.5" PointX="4.375" PointY="6.25" Height="1.9802864583333326" />
+		<EntityTypeShape EntityType="EntityDataModel.RequestItemService" Width="1.5" PointX="4.375" PointY="6.25" Height="2.1725878906249996" />
 		<AssociationConnector Association="EntityDataModel.RequestItemRequestItemPart">
 		  <ConnectorPoint PointX="5.875" PointY="3.2449446614583337" />
 		  <ConnectorPoint PointX="8.25" PointY="3.2449446614583337" />

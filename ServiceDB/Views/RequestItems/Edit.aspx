@@ -88,8 +88,6 @@
                     <input type="submit" value="Сохранить" class="btn btn-primary" />
                 </p>
             </fieldset>
-        <% } %>
-
         <div>
             <%: Html.ActionLink("К заявке", "Edit", "Requests", new { @id = Model.Request_id }, null)%>
         </div>
@@ -113,55 +111,14 @@
                 <%: Html.ValidationMessageFor(model => model.State_id) %>
             </div>
         </fieldset>
+        <% } %>
         <fieldset>
             <legend>Запчасти и услуги</legend>
-            <table class="table table-striped">
-                <tr>
-                    <th>Запчасть</th>
-                    <th>Серийный №</th>
-                    <th>Price</th>
-                    <th>Действия</th>
-                </tr>
-
-            <% foreach (var item in Model.RequestItemPart) { %>
-                <tr>
-                    <td>
-                        <%: Html.DisplayFor(modelItem => item.Part_id) %>
-                    </td>
-                    <td>
-                        <%: Html.DisplayFor(modelItem => item.Serial_num) %>
-                    </td>
-                    <td>
-                        <%: Html.DisplayFor(modelItem => item.Price) %>
-                    </td>
-                    <td>
-                        <%: Html.ActionLink("Править", "Edit", "RequestItemParts", new { @id=item.Id } , new { @class="btn btn-mini" }) %> 
-                        <%: Html.ActionLink("Удалить", "Delete", "RequestItemParts", new { @id = item.Id }, new { @class = "btn btn-mini btn-danger" })%>
-                    </td>
-                </tr>
-            <% } %>
-            </table>
+            <% Html.RenderPartial("Parts_edit", Model.RequestItemPart); %>
             <p>
                 <%: Html.ActionLink("Добавить", "Create", "RequestItemParts", new { @requestItemId = Model.Id }, new { @class = "btn btn-primary" })%>
             </p>
-            <table class="table table-striped">
-                <tr>
-                    <th>Услуга</th>
-                    <th>Действия</th>
-                </tr>
-
-            <% foreach (var item in Model.RequestItemService) { %>
-                <tr>
-                    <td>
-                        <%: Html.DisplayFor(modelItem => item.Service_id) %>
-                    </td>
-                    <td>
-                        <%: Html.ActionLink("Править", "Edit", "RequestItemServices", new { @id=item.Id } , new { @class="btn btn-mini" }) %> 
-                        <%: Html.ActionLink("Удалить", "Delete", "RequestItemServices", new { @id = item.Id }, new { @class = "btn btn-mini btn-danger" })%>
-                    </td>
-                </tr>
-            <% } %>
-            </table>
+            <% Html.RenderPartial("Services_edit", Model.RequestItemService); %>
             <p>
                 <%: Html.ActionLink("Добавить", "Create", "RequestItemServices", new { @requestItemId = Model.Id }, new { @class = "btn btn-primary" })%>
             </p>

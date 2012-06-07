@@ -18,6 +18,10 @@ namespace ServiceDB.Models
 			[Required]
 			[Display(Name = "Услуга")]
 			public int Service_id { get; set; }
+
+			[Required]
+			[Display(Name = "Цена")]
+			public Decimal Price { get; set; }
 		}
 	}
 }

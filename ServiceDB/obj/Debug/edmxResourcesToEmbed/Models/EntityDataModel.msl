@@ -153,6 +153,7 @@
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="RequestItem_id" ColumnName="RequestItem_id" />
           <ScalarProperty Name="Service_id" ColumnName="Service_id" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -24,11 +24,11 @@
                           <li><%: Html.ActionLink("Заявки", "Index", "Requests")%></li>
                           <li id="supp-menu" class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                              Товары <b class="caret"></b>
+                              Товар <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
-                              <li><%: Html.ActionLink("Товары в ремонте", "Index", "RequestItems")%></li>
-                              <li><%: Html.ActionLink("Товары в заявке", "Index", "RequestItemParts")%></li>
+                              <li><%: Html.ActionLink("Товар в ремонте", "Index", "RequestItems")%></li>
+                              <li><%: Html.ActionLink("Запчасти в товаре", "Index", "RequestItemParts")%></li>
                             </ul>
                           </li>  
                           <li id="ref-menu" class="dropdown">

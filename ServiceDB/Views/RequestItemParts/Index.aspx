@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<ServiceDB.Models.RequestPart>>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<ServiceDB.Models.RequestItemPart>>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     Запчасти по заявкам
@@ -26,7 +26,7 @@
              <%: Html.ActionLink("Подробно", "Details", new { id=item.Id }) %>
         </td>
         <td>
-            <%: Html.DisplayFor(modelItem => item.Request.Name) %>
+            <%: Html.DisplayFor(modelItem => item.RequestItem.Description) %>
         </td>
         <td>
             <%: Html.DisplayFor(modelItem => item.Part.Part_num) %>

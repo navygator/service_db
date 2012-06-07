@@ -241,7 +241,7 @@
     <Property Type="Int32" Name="Part_id" Nullable="false" />
     <Property Type="String" Name="Serial_num" Nullable="false" />
     <Property Type="Int32" Name="Supplier_id" Nullable="false" />
-    <Property Type="String" Name="Date_in" Nullable="false" />
+    <Property Type="DateTime" Name="Date_in" Nullable="false" />
     <Property Type="Decimal" Name="Price" Nullable="false" />
     <NavigationProperty Name="Part" Relationship="EntityDataModel.PartRequestPart" FromRole="RequestPart" ToRole="Part" />
     <NavigationProperty Name="Supplier" Relationship="EntityDataModel.SupplierRequestPart" FromRole="RequestPart" ToRole="Supplier" />
@@ -312,6 +312,7 @@
     <NavigationProperty Name="RequestItem" Relationship="EntityDataModel.RequestItemRequestItemService" FromRole="RequestItemService" ToRole="RequestItem" />
     <NavigationProperty Name="Service" Relationship="EntityDataModel.ServiceRequestItemService" FromRole="RequestItemService" ToRole="Service" />
     <Property Type="Int32" Name="Service_id" Nullable="false" />
+    <Property Type="Decimal" Name="Price" Nullable="false" />
   </EntityType>
   <Association Name="RequestItemRequestItemPart">
     <End Type="EntityDataModel.RequestItem" Role="RequestItem" Multiplicity="1" />

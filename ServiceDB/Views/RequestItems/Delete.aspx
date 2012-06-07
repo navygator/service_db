@@ -14,7 +14,7 @@
         <% using (Html.BeginForm()) { %>
             <p>
                 <input type="submit" value="Удалить" class="btn btn-danger" /> 
-                <%: Html.ActionLink("К списку", "Index", null, new { @class="btn btn-primary"})%>
+                <%: Html.ActionLink("К заявке", "Edit", "Requests", new { @id = Model.Request_id }, new { @class = "btn btn-primary" })%>
             </p>
         <% } %>
     </div>

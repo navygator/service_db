@@ -70,11 +70,13 @@
     <Compile Include="Controllers\ContragentsController.cs" />
     <Compile Include="Controllers\GoodsController.cs" />
     <Compile Include="Controllers\RequestItemsController.cs" />
+    <Compile Include="Controllers\RequestItemServicesController.cs" />
     <Compile Include="Controllers\RequestsController.cs" />
     <Compile Include="Controllers\EmployeesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PartsController.cs" />
     <Compile Include="Controllers\RequestItemPartsController.cs" />
+    <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Controllers\StatesController.cs" />
     <Compile Include="Controllers\SuppliersController.cs" />
     <Compile Include="Controllers\VendorsController.cs" />
@@ -91,7 +93,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EntityDataModel.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\EntityDataModel.Views.cs" />
     <Compile Include="Models\FeedModel.cs" />
     <Compile Include="Models\GoodModel.cs" />
     <Compile Include="Models\Interface\IBase.cs" />
@@ -175,14 +176,23 @@
     <Content Include="Views\Goods\Details.aspx" />
     <Content Include="Views\Goods\Edit.aspx" />
     <Content Include="Views\Goods\Index.aspx" />
+    <Content Include="Views\RequestItemServices\Create.aspx" />
+    <Content Include="Views\RequestItemServices\Delete.aspx" />
+    <Content Include="Views\RequestItemServices\Details.aspx" />
+    <Content Include="Views\RequestItemServices\Edit.aspx" />
+    <Content Include="Views\RequestItemServices\EditFields.ascx" />
+    <Content Include="Views\RequestItemServices\Index.aspx" />
+    <Content Include="Views\RequestItemServices\ViewFields.ascx" />
     <Content Include="Views\RequestItems\Create.aspx" />
     <Content Include="Views\RequestItems\Delete.aspx" />
     <Content Include="Views\RequestItems\Details.aspx" />
     <Content Include="Views\RequestItems\Edit.aspx" />
     <Content Include="Views\RequestItems\Index.aspx" />
     <Content Include="Views\RequestItems\Parts.ascx" />
+    <Content Include="Views\RequestItems\Parts_edit.ascx" />
     <Content Include="Views\RequestItems\RequestItemInfo.ascx" />
     <Content Include="Views\RequestItems\Services.ascx" />
+    <Content Include="Views\RequestItems\Services_edit.ascx" />
     <Content Include="Views\Requests\Create.aspx" />
     <Content Include="Views\Requests\Delete.aspx" />
     <Content Include="Views\Requests\Details.aspx" />
@@ -204,13 +214,15 @@
     <Content Include="Views\RequestItemParts\Details.aspx" />
     <Content Include="Views\RequestItemParts\Edit.aspx" />
     <Content Include="Views\RequestItemParts\Index.aspx" />
-    <Content Include="Views\RequestsOld\Create.aspx" />
-    <Content Include="Views\RequestsOld\Delete.aspx" />
-    <Content Include="Views\RequestsOld\Details.aspx" />
-    <Content Include="Views\RequestsOld\Edit.aspx" />
-    <Content Include="Views\RequestsOld\Index.aspx" />
     <Content Include="Views\Requests\Items.ascx" />
     <Content Include="Views\Requests\RequestInfo.ascx" />
+    <Content Include="Views\Services\Create.aspx" />
+    <Content Include="Views\Services\Delete.aspx" />
+    <Content Include="Views\Services\Details.aspx" />
+    <Content Include="Views\Services\Edit.aspx" />
+    <Content Include="Views\Services\Index.aspx" />
+    <Content Include="Views\Services\Service_info.ascx" />
+    <Content Include="Views\Services\Service_edit.ascx" />
     <Content Include="Views\States\Create.aspx" />
     <Content Include="Views\States\Delete.aspx" />
     <Content Include="Views\States\Details.aspx" />
