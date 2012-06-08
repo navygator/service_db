@@ -10,13 +10,13 @@
 <% foreach (var item in Model) { %>
     <tr>
         <td>
-            <%: Html.DisplayFor(modelItem => item.Part.Description) %>
+            <%: Html.DisplayFor(modelItem => item.PartItem.Part.Description) %>
         </td>
         <td>
-            <%: Html.DisplayFor(modelItem => item.Serial_num) %>
+            <%: Html.DisplayFor(modelItem => item.PartItem.Serial_num)%>
         </td>
         <td>
-            <%: Html.DisplayFor(modelItem => item.Price) %>
+            <%: Html.DisplayFor(modelItem => item.PartItem.Price)%>
         </td>
     </tr>
 <% } %>

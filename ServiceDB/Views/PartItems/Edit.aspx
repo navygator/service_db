@@ -1,7 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<ServiceDB.Models.RequestItemPart>" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Shared/Site.master" Inherits="System.Web.Mvc.ViewPage<ServiceDB.Models.PartItem>" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
-    Редактировать
+    Edit
 </asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
@@ -18,18 +18,8 @@
             <fieldset>
                 <legend>Запчасть</legend>
 
-                <%: Html.HiddenFor(model => model.RequestItem_id) %>
-
-                <h3><%: Html.DisplayFor(model => model.PartItem.Part.Description) %></h3>
-
-                <div class="editor-label">
-                    <%: Html.LabelFor(model => model.PartItem_id, "Серийный номер") %>
-                </div>
-                <div class="editor-field">
-                    <%: Html.DropDownList("PartItem_id", String.Empty) %>
-                    <%: Html.ValidationMessageFor(model => model.PartItem_id) %>
-                </div>
-
+                <%: Html.HiddenFor(model => model.Id) %>
+                <% Html.RenderPartial("EditFields", Model); %>
                 <p>
                     <input type="submit" value="Сохранить" class="btn btn-primary"/>
                 </p>
@@ -37,7 +27,7 @@
         <% } %>
 
         <div>
-            <%: Html.ActionLink("К товару", "Edit", "RequestItems", new { @id = Model.RequestItem_id }, null)%>
+            <%: Html.ActionLink("К списку", "Index") %>
         </div>
     </div>
 </div>

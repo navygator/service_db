@@ -15,6 +15,7 @@
     <EntitySet Name="Goods" EntityType="EntityDataModel.Store.Goods" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Services" EntityType="EntityDataModel.Store.Services" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="RequestItemServices" EntityType="EntityDataModel.Store.RequestItemServices" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PartItems" EntityType="EntityDataModel.Store.PartItems" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="CategoryParts" Association="EntityDataModel.Store.CategoryParts">
       <End Role="Category" EntitySet="Categories" />
       <End Role="Parts" EntitySet="Parts" />
@@ -30,14 +31,6 @@
     <AssociationSet Name="EmployeeRequest" Association="EntityDataModel.Store.EmployeeRequest">
       <End Role="Employee" EntitySet="Employees" />
       <End Role="Request" EntitySet="RequestItems" />
-    </AssociationSet>
-    <AssociationSet Name="PartRequestPart" Association="EntityDataModel.Store.PartRequestPart">
-      <End Role="Part" EntitySet="Parts" />
-      <End Role="RequestPart" EntitySet="RequestItemParts" />
-    </AssociationSet>
-    <AssociationSet Name="SupplierRequestPart" Association="EntityDataModel.Store.SupplierRequestPart">
-      <End Role="Supplier" EntitySet="Suppliers" />
-      <End Role="RequestPart" EntitySet="RequestItemParts" />
     </AssociationSet>
     <AssociationSet Name="RequestItemRequestItemPart" Association="EntityDataModel.Store.RequestItemRequestItemPart">
       <End Role="RequestItem" EntitySet="RequestItems" />
@@ -70,6 +63,18 @@
     <AssociationSet Name="GoodRequestItem" Association="EntityDataModel.Store.GoodRequestItem">
       <End Role="Good" EntitySet="Goods" />
       <End Role="RequestItem" EntitySet="RequestItems" />
+    </AssociationSet>
+    <AssociationSet Name="SupplierPartItem" Association="EntityDataModel.Store.SupplierPartItem">
+      <End Role="Supplier" EntitySet="Suppliers" />
+      <End Role="PartItem" EntitySet="PartItems" />
+    </AssociationSet>
+    <AssociationSet Name="PartPartItem" Association="EntityDataModel.Store.PartPartItem">
+      <End Role="Part" EntitySet="Parts" />
+      <End Role="PartItem" EntitySet="PartItems" />
+    </AssociationSet>
+    <AssociationSet Name="PartItemRequestItemPart" Association="EntityDataModel.Store.PartItemRequestItemPart">
+      <End Role="PartItem" EntitySet="PartItems" />
+      <End Role="RequestItemPart" EntitySet="RequestItemParts" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Contragents">
@@ -172,11 +177,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="RequestItem_id" Type="int" Nullable="false" />
-    <Property Name="Part_id" Type="int" Nullable="false" />
-    <Property Name="Serial_num" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Supplier_id" Type="int" Nullable="false" />
-    <Property Name="Date_in" Type="datetime" Nullable="false" />
-    <Property Name="Price" Type="decimal" Nullable="false" />
+    <Property Name="PartItem_id" Type="int" Nullable="false" />
     <Property Name="Updated_at" Type="datetime" Nullable="true" />
   </EntityType>
   <EntityType Name="Requests">
@@ -213,6 +214,18 @@
     <Property Name="RequestItem_id" Type="int" Nullable="false" />
     <Property Name="Service_id" Type="int" Nullable="false" />
     <Property Name="Price" Type="decimal" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PartItems">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Part_id" Type="int" Nullable="false" />
+    <Property Name="Serial_num" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Supplier_id" Type="int" Nullable="false" />
+    <Property Name="Date_in" Type="datetime" Nullable="false" />
+    <Property Name="Price" Type="decimal" Nullable="false" />
+    <Property Name="Updated_at" Type="datetime" Nullable="true" />
   </EntityType>
   <Association Name="CategoryParts">
     <End Role="Category" Type="EntityDataModel.Store.Categories" Multiplicity="1" />
@@ -259,30 +272,6 @@
       </Principal>
       <Dependent Role="Request">
         <PropertyRef Name="Employee_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="PartRequestPart">
-    <End Role="Part" Type="EntityDataModel.Store.Parts" Multiplicity="1" />
-    <End Role="RequestPart" Type="EntityDataModel.Store.RequestItemParts" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Part">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="RequestPart">
-        <PropertyRef Name="Part_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="SupplierRequestPart">
-    <End Role="Supplier" Type="EntityDataModel.Store.Suppliers" Multiplicity="1" />
-    <End Role="RequestPart" Type="EntityDataModel.Store.RequestItemParts" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Supplier">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="RequestPart">
-        <PropertyRef Name="Supplier_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -379,6 +368,42 @@
       </Principal>
       <Dependent Role="RequestItem">
         <PropertyRef Name="Good_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="SupplierPartItem">
+    <End Role="Supplier" Type="EntityDataModel.Store.Suppliers" Multiplicity="1" />
+    <End Role="PartItem" Type="EntityDataModel.Store.PartItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PartItem">
+        <PropertyRef Name="Supplier_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PartPartItem">
+    <End Role="Part" Type="EntityDataModel.Store.Parts" Multiplicity="1" />
+    <End Role="PartItem" Type="EntityDataModel.Store.PartItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Part">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PartItem">
+        <PropertyRef Name="Part_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PartItemRequestItemPart">
+    <End Role="PartItem" Type="EntityDataModel.Store.PartItems" Multiplicity="1" />
+    <End Role="RequestItemPart" Type="EntityDataModel.Store.RequestItemParts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PartItem">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RequestItemPart">
+        <PropertyRef Name="PartItem_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

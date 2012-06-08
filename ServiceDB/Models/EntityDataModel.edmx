@@ -20,6 +20,7 @@
     <EntitySet Name="Goods" EntityType="EntityDataModel.Store.Goods" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Services" EntityType="EntityDataModel.Store.Services" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="RequestItemServices" EntityType="EntityDataModel.Store.RequestItemServices" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PartItems" EntityType="EntityDataModel.Store.PartItems" store:Type="Tables" Schema="dbo" />
     <AssociationSet Name="CategoryParts" Association="EntityDataModel.Store.CategoryParts">
       <End Role="Category" EntitySet="Categories" />
       <End Role="Parts" EntitySet="Parts" />
@@ -35,14 +36,6 @@
     <AssociationSet Name="EmployeeRequest" Association="EntityDataModel.Store.EmployeeRequest">
       <End Role="Employee" EntitySet="Employees" />
       <End Role="Request" EntitySet="RequestItems" />
-    </AssociationSet>
-    <AssociationSet Name="PartRequestPart" Association="EntityDataModel.Store.PartRequestPart">
-      <End Role="Part" EntitySet="Parts" />
-      <End Role="RequestPart" EntitySet="RequestItemParts" />
-    </AssociationSet>
-    <AssociationSet Name="SupplierRequestPart" Association="EntityDataModel.Store.SupplierRequestPart">
-      <End Role="Supplier" EntitySet="Suppliers" />
-      <End Role="RequestPart" EntitySet="RequestItemParts" />
     </AssociationSet>
     <AssociationSet Name="RequestItemRequestItemPart" Association="EntityDataModel.Store.RequestItemRequestItemPart">
       <End Role="RequestItem" EntitySet="RequestItems" />
@@ -75,6 +68,18 @@
     <AssociationSet Name="GoodRequestItem" Association="EntityDataModel.Store.GoodRequestItem">
       <End Role="Good" EntitySet="Goods" />
       <End Role="RequestItem" EntitySet="RequestItems" />
+    </AssociationSet>
+    <AssociationSet Name="SupplierPartItem" Association="EntityDataModel.Store.SupplierPartItem">
+      <End Role="Supplier" EntitySet="Suppliers" />
+      <End Role="PartItem" EntitySet="PartItems" />
+    </AssociationSet>
+    <AssociationSet Name="PartPartItem" Association="EntityDataModel.Store.PartPartItem">
+      <End Role="Part" EntitySet="Parts" />
+      <End Role="PartItem" EntitySet="PartItems" />
+    </AssociationSet>
+    <AssociationSet Name="PartItemRequestItemPart" Association="EntityDataModel.Store.PartItemRequestItemPart">
+      <End Role="PartItem" EntitySet="PartItems" />
+      <End Role="RequestItemPart" EntitySet="RequestItemParts" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Contragents">
@@ -177,11 +182,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="RequestItem_id" Type="int" Nullable="false" />
-    <Property Name="Part_id" Type="int" Nullable="false" />
-    <Property Name="Serial_num" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Supplier_id" Type="int" Nullable="false" />
-    <Property Name="Date_in" Type="datetime" Nullable="false" />
-    <Property Name="Price" Type="decimal" Nullable="false" />
+    <Property Name="PartItem_id" Type="int" Nullable="false" />
     <Property Name="Updated_at" Type="datetime" Nullable="true" />
   </EntityType>
   <EntityType Name="Requests">
@@ -218,6 +219,18 @@
     <Property Name="RequestItem_id" Type="int" Nullable="false" />
     <Property Name="Service_id" Type="int" Nullable="false" />
     <Property Name="Price" Type="decimal" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PartItems">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Part_id" Type="int" Nullable="false" />
+    <Property Name="Serial_num" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Supplier_id" Type="int" Nullable="false" />
+    <Property Name="Date_in" Type="datetime" Nullable="false" />
+    <Property Name="Price" Type="decimal" Nullable="false" />
+    <Property Name="Updated_at" Type="datetime" Nullable="true" />
   </EntityType>
   <Association Name="CategoryParts">
     <End Role="Category" Type="EntityDataModel.Store.Categories" Multiplicity="1" />
@@ -264,30 +277,6 @@
       </Principal>
       <Dependent Role="Request">
         <PropertyRef Name="Employee_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="PartRequestPart">
-    <End Role="Part" Type="EntityDataModel.Store.Parts" Multiplicity="1" />
-    <End Role="RequestPart" Type="EntityDataModel.Store.RequestItemParts" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Part">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="RequestPart">
-        <PropertyRef Name="Part_id" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="SupplierRequestPart">
-    <End Role="Supplier" Type="EntityDataModel.Store.Suppliers" Multiplicity="1" />
-    <End Role="RequestPart" Type="EntityDataModel.Store.RequestItemParts" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Supplier">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="RequestPart">
-        <PropertyRef Name="Supplier_id" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -387,6 +376,42 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="SupplierPartItem">
+    <End Role="Supplier" Type="EntityDataModel.Store.Suppliers" Multiplicity="1" />
+    <End Role="PartItem" Type="EntityDataModel.Store.PartItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PartItem">
+        <PropertyRef Name="Supplier_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PartPartItem">
+    <End Role="Part" Type="EntityDataModel.Store.Parts" Multiplicity="1" />
+    <End Role="PartItem" Type="EntityDataModel.Store.PartItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Part">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="PartItem">
+        <PropertyRef Name="Part_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PartItemRequestItemPart">
+    <End Role="PartItem" Type="EntityDataModel.Store.PartItems" Multiplicity="1" />
+    <End Role="RequestItemPart" Type="EntityDataModel.Store.RequestItemParts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PartItem">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="RequestItemPart">
+        <PropertyRef Name="PartItem_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema></edmx:StorageModels>
 	<!-- CSDL content -->
 	<edmx:ConceptualModels>
@@ -418,14 +443,6 @@
 		  </AssociationSet>
 		  <EntitySet Name="Suppliers" EntityType="EntityDataModel.Supplier" />
 		  <EntitySet Name="RequestItemParts" EntityType="EntityDataModel.RequestItemPart" />
-		  <AssociationSet Name="PartRequestPart" Association="EntityDataModel.PartRequestPart">
-			<End Role="Part" EntitySet="Parts" />
-			<End Role="RequestPart" EntitySet="RequestItemParts" />
-		  </AssociationSet>
-		  <AssociationSet Name="SupplierRequestPart" Association="EntityDataModel.SupplierRequestPart">
-			<End Role="Supplier" EntitySet="Suppliers" />
-			<End Role="RequestPart" EntitySet="RequestItemParts" />
-		  </AssociationSet>
 		  <EntitySet Name="Requests" EntityType="EntityDataModel.Request" />
 		  <EntitySet Name="Goods" EntityType="EntityDataModel.Good" />
 		  <EntitySet Name="Services" EntityType="EntityDataModel.Service" />
@@ -462,6 +479,19 @@
 			<End Role="Good" EntitySet="Goods" />
 			<End Role="RequestItem" EntitySet="RequestItems" />
 		  </AssociationSet>
+          <EntitySet Name="PartItems" EntityType="EntityDataModel.PartItem" />
+          <AssociationSet Name="SupplierPartItem" Association="EntityDataModel.SupplierPartItem">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="PartItem" EntitySet="PartItems" />
+          </AssociationSet>
+          <AssociationSet Name="PartPartItem" Association="EntityDataModel.PartPartItem">
+            <End Role="Part" EntitySet="Parts" />
+            <End Role="PartItem" EntitySet="PartItems" />
+          </AssociationSet>
+          <AssociationSet Name="PartItemRequestItemPart" Association="EntityDataModel.PartItemRequestItemPart">
+            <End Role="PartItem" EntitySet="PartItems" />
+            <End Role="RequestItemPart" EntitySet="RequestItemParts" />
+          </AssociationSet>
 		</EntityContainer>
 		<EntityType Name="Contragent">
 		  <Key>
@@ -486,8 +516,8 @@
 		  <Property Type="String" Name="Description" Nullable="false" />
 		  <NavigationProperty Name="Category" Relationship="EntityDataModel.CategoryParts" FromRole="Parts" ToRole="Category" />
 		  <NavigationProperty Name="Vendor" Relationship="EntityDataModel.VendorPart" FromRole="Part" ToRole="Vendor" />
-		  <NavigationProperty Name="RequestPart" Relationship="EntityDataModel.PartRequestPart" FromRole="Part" ToRole="RequestPart" />
 		  <Property Type="DateTime" Name="Updated_at" Nullable="true" />
+          <NavigationProperty Name="PartItem" Relationship="EntityDataModel.PartPartItem" FromRole="Part" ToRole="PartItem" />
 		</EntityType>
 		<EntityType Name="Category">
 		  <Key>
@@ -620,8 +650,8 @@
 		  <Property Type="String" Name="Phone" Nullable="false" />
 		  <Property Type="String" Name="Address" Nullable="false" />
 		  <Property Type="String" Name="Contact_name" Nullable="false" />
-		  <NavigationProperty Name="RequestPart" Relationship="EntityDataModel.SupplierRequestPart" FromRole="Supplier" ToRole="RequestPart" />
 		  <Property Type="DateTime" Name="Updated_at" Nullable="true" />
+          <NavigationProperty Name="PartItem" Relationship="EntityDataModel.SupplierPartItem" FromRole="Supplier" ToRole="PartItem" />
 		  </EntityType>
 		<EntityType Name="RequestItemPart">
 		  <Key>
@@ -629,40 +659,11 @@
 		  </Key>
 		  <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
 		  <Property Type="Int32" Name="RequestItem_id" Nullable="false" />
-		  <Property Type="Int32" Name="Part_id" Nullable="false" />
-		  <Property Type="String" Name="Serial_num" Nullable="false" />
-		  <Property Type="Int32" Name="Supplier_id" Nullable="false" />
-		  <Property Type="DateTime" Name="Date_in" Nullable="false" />
-		  <Property Type="Decimal" Name="Price" Nullable="false" />
-		  <NavigationProperty Name="Part" Relationship="EntityDataModel.PartRequestPart" FromRole="RequestPart" ToRole="Part" />
-		  <NavigationProperty Name="Supplier" Relationship="EntityDataModel.SupplierRequestPart" FromRole="RequestPart" ToRole="Supplier" />
+		  <Property Type="Int32" Name="PartItem_id" Nullable="false" />
 		  <Property Type="DateTime" Name="Updated_at" Nullable="true" />
 		  <NavigationProperty Name="RequestItem" Relationship="EntityDataModel.RequestItemRequestItemPart" FromRole="RequestItemPart" ToRole="RequestItem" />
+          <NavigationProperty Name="PartItem" Relationship="EntityDataModel.PartItemRequestItemPart" FromRole="RequestItemPart" ToRole="PartItem" />
 		</EntityType>
-		<Association Name="PartRequestPart">
-		  <End Type="EntityDataModel.Part" Role="Part" Multiplicity="1" />
-		  <End Type="EntityDataModel.RequestItemPart" Role="RequestPart" Multiplicity="*" />
-		  <ReferentialConstraint>
-			<Principal Role="Part">
-			  <PropertyRef Name="Id" />
-			</Principal>
-			<Dependent Role="RequestPart">
-			  <PropertyRef Name="Part_id" />
-			</Dependent>
-		  </ReferentialConstraint>
-		</Association>
-		<Association Name="SupplierRequestPart">
-		  <End Type="EntityDataModel.Supplier" Role="Supplier" Multiplicity="1" />
-		  <End Type="EntityDataModel.RequestItemPart" Role="RequestPart" Multiplicity="*" />
-		  <ReferentialConstraint>
-			<Principal Role="Supplier">
-			  <PropertyRef Name="Id" />
-			</Principal>
-			<Dependent Role="RequestPart">
-			  <PropertyRef Name="Supplier_id" />
-			</Dependent>
-		  </ReferentialConstraint>
-		</Association>
 		<EntityType Name="Request">
 		  <Key>
 			<PropertyRef Name="Id" />
@@ -801,6 +802,57 @@
 			</Dependent>
 		  </ReferentialConstraint>
 		</Association>
+        <EntityType Name="PartItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="Part_id" Nullable="false" />
+          <Property Type="String" Name="Serial_num" Nullable="false" />
+          <Property Type="Int32" Name="Supplier_id" Nullable="false" />
+          <Property Type="DateTime" Name="Date_in" Nullable="false" />
+          <Property Type="Decimal" Name="Price" Nullable="false" />
+          <NavigationProperty Name="Supplier" Relationship="EntityDataModel.SupplierPartItem" FromRole="PartItem" ToRole="Supplier" />
+          <NavigationProperty Name="Part" Relationship="EntityDataModel.PartPartItem" FromRole="PartItem" ToRole="Part" />
+          <NavigationProperty Name="RequestItemPart" Relationship="EntityDataModel.PartItemRequestItemPart" FromRole="PartItem" ToRole="RequestItemPart" />
+          <Property Type="DateTime" Name="Updated_at" Nullable="true" />
+        </EntityType>
+        <Association Name="SupplierPartItem">
+          <End Type="EntityDataModel.Supplier" Role="Supplier" Multiplicity="1" />
+          <End Type="EntityDataModel.PartItem" Role="PartItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PartItem">
+              <PropertyRef Name="Supplier_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PartPartItem">
+          <End Type="EntityDataModel.Part" Role="Part" Multiplicity="1" />
+          <End Type="EntityDataModel.PartItem" Role="PartItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Part">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PartItem">
+              <PropertyRef Name="Part_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="PartItemRequestItemPart">
+          <End Type="EntityDataModel.PartItem" Role="PartItem" Multiplicity="1" />
+          <End Type="EntityDataModel.RequestItemPart" Role="RequestItemPart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PartItem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RequestItemPart">
+              <PropertyRef Name="PartItem_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
 	  </Schema>
 	</edmx:ConceptualModels>
 	<!-- C-S mapping content -->
@@ -915,11 +967,7 @@
         <MappingFragment StoreEntitySet="RequestItemParts">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="RequestItem_id" ColumnName="RequestItem_id" />
-          <ScalarProperty Name="Part_id" ColumnName="Part_id" />
-          <ScalarProperty Name="Serial_num" ColumnName="Serial_num" />
-          <ScalarProperty Name="Supplier_id" ColumnName="Supplier_id" />
-          <ScalarProperty Name="Date_in" ColumnName="Date_in" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="PartItem_id" ColumnName="PartItem_id" />
           <ScalarProperty Name="Updated_at" ColumnName="Updated_at" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -963,6 +1011,19 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="PartItems">
+      <EntityTypeMapping TypeName="IsTypeOf(EntityDataModel.PartItem)">
+        <MappingFragment StoreEntitySet="PartItems">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Part_id" ColumnName="Part_id" />
+          <ScalarProperty Name="Serial_num" ColumnName="Serial_num" />
+          <ScalarProperty Name="Supplier_id" ColumnName="Supplier_id" />
+          <ScalarProperty Name="Date_in" ColumnName="Date_in" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Updated_at" ColumnName="Updated_at" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>
@@ -983,47 +1044,38 @@
 	<edmx:Diagrams>
 	  <Diagram Name="EntityDataModel" ZoomLevel="100" >
 		<EntityTypeShape EntityType="EntityDataModel.Contragent" Width="1.5" PointX="0.5" PointY="0.625" Height="2.1725878906249996" />
-		<EntityTypeShape EntityType="EntityDataModel.Part" Width="1.5" PointX="10.25" PointY="0.625" Height="2.7494921875" />
-		<EntityTypeShape EntityType="EntityDataModel.Category" Width="1.5" PointX="12.25" PointY="0.625" Height="1.787985026041667" />
+		<EntityTypeShape EntityType="EntityDataModel.Part" Width="1.5" PointX="10.125" PointY="4" Height="2.7494921874999996" />
+		<EntityTypeShape EntityType="EntityDataModel.Category" Width="1.5" PointX="12.125" PointY="4" Height="1.787985026041667" />
 		<AssociationConnector Association="EntityDataModel.CategoryParts">
-		  <ConnectorPoint PointX="12.25" PointY="1.5189925130208335" />
-		  <ConnectorPoint PointX="11.75" PointY="1.5189925130208335" />
+		  <ConnectorPoint PointX="12.125" PointY="4.8939925130208337" />
+		  <ConnectorPoint PointX="11.625" PointY="4.8939925130208337" />
 		</AssociationConnector>
-		<EntityTypeShape EntityType="EntityDataModel.Warranty" Width="1.5" PointX="6.375" PointY="3.5" Height="1.7879850260416665" />
+		<EntityTypeShape EntityType="EntityDataModel.Warranty" Width="1.5" PointX="6.375" PointY="4" Height="1.7879850260416665" />
 		<EntityTypeShape EntityType="EntityDataModel.Employee" Width="1.5" PointX="6.375" PointY="0.625" Height="2.364889322916667" />
-		<EntityTypeShape EntityType="EntityDataModel.Vendor" Width="1.5" PointX="12.25" PointY="2.625" Height="1.7879850260416665" />
+		<EntityTypeShape EntityType="EntityDataModel.Vendor" Width="1.5" PointX="8.25" PointY="4" Height="1.7879850260416665" />
 		<AssociationConnector Association="EntityDataModel.VendorPart">
-		  <ConnectorPoint PointX="12.25" PointY="2.99974609375" />
-		  <ConnectorPoint PointX="11.75" PointY="2.99974609375" />
+		  <ConnectorPoint PointX="9.75" PointY="4.8939925130208337" />
+		  <ConnectorPoint PointX="10.125" PointY="4.8939925130208337" />
 		</AssociationConnector>
 		<EntityTypeShape EntityType="EntityDataModel.RequestItem" Width="1.5" PointX="4.375" PointY="0.625" Height="3.9033007812499996" />
 		<EntityTypeShape EntityType="EntityDataModel.State" Width="1.5" PointX="0.5" PointY="3.25" Height="1.9802864583333326" />
 		<AssociationConnector Association="EntityDataModel.WarrantyRequest">
-		  <ConnectorPoint PointX="6.375" PointY="4.014150390625" />
-		  <ConnectorPoint PointX="5.875" PointY="4.014150390625" />
+		  <ConnectorPoint PointX="6.375" PointY="4.7449039713541659" />
+		  <ConnectorPoint PointX="5.875" PointY="4.7449039713541659" />
 		</AssociationConnector>
 		<AssociationConnector Association="EntityDataModel.EmployeeRequest">
 		  <ConnectorPoint PointX="6.375" PointY="1.8074446614583333" />
 		  <ConnectorPoint PointX="5.875" PointY="1.8074446614583333" />
 		</AssociationConnector>
-		<EntityTypeShape EntityType="EntityDataModel.Supplier" Width="1.5" PointX="10.25" PointY="3.5" Height="2.3648893229166665" />
-		<EntityTypeShape EntityType="EntityDataModel.RequestItemPart" Width="1.5" PointX="8.25" PointY="0.625" Height="2.9417936197916661" />
-		<AssociationConnector Association="EntityDataModel.PartRequestPart">
-		  <ConnectorPoint PointX="10.25" PointY="1.9997460937499998" />
-		  <ConnectorPoint PointX="9.75" PointY="1.9997460937499998" />
-		</AssociationConnector>
-		<AssociationConnector Association="EntityDataModel.SupplierRequestPart">
-		  <ConnectorPoint PointX="10.25" PointY="4.6824446614583337" />
-		  <ConnectorPoint PointX="9" PointY="4.6824446614583337" />
-		  <ConnectorPoint PointX="9" PointY="3.5667936197916661" />
-		</AssociationConnector>
-		<EntityTypeShape EntityType="EntityDataModel.Request" Width="1.5" PointX="2.5" PointY="0.625" Height="2.5571907552083331" />
+		<EntityTypeShape EntityType="EntityDataModel.Supplier" Width="1.5" PointX="12.125" PointY="0.625" Height="2.364889322916667" />
+		<EntityTypeShape EntityType="EntityDataModel.RequestItemPart" Width="1.5" PointX="8.25" PointY="1.625" Height="2.1725878906250009" />
+		<EntityTypeShape EntityType="EntityDataModel.Request" Width="1.5" PointX="2.5" PointY="0.875" Height="2.5571907552083331" />
 		<EntityTypeShape EntityType="EntityDataModel.Good" Width="1.5" PointX="2.5" PointY="4" Height="1.7879850260416665" />
 		<EntityTypeShape EntityType="EntityDataModel.Service" Width="1.5" PointX="2.5" PointY="6.25" Height="1.7879850260416665" />
 		<EntityTypeShape EntityType="EntityDataModel.RequestItemService" Width="1.5" PointX="4.375" PointY="6.25" Height="2.1725878906249996" />
 		<AssociationConnector Association="EntityDataModel.RequestItemRequestItemPart">
-		  <ConnectorPoint PointX="5.875" PointY="3.2449446614583337" />
-		  <ConnectorPoint PointX="8.25" PointY="3.2449446614583337" />
+		  <ConnectorPoint PointX="5.875" PointY="3.4249886067708339" />
+		  <ConnectorPoint PointX="8.25" PointY="3.4249886067708339" />
 		</AssociationConnector>
 		<AssociationConnector Association="EntityDataModel.RequestItemRequestItemService">
 		  <ConnectorPoint PointX="5.125" PointY="5.4898079427083326" />
@@ -1034,27 +1086,41 @@
 		  <ConnectorPoint PointX="4.375" PointY="7.1439925130208337" />
 		</AssociationConnector>
 		<AssociationConnector Association="EntityDataModel.RequestRequestItem">
-		  <ConnectorPoint PointX="4" PointY="1.9035953776041668" />
-		  <ConnectorPoint PointX="4.375" PointY="1.9035953776041668" />
+		  <ConnectorPoint PointX="4" PointY="2.1535953776041667" />
+		  <ConnectorPoint PointX="4.375" PointY="2.1535953776041667" />
 		</AssociationConnector>
 		<AssociationConnector Association="EntityDataModel.StateRequestItem">
-		  <ConnectorPoint PointX="2" PointY="3.59375" />
-		  <ConnectorPoint PointX="4.375" PointY="3.59375" />
+		  <ConnectorPoint PointX="2" PointY="3.7160953776041667" />
+		  <ConnectorPoint PointX="4.375" PointY="3.7160953776041667" />
 		</AssociationConnector>
 		<AssociationConnector Association="EntityDataModel.StateRequest">
-		  <ConnectorPoint PointX="2" PointY="3.4506586512445878" />
-		  <ConnectorPoint PointX="2.24" PointY="3.4506586512445878" />
-		  <ConnectorPoint PointX="2.24" PointY="2.5260697083333334" />
-		  <ConnectorPoint PointX="2.5" PointY="2.5260697083333334" />
+		  <ConnectorPoint PointX="1.25" PointY="3.25" />
+		  <ConnectorPoint PointX="1.25" PointY="3.0964" />
+		  <ConnectorPoint PointX="2.3464" PointY="3.0964" />
+		  <ConnectorPoint PointX="2.3464" PointY="2.1535953776041667" />
+          <ConnectorPoint PointX="2.5" PointY="2.1535953776041667" />
 		</AssociationConnector>
 		<AssociationConnector Association="EntityDataModel.ContragentRequest">
-		  <ConnectorPoint PointX="2" PointY="1.8074446614583337" />
-		  <ConnectorPoint PointX="2.5" PointY="1.8074446614583337" />
+		  <ConnectorPoint PointX="2" PointY="1.4517976888020834" />
+		  <ConnectorPoint PointX="2.5" PointY="1.4517976888020834" />
 		</AssociationConnector>
 		<AssociationConnector Association="EntityDataModel.GoodRequestItem">
 		  <ConnectorPoint PointX="4" PointY="4.7449039713541667" />
 		  <ConnectorPoint PointX="4.375" PointY="4.7449039713541667" />
 		</AssociationConnector>
+        <EntityTypeShape EntityType="EntityDataModel.PartItem" Width="1.5" PointX="10.125" PointY="0.625" Height="2.9417936197916665" />
+        <AssociationConnector Association="EntityDataModel.SupplierPartItem">
+          <ConnectorPoint PointX="12.125" PointY="1.8074446614583333" />
+          <ConnectorPoint PointX="11.625" PointY="1.8074446614583333" />
+        </AssociationConnector>
+        <AssociationConnector Association="EntityDataModel.PartPartItem">
+          <ConnectorPoint PointX="10.875" PointY="4" />
+          <ConnectorPoint PointX="10.875" PointY="3.5667936197916665" />
+        </AssociationConnector>
+        <AssociationConnector Association="EntityDataModel.PartItemRequestItemPart">
+          <ConnectorPoint PointX="10.125" PointY="2.5958968098958333" />
+          <ConnectorPoint PointX="9.75" PointY="2.5958968098958333" />
+        </AssociationConnector>
 	  </Diagram>
 	</edmx:Diagrams>
   </edmx:Designer>

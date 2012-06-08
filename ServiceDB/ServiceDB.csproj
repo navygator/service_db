@@ -69,6 +69,7 @@
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\ContragentsController.cs" />
     <Compile Include="Controllers\GoodsController.cs" />
+    <Compile Include="Controllers\PartItemsController.cs" />
     <Compile Include="Controllers\RequestItemsController.cs" />
     <Compile Include="Controllers\RequestItemServicesController.cs" />
     <Compile Include="Controllers\RequestsController.cs" />
@@ -96,6 +97,7 @@
     <Compile Include="Models\FeedModel.cs" />
     <Compile Include="Models\GoodModel.cs" />
     <Compile Include="Models\Interface\IBase.cs" />
+    <Compile Include="Models\PartItemModel.cs" />
     <Compile Include="Models\PartModel.cs" />
     <Compile Include="Models\RequestItemModel.cs" />
     <Compile Include="Models\RequestItemPartModel.cs" />
@@ -159,6 +161,7 @@
     <Content Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\partitems.js" />
     <Content Include="Scripts\modernizr-1.7.js" />
     <Content Include="Scripts\modernizr-1.7.min.js" />
     <Content Include="Views\Categories\Create.aspx" />
@@ -176,6 +179,13 @@
     <Content Include="Views\Goods\Details.aspx" />
     <Content Include="Views\Goods\Edit.aspx" />
     <Content Include="Views\Goods\Index.aspx" />
+    <Content Include="Views\PartItems\Create.aspx" />
+    <Content Include="Views\PartItems\Delete.aspx" />
+    <Content Include="Views\PartItems\Details.aspx" />
+    <Content Include="Views\PartItems\Edit.aspx" />
+    <Content Include="Views\PartItems\EditFields.ascx" />
+    <Content Include="Views\PartItems\Index.aspx" />
+    <Content Include="Views\PartItems\ViewFields.ascx" />
     <Content Include="Views\RequestItemServices\Create.aspx" />
     <Content Include="Views\RequestItemServices\Delete.aspx" />
     <Content Include="Views\RequestItemServices\Details.aspx" />

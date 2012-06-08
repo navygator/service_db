@@ -29,6 +29,7 @@
                             <ul class="dropdown-menu">
                               <li><%: Html.ActionLink("Товар в ремонте", "Index", "RequestItems")%></li>
                               <li><%: Html.ActionLink("Запчасти в товаре", "Index", "RequestItemParts")%></li>
+                              <li><%: Html.ActionLink("Склад запчастей", "Index", "PartItems")%></li>
                             </ul>
                           </li>  
                           <li id="ref-menu" class="dropdown">

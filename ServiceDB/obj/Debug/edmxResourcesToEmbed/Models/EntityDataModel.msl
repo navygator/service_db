@@ -109,11 +109,7 @@
         <MappingFragment StoreEntitySet="RequestItemParts">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="RequestItem_id" ColumnName="RequestItem_id" />
-          <ScalarProperty Name="Part_id" ColumnName="Part_id" />
-          <ScalarProperty Name="Serial_num" ColumnName="Serial_num" />
-          <ScalarProperty Name="Supplier_id" ColumnName="Supplier_id" />
-          <ScalarProperty Name="Date_in" ColumnName="Date_in" />
-          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="PartItem_id" ColumnName="PartItem_id" />
           <ScalarProperty Name="Updated_at" ColumnName="Updated_at" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -154,6 +150,19 @@
           <ScalarProperty Name="RequestItem_id" ColumnName="RequestItem_id" />
           <ScalarProperty Name="Service_id" ColumnName="Service_id" />
           <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PartItems">
+      <EntityTypeMapping TypeName="IsTypeOf(EntityDataModel.PartItem)">
+        <MappingFragment StoreEntitySet="PartItems">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Part_id" ColumnName="Part_id" />
+          <ScalarProperty Name="Serial_num" ColumnName="Serial_num" />
+          <ScalarProperty Name="Supplier_id" ColumnName="Supplier_id" />
+          <ScalarProperty Name="Date_in" ColumnName="Date_in" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Updated_at" ColumnName="Updated_at" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -14,8 +14,6 @@
         <th>Заявка</th>
         <th>Запчасть</th>
         <th>S/N</th>
-        <th>Поставщик</th>
-        <th>Дата прихода</th>
         <th>Цена</th>
         <th>Действия</th>
     </tr>
@@ -29,19 +27,13 @@
             <%: Html.DisplayFor(modelItem => item.RequestItem.Description) %>
         </td>
         <td>
-            <%: Html.DisplayFor(modelItem => item.Part.Part_num) %>
+            <%: Html.DisplayFor(modelItem => item.PartItem.Part.Part_num)%>
         </td>
         <td>
-            <%: Html.DisplayFor(modelItem => item.Serial_num) %>
+            <%: Html.DisplayFor(modelItem => item.PartItem.Serial_num)%>
         </td>
         <td>
-            <%: Html.DisplayFor(modelItem => item.Supplier.Name) %>
-        </td>
-        <td>
-            <%: Html.DisplayFor(modelItem => item.Date_in) %>
-        </td>
-        <td>
-            <%: Html.DisplayFor(modelItem => item.Price) %>
+            <%: Html.DisplayFor(modelItem => item.PartItem.Price)%>
         </td>
         <td>
             <%: Html.ActionLink("Править", "Edit", new { @id=item.Id } , new { @class="btn btn-mini" }) %> 

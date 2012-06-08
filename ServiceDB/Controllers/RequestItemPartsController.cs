@@ -19,14 +19,14 @@ namespace ServiceDB.Controllers
 		public ViewResult Index()
 		{
 			ViewBag.Message = "Список запчастей в заявках";
-			var requestsparts = db.RequestItemParts.Include("Part").Include("Supplier").Include("RequestItem");
+			var requestsparts = db.RequestItemParts.Include("PartItem").Include("RequestItem");
 			return View(requestsparts.ToList());
 		}
 
 		public ViewResult GetParts(int id)
 		{
 			ViewBag.Message = "Запчасти в заявке";
-			var requestItemPart = db.RequestItemParts.Where(part => part.RequestItem_id == id).Include("Part").Include("Supplier").Include("RequestItem");
+			var requestItemPart = db.RequestItemParts.Where(part => part.RequestItem_id == id).Include("PartItem").Include("RequestItem");
 			return View("Index", requestItemPart.ToList());
 		}
 		//
@@ -43,12 +43,12 @@ namespace ServiceDB.Controllers
 
 		public ActionResult Create(int requestItemId)
 		{
-			ViewBag.Part_id = new SelectList(db.Parts, "Id", "Part_num");
+			ViewBag.Part_id = new SelectList(db.Parts, "Id", "Description");
+			ViewBag.PartItem_id = new SelectList(db.PartItems.Where(pi => pi.Id == -1), "Id", "Serial_num");
 			ViewBag.Supplier_id = new SelectList(db.Suppliers, "Id", "Name");
 
 			var part = new RequestItemPart();
 
-			part.Date_in = DateTime.Now;
 			part.RequestItem_id = requestItemId;
 			return View(part);
 		} 
@@ -66,8 +66,7 @@ namespace ServiceDB.Controllers
 				return RedirectToAction("Edit", "RequestItems", new { @id = requestpart.RequestItem_id });  
 			}
 
-			ViewBag.Part_id = new SelectList(db.Parts, "Id", "Part_num", requestpart.Part_id);
-			ViewBag.Supplier_id = new SelectList(db.Suppliers, "Id", "Name", requestpart.Supplier_id);
+			ViewBag.PartItem_id = new SelectList(db.PartItems, "Id", "Serial_num", requestpart.PartItem_id);
 			ViewBag.RequestItem_id = new SelectList(db.RequestItems, "Id", "Name", requestpart.RequestItem_id);
 			return View(requestpart);
 		}
@@ -78,8 +77,7 @@ namespace ServiceDB.Controllers
 		public ActionResult Edit(int id)
 		{
 			RequestItemPart requestpart = db.RequestItemParts.Single(r => r.Id == id);
-			ViewBag.Part_id = new SelectList(db.Parts, "Id", "Part_num", requestpart.Part_id);
-			ViewBag.Supplier_id = new SelectList(db.Suppliers, "Id", "Name", requestpart.Supplier_id);
+			ViewBag.PartItem_id = new SelectList(db.PartItems, "Id", "Serial_num", requestpart.PartItem_id);
 			ViewBag.RequestItem_id = new SelectList(db.RequestItems, "Id", "Name", requestpart.RequestItem_id);
 			return View(requestpart);
 		}
@@ -97,8 +95,7 @@ namespace ServiceDB.Controllers
 				db.SaveChanges();
 				return RedirectToAction("Edit", "RequestItems", new { @id = requestpart.RequestItem_id });
 			}
-			ViewBag.Part_id = new SelectList(db.Parts, "Id", "Part_num", requestpart.Part_id);
-			ViewBag.Supplier_id = new SelectList(db.Suppliers, "Id", "Name", requestpart.Supplier_id);
+			ViewBag.PartItem_id = new SelectList(db.PartItems, "Id", "Serial_num", requestpart.PartItem_id);
 			ViewBag.RequestItem_id = new SelectList(db.RequestItems, "Id", "Name", requestpart.RequestItem_id);
 			return View(requestpart);
 		}
@@ -122,6 +119,13 @@ namespace ServiceDB.Controllers
 			db.RequestItemParts.DeleteObject(requestpart);
 			db.SaveChanges();
 			return RedirectToAction("Edit", "RequestItems", new { @id = requestpart.RequestItem_id });
+		}
+
+		public JsonResult FreeItems(int partId)
+		{
+			var parts = db.PartItems.Where(pi => pi.Part_id == partId && pi.RequestItemPart.Count == 0);
+			var json = Json(new SelectList(parts, "Id", "Serial_num", 0), JsonRequestBehavior.AllowGet);
+			return json;
 		}
 
 		protected override void Dispose(bool disposing)

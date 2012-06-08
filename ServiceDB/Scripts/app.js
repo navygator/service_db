@@ -4,3 +4,4 @@
         $("#check_username").load("/Account/CheckUsername?username=" = username);
     })
 });
+

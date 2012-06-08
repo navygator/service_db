@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 06/07/2012 11:40:07
+-- Date Created: 06/08/2012 10:29:35
 -- Generated from EDMX file: D:\Work\My Documents\Visual Studio 2010\Projects\ServiceDB\ServiceDB\Models\EntityDataModel.edmx
 -- --------------------------------------------------
 
@@ -209,11 +209,7 @@ GO
 CREATE TABLE [dbo].[RequestItemParts] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [RequestItem_id] int  NOT NULL,
-    [Part_id] int  NOT NULL,
-    [Serial_num] nvarchar(max)  NOT NULL,
-    [Supplier_id] int  NOT NULL,
-    [Date_in] datetime  NOT NULL,
-    [Price] decimal(18,0)  NOT NULL,
+    [PartItem_id] int  NOT NULL,
     [Updated_at] datetime  NULL
 );
 GO
@@ -250,6 +246,18 @@ CREATE TABLE [dbo].[RequestItemServices] (
     [RequestItem_id] int  NOT NULL,
     [Service_id] int  NOT NULL,
     [Price] decimal(18,0)  NOT NULL
+);
+GO
+
+-- Creating table 'PartItems'
+CREATE TABLE [dbo].[PartItems] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Part_id] int  NOT NULL,
+    [Serial_num] nvarchar(max)  NOT NULL,
+    [Supplier_id] int  NOT NULL,
+    [Date_in] datetime  NOT NULL,
+    [Price] decimal(18,0)  NOT NULL,
+    [Updated_at] datetime  NULL
 );
 GO
 
@@ -341,6 +349,12 @@ ADD CONSTRAINT [PK_RequestItemServices]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
+-- Creating primary key on [Id] in table 'PartItems'
+ALTER TABLE [dbo].[PartItems]
+ADD CONSTRAINT [PK_PartItems]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
 -- --------------------------------------------------
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
@@ -399,34 +413,6 @@ ADD CONSTRAINT [FK_EmployeeRequest]
 CREATE INDEX [IX_FK_EmployeeRequest]
 ON [dbo].[RequestItems]
     ([Employee_id]);
-GO
-
--- Creating foreign key on [Part_id] in table 'RequestItemParts'
-ALTER TABLE [dbo].[RequestItemParts]
-ADD CONSTRAINT [FK_PartRequestPart]
-    FOREIGN KEY ([Part_id])
-    REFERENCES [dbo].[Parts]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_PartRequestPart'
-CREATE INDEX [IX_FK_PartRequestPart]
-ON [dbo].[RequestItemParts]
-    ([Part_id]);
-GO
-
--- Creating foreign key on [Supplier_id] in table 'RequestItemParts'
-ALTER TABLE [dbo].[RequestItemParts]
-ADD CONSTRAINT [FK_SupplierRequestPart]
-    FOREIGN KEY ([Supplier_id])
-    REFERENCES [dbo].[Suppliers]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-
--- Creating non-clustered index for FOREIGN KEY 'FK_SupplierRequestPart'
-CREATE INDEX [IX_FK_SupplierRequestPart]
-ON [dbo].[RequestItemParts]
-    ([Supplier_id]);
 GO
 
 -- Creating foreign key on [RequestItem_id] in table 'RequestItemParts'
@@ -539,6 +525,48 @@ ADD CONSTRAINT [FK_GoodRequestItem]
 CREATE INDEX [IX_FK_GoodRequestItem]
 ON [dbo].[RequestItems]
     ([Good_id]);
+GO
+
+-- Creating foreign key on [Supplier_id] in table 'PartItems'
+ALTER TABLE [dbo].[PartItems]
+ADD CONSTRAINT [FK_SupplierPartItem]
+    FOREIGN KEY ([Supplier_id])
+    REFERENCES [dbo].[Suppliers]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_SupplierPartItem'
+CREATE INDEX [IX_FK_SupplierPartItem]
+ON [dbo].[PartItems]
+    ([Supplier_id]);
+GO
+
+-- Creating foreign key on [Part_id] in table 'PartItems'
+ALTER TABLE [dbo].[PartItems]
+ADD CONSTRAINT [FK_PartPartItem]
+    FOREIGN KEY ([Part_id])
+    REFERENCES [dbo].[Parts]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PartPartItem'
+CREATE INDEX [IX_FK_PartPartItem]
+ON [dbo].[PartItems]
+    ([Part_id]);
+GO
+
+-- Creating foreign key on [PartItem_id] in table 'RequestItemParts'
+ALTER TABLE [dbo].[RequestItemParts]
+ADD CONSTRAINT [FK_PartItemRequestItemPart]
+    FOREIGN KEY ([PartItem_id])
+    REFERENCES [dbo].[PartItems]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PartItemRequestItemPart'
+CREATE INDEX [IX_FK_PartItemRequestItemPart]
+ON [dbo].[RequestItemParts]
+    ([PartItem_id]);
 GO
 
 -- --------------------------------------------------

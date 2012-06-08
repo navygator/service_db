@@ -20,27 +20,17 @@
 
             <div class="display-label">Запчасть</div>
             <div class="display-field">
-                <%: Html.DisplayFor(model => model.Part.Part_num) %>
+                <%: Html.DisplayFor(model => model.PartItem.Part.Part_num) %>
             </div>
 
             <div class="display-label">S/N</div>
             <div class="display-field">
-                <%: Html.DisplayFor(model => model.Serial_num) %>
-            </div>
-
-            <div class="display-label">Поставщик</div>
-            <div class="display-field">
-                <%: Html.DisplayFor(model => model.Supplier.Name) %>
-            </div>
-
-            <div class="display-label">Дата прихода</div>
-            <div class="display-field">
-                <%: Html.DisplayFor(model => model.Date_in) %>
+                <%: Html.DisplayFor(model => model.PartItem.Serial_num)%>
             </div>
 
             <div class="display-label">Цена</div>
             <div class="display-field">
-                <%: Html.DisplayFor(model => model.Price) %>
+                <%: Html.DisplayFor(model => model.PartItem.Price)%>
             </div>
         </fieldset>
         <p>
