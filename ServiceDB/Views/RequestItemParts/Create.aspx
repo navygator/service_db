@@ -12,7 +12,7 @@
 
         <script src="<%: Url.Content("~/Scripts/jquery.validate.min.js") %>" type="text/javascript"></script>
         <script src="<%: Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js") %>" type="text/javascript"></script>
-        <script src="<%: Url.Content("~/Scripts/partitems.js") %>" type="text/javascript"></script>
+        <script src="<%: Url.Content("~/Scripts/requestpartitems.js") %>" type="text/javascript"></script>
 
         <% using (Html.BeginForm()) { %>
             <%: Html.ValidationSummary(true) %>

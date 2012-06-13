@@ -96,21 +96,19 @@
     </Compile>
     <Compile Include="Models\FeedModel.cs" />
     <Compile Include="Models\GoodModel.cs" />
-    <Compile Include="Models\Interface\IBase.cs" />
     <Compile Include="Models\PartItemModel.cs" />
     <Compile Include="Models\PartModel.cs" />
     <Compile Include="Models\RequestItemModel.cs" />
     <Compile Include="Models\RequestItemPartModel.cs" />
     <Compile Include="Models\RequestItemServiceModel.cs" />
     <Compile Include="Models\RequestModel.cs" />
-    <Compile Include="Models\ServiceDdContext.cs" />
+    <Compile Include="Models\ServiceDbContext.cs" />
     <Compile Include="Models\ServiceModel.cs" />
     <Compile Include="Models\StateModel.cs" />
     <Compile Include="Models\SupplierModel.cs" />
     <Compile Include="Models\VendorModel.cs" />
     <Compile Include="Models\WarrantyModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service\Interface\IBaseService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap\css\bootstrap-responsive.css" />
@@ -147,9 +145,25 @@
     <Content Include="Content\themes\base\jquery.ui.slider.css" />
     <Content Include="Content\themes\base\jquery.ui.tabs.css" />
     <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\themes\redmon\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\redmon\images\ui-bg_flat_55_fbec88_40x100.png" />
+    <Content Include="Content\themes\redmon\images\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="Content\themes\redmon\images\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="Content\themes\redmon\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\redmon\images\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="Content\themes\redmon\images\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="Content\themes\redmon\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="Content\themes\redmon\images\ui-icons_217bc0_256x240.png" />
+    <Content Include="Content\themes\redmon\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\redmon\images\ui-icons_469bdd_256x240.png" />
+    <Content Include="Content\themes\redmon\images\ui-icons_6da8d5_256x240.png" />
+    <Content Include="Content\themes\redmon\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\redmon\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="Content\themes\redmon\images\ui-icons_f9bd01_256x240.png" />
+    <Content Include="Content\themes\redmon\jquery-ui-1.8.18.custom.css" />
     <Content Include="Global.asax" />
     <Content Include="Models\EntityDataModel.edmx.sql" />
-    <Content Include="Scripts\app.js" />
+    <Content Include="Scripts\jquery.ui.datepicker-ru.js" />
     <Content Include="Scripts\bootstrap\js\bootstrap.js" />
     <Content Include="Scripts\bootstrap\js\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.5.1-vsdoc.js" />
@@ -162,8 +176,10 @@
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\partitems.js" />
+    <Content Include="Scripts\requestpartitems.js" />
     <Content Include="Scripts\modernizr-1.7.js" />
     <Content Include="Scripts\modernizr-1.7.min.js" />
+    <Content Include="Scripts\requests.js" />
     <Content Include="Views\Categories\Create.aspx" />
     <Content Include="Views\Categories\Delete.aspx" />
     <Content Include="Views\Categories\Details.aspx" />
