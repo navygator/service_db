@@ -19,52 +19,59 @@
         <header class="navbar navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container">
-                <%: Html.ActionLink("Сервисный центр", "Index", "Home", null, new { @class="brand", @id="logo" }) %>
-                    <ul class="nav pull-right">
-                        <li><%: Html.ActionLink("Домой", "Index", "Home")%></li>
-                        <% if (Request.IsAuthenticated) { %>
-                          <li><%: Html.ActionLink("Заявки", "Index", "Requests")%></li>
-                          <li id="supp-menu" class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                              Товар <b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-                              <li><%: Html.ActionLink("Товар в ремонте", "Index", "RequestItems")%></li>
-                              <li><%: Html.ActionLink("Запчасти в товаре", "Index", "RequestItemParts")%></li>
-                              <li><%: Html.ActionLink("Склад запчастей", "Index", "PartItems")%></li>
-                            </ul>
-                          </li>  
-                          <li id="ref-menu" class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                              Справочники <b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-                              <li><%: Html.ActionLink("Гарантия", "Index", "Warranties")%></li>
-                              <li><%: Html.ActionLink("Контрагенты", "Index", "Contragents")%> </li>
-                              <li><%: Html.ActionLink("Мастера", "Index", "Employees")%> </li>
-                              <li><%: Html.ActionLink("Статус", "Index", "States")%> </li>
-                              <li><%: Html.ActionLink("Товар", "Index", "Goods")%> </li>
-                              <li class="divider"></li>
-                              <li><%: Html.ActionLink("Вендор", "Index", "Vendors")%> </li>
-                              <li><%: Html.ActionLink("Поставщик", "Index", "Suppliers")%> </li>
-                              <li><%: Html.ActionLink("Категории", "Index", "Categories")%> </li>
-                              <li><%: Html.ActionLink("Запчасти", "Index", "Parts")%></li>
-                              <li><%: Html.ActionLink("Услуги", "Index", "Services")%> </li>
-                            </ul>
-                          <li id="fat-menu" class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                              Аккаунт <b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-                              <li><%: Html.ActionLink("...", "About", "Home")%> </li>
-                              <li class="divider"></li>
-                              <li><%: Html.ActionLink("Выйти", "LogOff", "Account")%></li>
-                            </ul>
-                        <% }else{ %>
-                            <li><%: Html.ActionLink("Войти", "Logon", "Account")%></li>
-                        <% } %>
-                        <li><%: Html.ActionLink("О нас", "About", "Home")%></li>
-                    </ul>
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    </a>
+                    <%: Html.ActionLink("Сервисный центр", "Index", "Home", null, new { @class="brand", @id="logo" }) %>
+                    <div class="nav-collapse">
+                        <ul class="nav pull-right">
+                            <li><%: Html.ActionLink("Домой", "Index", "Home")%></li>
+                            <% if (Request.IsAuthenticated) { %>
+                              <li><%: Html.ActionLink("Заявки", "Index", "Requests")%></li>
+                              <li id="supp-menu" class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                  Товар <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                  <li><%: Html.ActionLink("Товар в ремонте", "Index", "RequestItems")%></li>
+                                  <li><%: Html.ActionLink("Запчасти в товаре", "Index", "RequestItemParts")%></li>
+                                  <li><%: Html.ActionLink("Склад запчастей", "Index", "PartItems")%></li>
+                                </ul>
+                              </li>  
+                              <li id="ref-menu" class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                  Справочники <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                  <li><%: Html.ActionLink("Гарантия", "Index", "Warranties")%></li>
+                                  <li><%: Html.ActionLink("Контрагенты", "Index", "Contragents")%> </li>
+                                  <li><%: Html.ActionLink("Мастера", "Index", "Employees")%> </li>
+                                  <li><%: Html.ActionLink("Статус", "Index", "States")%> </li>
+                                  <li><%: Html.ActionLink("Товар", "Index", "Goods")%> </li>
+                                  <li class="divider"></li>
+                                  <li><%: Html.ActionLink("Вендор", "Index", "Vendors")%> </li>
+                                  <li><%: Html.ActionLink("Поставщик", "Index", "Suppliers")%> </li>
+                                  <li><%: Html.ActionLink("Категории", "Index", "Categories")%> </li>
+                                  <li><%: Html.ActionLink("Запчасти", "Index", "Parts")%></li>
+                                  <li><%: Html.ActionLink("Услуги", "Index", "Services")%> </li>
+                                </ul>
+                              <li id="fat-menu" class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                  Аккаунт <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                  <li><%: Html.ActionLink("...", "About", "Home")%> </li>
+                                  <li class="divider"></li>
+                                  <li><%: Html.ActionLink("Выйти", "LogOff", "Account")%></li>
+                                </ul>
+                            <% }else{ %>
+                                <li><%: Html.ActionLink("Войти", "Logon", "Account")%></li>
+                            <% } %>
+                            <li><%: Html.ActionLink("О нас", "About", "Home")%></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </header>
