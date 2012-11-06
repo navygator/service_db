@@ -9,101 +9,91 @@ using ServiceDB.Models;
 
 namespace ServiceDB.Controllers
 { 
-    public class ContragentsController : Controller
-    {
-        private EntityDataModelContainer db = new EntityDataModelContainer();
+	public class ContragentsController : Controller
+	{
+		//
+		// GET: /Contragents/
 
-        //
-        // GET: /Contragents/
+		public ViewResult Index()
+		{
+			return View(Contragent.All());
+		}
 
-        public ViewResult Index()
-        {
-            return View(db.Contragents.ToList());
-        }
+		//
+		// GET: /Contragents/Details/5
 
-        //
-        // GET: /Contragents/Details/5
+		public ViewResult Details(int id)
+		{
+			var contragent = Contragent.Find(id);
+			return View(contragent);
+		}
 
-        public ViewResult Details(int id)
-        {
-            Contragent contragent = db.Contragents.Single(c => c.Id == id);
-            return View(contragent);
-        }
+		//
+		// GET: /Contragents/Create
 
-        //
-        // GET: /Contragents/Create
+		public ActionResult Create()
+		{
+			return View();
+		} 
 
-        public ActionResult Create()
-        {
-            return View();
-        } 
+		//
+		// POST: /Contragents/Create
 
-        //
-        // POST: /Contragents/Create
+		[HttpPost]
+		public ActionResult Create(Contragent contragent)
+		{
+			if (ModelState.IsValid && Contragent.Create(contragent))
+			{
+				return RedirectToAction("Index");  
+			}
 
-        [HttpPost]
-        public ActionResult Create(Contragent contragent)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Contragents.AddObject(contragent);
-                db.SaveChanges();
-                return RedirectToAction("Index");  
-            }
-
-            return View(contragent);
-        }
-        
-        //
-        // GET: /Contragents/Edit/5
+			return View(contragent);
+		}
+		
+		//
+		// GET: /Contragents/Edit/5
  
-        public ActionResult Edit(int id)
-        {
-            Contragent contragent = db.Contragents.Single(c => c.Id == id);
-            return View(contragent);
-        }
+		public ActionResult Edit(int id)
+		{
+			var contragent = Contragent.Find(id);
+			return View(contragent);
+		}
 
-        //
-        // POST: /Contragents/Edit/5
+		//
+		// POST: /Contragents/Edit/5
 
-        [HttpPost]
-        public ActionResult Edit(Contragent contragent)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Contragents.Attach(contragent);
-                db.ObjectStateManager.ChangeObjectState(contragent, EntityState.Modified);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(contragent);
-        }
+		[HttpPost]
+		public ActionResult Edit(Contragent contragent)
+		{
+			if (ModelState.IsValid && Contragent.Update(contragent))
+			{
+				return RedirectToAction("Index");
+			}
+			return View(contragent);
+		}
 
-        //
-        // GET: /Contragents/Delete/5
+		//
+		// GET: /Contragents/Delete/5
  
-        public ActionResult Delete(int id)
-        {
-            Contragent contragent = db.Contragents.Single(c => c.Id == id);
-            return View(contragent);
-        }
+		public ActionResult Delete(int id)
+		{
+			var contragent = Contragent.Find(id);
+			return View(contragent);
+		}
 
-        //
-        // POST: /Contragents/Delete/5
+		//
+		// POST: /Contragents/Delete/5
 
-        [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
-        {            
-            Contragent contragent = db.Contragents.Single(c => c.Id == id);
-            db.Contragents.DeleteObject(contragent);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+		[HttpPost, ActionName("Delete")]
+		public ActionResult DeleteConfirmed(int id)
+		{            
+			Contragent.Destroy(id);
+			return RedirectToAction("Index");
+		}
 
-        protected override void Dispose(bool disposing)
-        {
-            db.Dispose();
-            base.Dispose(disposing);
-        }
-    }
+		protected override void Dispose(bool disposing)
+		{
+			base.Dispose(disposing);
+		}
+	}
 }

@@ -38,6 +38,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.4.3.1\lib\net40\EntityFramework.dll</HintPath>
     </Reference>
+    <Reference Include="FakeO">
+      <HintPath>..\packages\FakeO.1.0.4447.26941\lib\net40\FakeO.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
@@ -80,6 +83,7 @@
     <Compile Include="Controllers\ServicesController.cs" />
     <Compile Include="Controllers\StatesController.cs" />
     <Compile Include="Controllers\SuppliersController.cs" />
+    <Compile Include="Controllers\TestDataController.cs" />
     <Compile Include="Controllers\VendorsController.cs" />
     <Compile Include="Controllers\WarrantiesController.cs" />
     <Compile Include="Global.asax.cs">

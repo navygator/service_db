@@ -11,14 +11,12 @@ namespace ServiceDB.Controllers
 { 
 	public class SuppliersController : Controller
 	{
-		private EntityDataModelContainer db = new EntityDataModelContainer();
-
 		//
 		// GET: /Suppliers/
 
 		public ViewResult Index()
 		{
-			return View(db.Suppliers.ToList());
+			return View(Supplier.All());
 		}
 
 		//
@@ -26,7 +24,7 @@ namespace ServiceDB.Controllers
 
 		public ViewResult Details(int id)
 		{
-			Supplier supplier = db.Suppliers.Single(s => s.Id == id);
+			var supplier = Supplier.Find(id);
 			return View(supplier);
 		}
 
@@ -44,10 +42,8 @@ namespace ServiceDB.Controllers
 		[HttpPost]
 		public ActionResult Create(Supplier supplier)
 		{
-			if (ModelState.IsValid)
+			if (ModelState.IsValid && Supplier.Create(supplier))
 			{
-				db.Suppliers.AddObject(supplier);
-				db.SaveChanges();
 				return RedirectToAction("Index");  
 			}
 
@@ -59,7 +55,7 @@ namespace ServiceDB.Controllers
  
 		public ActionResult Edit(int id)
 		{
-			Supplier supplier = db.Suppliers.Single(s => s.Id == id);
+			var supplier = Supplier.Find(id);
 			return View(supplier);
 		}
 
@@ -69,11 +65,8 @@ namespace ServiceDB.Controllers
 		[HttpPost]
 		public ActionResult Edit(Supplier supplier)
 		{
-			if (ModelState.IsValid)
+			if (ModelState.IsValid && Supplier.Update(supplier))
 			{
-				db.Suppliers.Attach(supplier);
-				db.ObjectStateManager.ChangeObjectState(supplier, EntityState.Modified);
-				db.SaveChanges();
 				return RedirectToAction("Index");
 			}
 			return View(supplier);
@@ -84,7 +77,7 @@ namespace ServiceDB.Controllers
  
 		public ActionResult Delete(int id)
 		{
-			Supplier supplier = db.Suppliers.Single(s => s.Id == id);
+			var supplier = Supplier.Find(id);
 			return View(supplier);
 		}
 
@@ -94,15 +87,12 @@ namespace ServiceDB.Controllers
 		[HttpPost, ActionName("Delete")]
 		public ActionResult DeleteConfirmed(int id)
 		{
-			Supplier supplier = db.Suppliers.Single(s => s.Id == id);
-			db.Suppliers.DeleteObject(supplier);
-			db.SaveChanges();
+			Supplier.Destroy(id);
 			return RedirectToAction("Index");
 		}
 
 		protected override void Dispose(bool disposing)
 		{
-			db.Dispose();
 			base.Dispose(disposing);
 		}
 	}

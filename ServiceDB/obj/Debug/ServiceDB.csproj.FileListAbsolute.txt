@@ -12,3 +12,4 @@ D:\Work\My Documents\Visual Studio 2010\Projects\ServiceDB\ServiceDB\bin\EntityF
 D:\Work\My Documents\Visual Studio 2010\Projects\ServiceDB\ServiceDB\obj\Debug\ResolveAssemblyReference.cache
 D:\Work\My Documents\Visual Studio 2010\Projects\ServiceDB\ServiceDB\obj\Debug\ServiceDB.dll
 D:\Work\My Documents\Visual Studio 2010\Projects\ServiceDB\ServiceDB\obj\Debug\ServiceDB.pdb
+D:\Work\My Documents\Visual Studio 2010\Projects\ServiceDB\ServiceDB\bin\FakeO.dll

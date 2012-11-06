@@ -9,101 +9,91 @@ using ServiceDB.Models;
 
 namespace ServiceDB.Controllers
 { 
-    public class CategoriesController : Controller
-    {
-        private EntityDataModelContainer db = new EntityDataModelContainer();
+	public class CategoriesController : Controller
+	{
+		//
+		// GET: /Categories/
 
-        //
-        // GET: /Categories/
+		public ViewResult Index()
+		{
+			return View(Category.All());
+		}
 
-        public ViewResult Index()
-        {
-            return View(db.Categories.ToList());
-        }
+		//
+		// GET: /Categories/Details/5
 
-        //
-        // GET: /Categories/Details/5
+		public ViewResult Details(int id)
+		{
+			var category = Category.Find(id);
+			return View(category);
+		}
 
-        public ViewResult Details(int id)
-        {
-            Category category = db.Categories.Single(c => c.Id == id);
-            return View(category);
-        }
+		//
+		// GET: /Categories/Create
 
-        //
-        // GET: /Categories/Create
+		public ActionResult Create()
+		{
+			return View();
+		} 
 
-        public ActionResult Create()
-        {
-            return View();
-        } 
+		//
+		// POST: /Categories/Create
 
-        //
-        // POST: /Categories/Create
+		[HttpPost]
+		public ActionResult Create(Category category)
+		{
+			if (ModelState.IsValid && Category.Create(category))
+			{
+				return RedirectToAction("Index");  
+			}
 
-        [HttpPost]
-        public ActionResult Create(Category category)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Categories.AddObject(category);
-                db.SaveChanges();
-                return RedirectToAction("Index");  
-            }
-
-            return View(category);
-        }
-        
-        //
-        // GET: /Categories/Edit/5
+			return View(category);
+		}
+		
+		//
+		// GET: /Categories/Edit/5
  
-        public ActionResult Edit(int id)
-        {
-            Category category = db.Categories.Single(c => c.Id == id);
-            return View(category);
-        }
+		public ActionResult Edit(int id)
+		{
+			var category = Category.Find(id);
+			return View(category);
+		}
 
-        //
-        // POST: /Categories/Edit/5
+		//
+		// POST: /Categories/Edit/5
 
-        [HttpPost]
-        public ActionResult Edit(Category category)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Categories.Attach(category);
-                db.ObjectStateManager.ChangeObjectState(category, EntityState.Modified);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(category);
-        }
+		[HttpPost]
+		public ActionResult Edit(Category category)
+		{
+			if (ModelState.IsValid && Category.Update(category))
+			{
+				return RedirectToAction("Index");
+			}
+			return View(category);
+		}
 
-        //
-        // GET: /Categories/Delete/5
+		//
+		// GET: /Categories/Delete/5
  
-        public ActionResult Delete(int id)
-        {
-            Category category = db.Categories.Single(c => c.Id == id);
-            return View(category);
-        }
+		public ActionResult Delete(int id)
+		{
+			var category = Category.Find(id);
+			return View(category);
+		}
 
-        //
-        // POST: /Categories/Delete/5
+		//
+		// POST: /Categories/Delete/5
 
-        [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
-        {            
-            Category category = db.Categories.Single(c => c.Id == id);
-            db.Categories.DeleteObject(category);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+		[HttpPost, ActionName("Delete")]
+		public ActionResult DeleteConfirmed(int id)
+		{
+			Category.Destroy(id);
+			return RedirectToAction("Index");
+		}
 
-        protected override void Dispose(bool disposing)
-        {
-            db.Dispose();
-            base.Dispose(disposing);
-        }
-    }
+		protected override void Dispose(bool disposing)
+		{
+			base.Dispose(disposing);
+		}
+	}
 }

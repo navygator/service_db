@@ -43,7 +43,7 @@ namespace ServiceDB.Controllers
 		{
 			if (ModelState.IsValid && Employee.Create(employee))
 			{
-				return RedirectToAction("Details", new { @id = employee.Id });  
+				return RedirectToAction("Index");  
 			}
 
 			return View(employee);
